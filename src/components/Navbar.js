@@ -23,13 +23,7 @@ const AnimatedButton = styled(Button)({
   },
 });
 
-const AnimatedListItem = styled(List)({
-  transition: 'background-color 0.3s ease-in-out, transform 0.3s ease-in-out',
-  '&:hover': {
-    backgroundColor: '#f5f5f5',
-    transform: 'scale(1.05)',
-  },
-});
+
 
 const AnimatedTypography = styled(Typography)({
   transition: 'color 0.3s ease-in-out, transform 0.3s ease-in-out',

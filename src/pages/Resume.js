@@ -10,7 +10,7 @@ function Resume() {
           My Resume
         </Typography>
         <Typography variant="body1" component="p">
-          Download my resume <a href="https://drive.google.com/file/d/1yxTmgz4TYJo-xFheg2bCurP7mY-0_gr7/view?usp=drive_link" target="_blank">here</a>.
+          Download my resume <a href="https://drive.google.com/file/d/1yxTmgz4TYJo-xFheg2bCurP7mY-0_gr7/view?usp=drive_link" rel="noopener noreferrer" target="_blank">here</a>.
         </Typography>
       </Box>
     </Container>

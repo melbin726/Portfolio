@@ -37,42 +37,12 @@ const ContactButton = styled(Button)({
   },
 });
 
-const Background = styled(Box)({
-  position: 'relative',
-  width: '100%',
-  height: '100vh',
-  backgroundColor: '#000000',
-  overflow: 'hidden',
-  zIndex: -1,
-});
 
-const Shape = styled(Box)({
-  position: 'absolute',
-  borderRadius: '50%',
-  opacity: 0.3,
-  animation: 'shapeAnimation 20s linear infinite',
-  '@keyframes shapeAnimation': {
-    '0%': { transform: 'translateY(0) scale(1)' },
-    '50%': { transform: 'translateY(-50vh) scale(0.5)' },
-    '100%': { transform: 'translateY(0) scale(1)' },
-  },
-});
 
-const Shape1 = styled(Shape)({
-  width: '150px',
-  height: '150px',
-  backgroundColor: '#f5f5f5',
-  top: '10%',
-  left: '5%',
-});
 
-const Shape2 = styled(Shape)({
-  width: '200px',
-  height: '200px',
-  backgroundColor: '#f5f5f5',
-  top: '50%',
-  right: '5%',
-});
+
+
+
 
 function Home() {
   const navigate = useNavigate();
