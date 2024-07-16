@@ -1,6 +1,6 @@
 // src/pages/About.js
 import React from 'react';
-import { Container, Typography, Box, Grid, LinearProgress, Avatar, Paper } from '@mui/material';
+import { Container, Typography, Box, Grid, LinearProgress, Avatar,} from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
