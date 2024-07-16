@@ -1,6 +1,6 @@
 // src/pages/About.js
 import React from 'react';
-import { Container, Typography, Box, Grid, Paper, LinearProgress, Avatar } from '@mui/material';
+import { Container, Typography, Box, Grid, LinearProgress, Avatar, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
 
@@ -20,6 +20,15 @@ const SkillProgress = ({ skill, level }) => (
   </Box>
 );
 
+const SectionContainer = styled(Box)({
+  backgroundColor: '#000000', // Black background
+  color: '#FFFFFF', // White text
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '15px', // Rounded corners
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Box shadow for a 3D effect
+});
+
 const About = () => {
   return (
     <Container>
@@ -33,7 +42,7 @@ const About = () => {
         >
           About Me
         </AnimatedTypography>
-        <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
+        <SectionContainer>
           <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
               <Avatar
@@ -44,27 +53,23 @@ const About = () => {
             </Grid>
             <Grid item xs={12} md={8}>
               <Typography variant="body1" component="p" gutterBottom>
-              I am a web developer with expertise in React.js, C#, and PostgreSQL. I am pursuing a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru, where I have been developing my skills in modern web development and database management.              </Typography>
+                I am a web developer with expertise in React.js, C#, and PostgreSQL. I am pursuing a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru, where I have been developing my skills in modern web development and database management.
+              </Typography>
               <Typography variant="body1" component="p" gutterBottom>
-              Experienced web developer with a demonstrated history of working on real-world projects. Skilled in React.js, C#, and PostgreSQL, I bring a comprehensive understanding of both front-end and back-end development. My strong technical background, combined with hands-on experience, makes me a proficient and adaptable technology professional.              </Typography>
+                Experienced web developer with a demonstrated history of working on real-world projects. Skilled in React.js, C#, and PostgreSQL, I bring a comprehensive understanding of both front-end and back-end development. My strong technical background, combined with hands-on experience, makes me a proficient and adaptable technology professional.
+              </Typography>
               <Typography variant="body1" component="p" gutterBottom>
                 <strong>Work Timeline:</strong>
-              </Typography>
-              <Typography variant="body1" component="p" gutterBottom>
-                <strong>Software Engineer Internship:</strong> Highradius (01-01-2022)
-              </Typography>
-              <Typography variant="body1" component="p" gutterBottom>
-                <strong>Full Stack Engineer:</strong> Highradius (01-05-2022)
               </Typography>
               <Typography variant="body1" component="p" gutterBottom>
                 <strong>Software Engineer Internship:</strong> Talview (01-01-2023)
               </Typography>
               <Typography variant="body1" component="p" gutterBottom>
-                <strong>Backend Engineer:</strong> Talview (01-05-2022)
+                <strong>Software Developer Internship:</strong> Talview (Present)
               </Typography>
             </Grid>
           </Grid>
-        </Paper>
+        </SectionContainer>
 
         <Box mt={5}>
           <AnimatedTypography
@@ -76,13 +81,14 @@ const About = () => {
           >
             Skills
           </AnimatedTypography>
-          <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
-            <SkillProgress skill="Python" level={90} />
-            <SkillProgress skill="Node.js" level={85} />
+          <SectionContainer>
+            <SkillProgress skill="React JS" level={80} />
+            <SkillProgress skill="C#" level={70} />
+            <SkillProgress skill="SQL" level={85} />
             <SkillProgress skill="JavaScript" level={80} />
-            <SkillProgress skill="React" level={60} />
-            <SkillProgress skill="Java" level={85} />
-          </Paper>
+            <SkillProgress skill="Python" level={60} />
+            <SkillProgress skill="Java" level={75} />
+          </SectionContainer>
         </Box>
 
         <Box mt={5}>
@@ -95,7 +101,13 @@ const About = () => {
           >
             Projects
           </AnimatedTypography>
-          <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
+          <SectionContainer>
+            <Typography variant="body1" component="p" gutterBottom>
+              <strong>Cambridge Dashboard Enhancements (Talview):</strong> Worked on enhancing the Cambridge Dashboard, focusing on improving user interface and functionality using React.js during my internship at Talview.
+            </Typography>
+            <Typography variant="body1" component="p" gutterBottom>
+              <strong>GrocerEase (MicroGenesis TechSoft):</strong> Developed features for the GrocerEase application, which included implementing backend services with C# and managing databases with PostgreSQL during my internship at MicroGenesis TechSoft.
+            </Typography>
             <Typography variant="body1" component="p" gutterBottom>
               <strong>College Placement Portal:</strong> Worked on frontend and database parts for a team project during MCA.
             </Typography>
@@ -105,7 +117,7 @@ const About = () => {
             <Typography variant="body1" component="p" gutterBottom>
               <strong>Netflix Clone:</strong> Created a Netflix clone to enhance understanding of front-end technologies and streaming functionalities.
             </Typography>
-          </Paper>
+          </SectionContainer>
         </Box>
       </Box>
     </Container>

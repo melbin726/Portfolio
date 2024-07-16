@@ -1,7 +1,17 @@
 // src/pages/Contact.js
 import React, { useState } from 'react';
-import { Container, Typography, Box, TextField, Button } from '@mui/material';
+import { Container, Typography, Box, TextField, Button, Paper } from '@mui/material';
+import { styled } from '@mui/system';
 import emailjs from 'emailjs-com';
+
+const SectionContainer = styled(Paper)({
+  backgroundColor: '#000000', // Black background
+  color: '#FFFFFF', // White text
+  padding: '20px',
+  marginTop: '20px',
+  borderRadius: '15px', // Rounded corners
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Box shadow for a 3D effect
+});
 
 function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
@@ -43,58 +53,72 @@ function Contact() {
   return (
     <Container>
       <Box mt={5}>
-        <Typography variant="h3" component="h1">
+        <Typography variant="h3" component="h1" style={{ color: '#FFFFFF' }}>
           Contact Me
         </Typography>
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            label="Name"
-            name="name"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={form.name}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Email"
-            name="email"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            value={form.email}
-            onChange={handleChange}
-          />
-          <TextField
-            label="Message"
-            name="message"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            multiline
-            rows={4}
-            value={form.message}
-            onChange={handleChange}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            style={{ marginTop: '20px' }}
-            type="submit"
-          >
-            Send
-          </Button>
-          {submitted && (
-            <Typography variant="body1" color="primary" style={{ marginTop: '20px' }}>
-              Your message has been sent successfully!
-            </Typography>
-          )}
-          {error && (
-            <Typography variant="body1" color="error" style={{ marginTop: '20px' }}>
-              {error}
-            </Typography>
-          )}
-        </form>
+        <SectionContainer>
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              label="Name"
+              name="name"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              value={form.name}
+              onChange={handleChange}
+              InputLabelProps={{ style: { color: '#FFFFFF' } }}
+              InputProps={{
+                style: { color: '#FFFFFF', borderColor: '#FFFFFF' },
+              }}
+            />
+            <TextField
+              label="Email"
+              name="email"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              value={form.email}
+              onChange={handleChange}
+              InputLabelProps={{ style: { color: '#FFFFFF' } }}
+              InputProps={{
+                style: { color: '#FFFFFF', borderColor: '#FFFFFF' },
+              }}
+            />
+            <TextField
+              label="Message"
+              name="message"
+              fullWidth
+              margin="normal"
+              variant="outlined"
+              multiline
+              rows={4}
+              value={form.message}
+              onChange={handleChange}
+              InputLabelProps={{ style: { color: '#FFFFFF' } }}
+              InputProps={{
+                style: { color: '#FFFFFF', borderColor: '#FFFFFF' },
+              }}
+            />
+            <Button
+              variant="contained"
+              color="primary"
+              style={{ marginTop: '20px' }}
+              type="submit"
+            >
+              Send
+            </Button>
+            {submitted && (
+              <Typography variant="body1" color="primary" style={{ marginTop: '20px' }}>
+                Your message has been sent successfully!
+              </Typography>
+            )}
+            {error && (
+              <Typography variant="body1" color="error" style={{ marginTop: '20px' }}>
+                {error}
+              </Typography>
+            )}
+          </form>
+        </SectionContainer>
       </Box>
     </Container>
   );
