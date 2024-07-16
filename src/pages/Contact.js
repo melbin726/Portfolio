@@ -56,6 +56,7 @@ function Contact() {
         <Typography variant="h3" component="h1" style={{ color: '#FFFFFF' }}>
           Contact Me
         </Typography>
+    
         <SectionContainer>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField

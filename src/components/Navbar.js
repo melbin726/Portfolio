@@ -42,6 +42,9 @@ const AnimatedTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
+
+
+
 function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
   const isDarkMode = theme.palette.mode === 'dark';
@@ -52,7 +55,7 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" >
       <Toolbar>
         <AnimatedIconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
           <MenuIcon />
@@ -73,22 +76,22 @@ function Navbar() {
         >
           <Box onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '40px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/">
                   Home
                 </AnimatedButton>
               </Typography>
-              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '40px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/portfolio">
                   Portfolio
                 </AnimatedButton>
               </Typography>
-              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '40px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/about">
                   About
                 </AnimatedButton>
               </Typography>
-              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '40px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/contact">
                   Contact
                 </AnimatedButton>
