@@ -37,12 +37,59 @@ const ContactButton = styled(Button)({
   },
 });
 
+const SectionContainer = styled(Box)({
+  backgroundColor: '#000000', // Black background
+  color: '#FFFFFF', // White text
+  padding: '50px',
+  marginTop: '50px',
+  borderRadius: '15px', // Rounded corners
+  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', // Box shadow for a 3D effect
+});
 
+const SectionTitle = styled(Typography)({
+  marginBottom: '20px',
+  fontWeight: 'bold',
+  color: '#FFFFFF', // Ensure the title text is white
+});
 
+const SectionContent = styled(Typography)({
+  marginBottom: '10px',
+  color: '#FFFFFF', // Ensure the content text is white
+});
 
-
-
-
+function WhatIDo() {
+  return (
+    <SectionContainer>
+      <Container>
+        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" component="h3" fontWeight="bold">Web Development</Typography>
+            <SectionContent variant="body1">
+            Utilizing React.js, HTML, CSS,JavaScript, C# ,sql, postgresql....etc I specialize in developing dynamic and responsive web applications. My passion lies in writing clean, modular, and maintainable code to build robust web solutions.
+            </SectionContent>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" component="h3" fontWeight="bold">Responsive UI Design</Typography>
+            <SectionContent variant="body1">
+            "A user interface is like a joke. If you have to explain it, it's not that good." I am committed to designing and implementing interfaces that are not only visually appealing but also highly intuitive. My goal is to ensure a seamless user experience across all devices and platforms, employing best practices in responsive design and accessibility.            </SectionContent>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" component="h3" fontWeight="bold">Experience Design</Typography>
+            <SectionContent variant="body1">
+            User experience is at the heart of my development philosophy. I focus on creating intuitive and enjoyable interactions that minimize frustration and maximize satisfaction. My experience in user-centered design principles helps me develop interfaces that are easy to navigate and use, ensuring that the end product meets the needs and expectations of its users.
+            </SectionContent>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" component="h3" fontWeight="bold">Diversity in Tech</Typography>
+            <SectionContent variant="body1">
+            Beyond my technical skills, I am a strong advocate for diversity and inclusion in the tech industry. I believe that a diverse and inclusive environment fosters innovation and growth. I actively support initiatives that promote diversity, aiming to create a more equitable and welcoming tech community for everyone.            </SectionContent>
+          </Grid>
+        </Grid>
+      </Container>
+    </SectionContainer>
+  );
+}
 
 function Home() {
   const navigate = useNavigate();
@@ -50,7 +97,7 @@ function Home() {
 
   useEffect(() => {
     const typed = new Typed(typedRef.current, {
-      strings: ['I develop web apps', 'I love coding', 'I will make your website', 'I love testing'],
+      strings: ['I love coding', 'I develop innovative web applications', 'I can create your website from scratch.', 'I enjoy testing and improving software.'],
       typeSpeed: 40,
       backSpeed: 50,
       loop: true,
@@ -71,7 +118,6 @@ function Home() {
 
   return (
     <Container>
-      
       <Box mt={5}>
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={6}>
@@ -84,7 +130,7 @@ function Home() {
               </Typography>
             </Box>
             <Typography variant="body1" component="p" fontFamily={'Marker Felt'} mb={2}>
-              I am an experienced software engineer with a demonstrated history of working in the software industry. I have a strong passion for coding and love to create innovative solutions to challenging problems.
+            I am an aspiring software engineer currently interning at MicroGenesis TechSoft. My dedication to web development and keen interest in enhancing user experiences drive me to create effective and efficient solutions. I have demonstrated commitment and professionalism in my previous roles, including an internship at Talview.
             </Typography>
             <Box mt={2}>
               <PortfolioButton
@@ -113,6 +159,7 @@ function Home() {
           </Grid>
         </Grid>
       </Box>
+      <WhatIDo />
     </Container>
   );
 }

@@ -44,11 +44,9 @@ const About = () => {
             </Grid>
             <Grid item xs={12} md={8}>
               <Typography variant="body1" component="p" gutterBottom>
-                I am a software engineer with expertise in C++, Python, Java, RPA, and C (Programming Language). I am pursuing a Bachelor's degree focused in Computer Science from the Kalinga Institute Of Industrial Technology.
-              </Typography>
+              I am a web developer with expertise in React.js, C#, and PostgreSQL. I am pursuing a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru, where I have been developing my skills in modern web development and database management.              </Typography>
               <Typography variant="body1" component="p" gutterBottom>
-                Experienced Software Engineer with a demonstrated history of working in the software industry. Skilled in C++, Python, Java, RPA, and C (Programming Language). Strong information technology professional.
-              </Typography>
+              Experienced web developer with a demonstrated history of working on real-world projects. Skilled in React.js, C#, and PostgreSQL, I bring a comprehensive understanding of both front-end and back-end development. My strong technical background, combined with hands-on experience, makes me a proficient and adaptable technology professional.              </Typography>
               <Typography variant="body1" component="p" gutterBottom>
                 <strong>Work Timeline:</strong>
               </Typography>

@@ -31,7 +31,7 @@ const AnimatedTypography = styled(Typography)(({ theme }) => ({
   },
   textDecoration: 'none',
   fontFamily: 'Monaco, Courier, monospace', // Font for a developer background
-  whiteSpace: 'nowrap', // Prevent text from breaking into multiple lines
+  whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   [theme.breakpoints.down('sm')]: {
@@ -58,7 +58,7 @@ function Navbar() {
           <MenuIcon />
         </AnimatedIconButton>
         <AnimatedTypography component={Link} to="/" variant="h6" style={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }} marginLeft={4}>
-          MELBIN JOSEPH
+          MELBIN 
         </AnimatedTypography>
         <Drawer
           anchor="bottom"

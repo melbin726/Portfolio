@@ -4,6 +4,7 @@ import { Box, Typography, Link, Divider } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 function Footer() {
   return (
@@ -24,6 +25,9 @@ function Footer() {
         </Link>
         <Link href=" https://x.com/Melbin?s=08" target="_blank">
           <TwitterIcon sx={{ ml: 1 }} />
+        </Link>
+        <Link href="https://www.instagram.com/___melbin_/?igsh=MXFmcHN4NzYwajM0eA%3D%3D" target="_blank">
+          <InstagramIcon sx={{ ml: 1 }} />
         </Link>
       </Typography>
     </Box>
