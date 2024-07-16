@@ -23,9 +23,7 @@ const AnimatedButton = styled(Button)({
   },
 });
 
-
-
-const AnimatedTypography = styled(Typography)({
+const AnimatedTypography = styled(Typography)(({ theme }) => ({
   transition: 'color 0.3s ease-in-out, transform 0.3s ease-in-out',
   '&:hover': {
     color: '#ff4081',
@@ -33,7 +31,16 @@ const AnimatedTypography = styled(Typography)({
   },
   textDecoration: 'none',
   fontFamily: 'Monaco, Courier, monospace', // Font for a developer background
-});
+  whiteSpace: 'nowrap', // Prevent text from breaking into multiple lines
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1rem',
+  },
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.5rem',
+  },
+}));
 
 function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
@@ -66,24 +73,21 @@ function Navbar() {
         >
           <Box onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
-            <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/">
                   Home
                 </AnimatedButton>
               </Typography>
-
               <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/portfolio">
                   Portfolio
                 </AnimatedButton>
               </Typography>
-
               <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/about">
                   About
                 </AnimatedButton>
               </Typography>
-
               <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/contact">
                   Contact
