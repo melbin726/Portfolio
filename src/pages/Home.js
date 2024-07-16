@@ -62,7 +62,7 @@ function Home() {
   }, []);
 
   const handlePortfolioClick = () => {
-    navigate('/portfolio');
+    navigate('/about');
   };
 
   const handleContactClick = () => {
@@ -93,7 +93,7 @@ function Home() {
                 style={{ marginRight: '10px', color: 'Black', backgroundColor: 'white' }}
                 onClick={handlePortfolioClick}
               >
-                My Portfolio
+                About Me
               </PortfolioButton>
               <ContactButton variant="outlined" color="primary" style={{ color: 'white', borderColor: 'white' }} onClick={handleContactClick}>
                 Contact Me

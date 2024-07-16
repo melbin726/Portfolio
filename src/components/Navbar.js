@@ -66,6 +66,12 @@ function Navbar() {
         >
           <Box onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
             <List>
+            <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+                <AnimatedButton color="inherit" component={Link} to="/">
+                  Home
+                </AnimatedButton>
+              </Typography>
+
               <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/portfolio">
                   Portfolio
@@ -81,6 +87,11 @@ function Navbar() {
               <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
                 <AnimatedButton color="inherit" component={Link} to="/contact">
                   Contact
+                </AnimatedButton>
+              </Typography>
+              <Typography variant="h6" style={{ flexGrow: 1, textAlign: 'center', fontFamily: 'Fantasy', fontSize: '20px' }}>
+                <AnimatedButton color="inherit" component={Link} to="/resume">
+                  Resume
                 </AnimatedButton>
               </Typography>
             </List>
