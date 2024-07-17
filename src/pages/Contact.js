@@ -3,6 +3,23 @@ import React, { useState } from 'react';
 import { Container, Typography, Box, TextField, Button, Paper } from '@mui/material';
 import { styled } from '@mui/system';
 import emailjs from 'emailjs-com';
+import { motion } from 'framer-motion';
+
+const AnimatedTypography = styled(motion(Typography))({
+  transition: 'transform 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.1)',
+  },
+});
+
+const PortfolioButton = styled(Button)({
+  transition: 'background-color 0.3s ease-in-out, transform 0.3s ease-in-out',
+  '&:hover': {
+    backgroundColor: '#f5f5f5',
+    transform: 'scale(1.05)',
+  },
+});
+
 
 const SectionContainer = styled(Paper)({
   backgroundColor: '#000000', // Black background
@@ -53,9 +70,17 @@ function Contact() {
   return (
     <Container>
       <Box mt={5}>
+      <AnimatedTypography
+          variant="h3"
+          component="h1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
         <Typography variant="h3" component="h1" style={{ color: '#FFFFFF' }}>
           Contact Me
         </Typography>
+        </AnimatedTypography>
     
         <SectionContainer>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
@@ -100,14 +125,13 @@ function Contact() {
                 style: { color: '#FFFFFF', borderColor: '#FFFFFF' },
               }}
             />
-            <Button
-              variant="contained"
-              color="primary"
-              style={{ marginTop: '20px' }}
-              type="submit"
-            >
+           <PortfolioButton
+                variant="contained"
+                color="primary"
+                style={{ marginRight: '10px', color: 'Black', backgroundColor: 'white' }}
+                type ='submit'>
               Send
-            </Button>
+              </PortfolioButton>
             {submitted && (
               <Typography variant="body1" color="primary" style={{ marginTop: '20px' }}>
                 Your message has been sent successfully!

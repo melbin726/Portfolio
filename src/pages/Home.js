@@ -61,7 +61,14 @@ function WhatIDo() {
   return (
     <SectionContainer>
       <Container>
-        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle>
+      <AnimatedTypography
+          variant="h3"
+          component="h1"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
+        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle></AnimatedTypography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" component="h3" fontWeight="bold">Web Development</Typography>

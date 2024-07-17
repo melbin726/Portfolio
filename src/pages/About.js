@@ -62,10 +62,10 @@ const About = () => {
                 <strong>Work Timeline:</strong>
               </Typography>
               <Typography variant="body1" component="p" gutterBottom>
-                <strong>Software Engineer Internship:</strong> Talview (01-01-2023)
+                <strong>Software Developer Internship:</strong> Talview (01-01-2023)
               </Typography>
               <Typography variant="body1" component="p" gutterBottom>
-                <strong>Software Developer Internship:</strong> Talview (Present)
+                <strong>Software Developer Internship:</strong> MicroGenesis TechSoft(Present)
               </Typography>
             </Grid>
           </Grid>
