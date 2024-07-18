@@ -28,7 +28,7 @@ html, body, #root {
   position: fixed;
   width: 20px;
   height: 20px;
-  background-color: red;
+  background-color: white;
   border-radius: 50%;
   pointer-events: none; /* Prevent the cursor from blocking interactions */
   transform: translate(-50%, -50%);
