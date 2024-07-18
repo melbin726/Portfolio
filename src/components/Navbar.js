@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useState } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Drawer, List, Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -42,9 +41,6 @@ const AnimatedTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
-
-
-
 function Navbar() {
   const { theme, toggleTheme } = useThemeContext();
   const isDarkMode = theme.palette.mode === 'dark';
@@ -55,7 +51,12 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" >
+    <AppBar 
+      position="static"
+      sx={{
+        backgroundColor: isDarkMode ? theme.palette.background.paper : '#000080 ',
+      }}
+    >
       <Toolbar>
         <AnimatedIconButton edge="start" color="inherit" aria-label="menu" onClick={toggleDrawer(true)}>
           <MenuIcon />

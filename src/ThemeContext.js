@@ -21,11 +21,11 @@ export const ThemeProvider = ({ children }) => {
         palette: {
           mode,
           background: {
-            default: mode === 'light' ? '#ffffff' : '#121212', // Light and dark mode background colors
-            paper: mode === 'light' ? '#ffffff' : '#1e1e1e', // Light and dark mode paper colors
+            default: mode === 'light' ? '#800000' : '#121212', // Light and dark mode background colors
+            paper: mode === 'light' ? '#800000' : '#1e1e1e', // Light and dark mode paper colors
           },
           text: {
-            primary: mode === 'light' ? '#000000' : '#ffffff', // Light and dark mode text colors
+            primary: mode === 'light' ? '#ffffff' : '#ffffff', // Light and dark mode text colors
           },
         },
       }),
