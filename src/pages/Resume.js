@@ -34,7 +34,7 @@ function Resume() {
           </Typography>
           <ResumeButton
             variant="contained"
-            href="https://drive.google.com/file/d/1yxTmgz4TYJo-xFheg2bCurP7mY-0_gr7/view?usp=drive_link"
+            href="https://drive.google.com/file/d/11QbYyGaH83p7ZooJ174GZDaplSdSY6bG/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
           >
