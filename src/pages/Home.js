@@ -68,7 +68,7 @@ function WhatIDo() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-        <SectionTitle variant="h4" component="h2">What Iiiiiii Do</SectionTitle></AnimatedTypography>
+        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle></AnimatedTypography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" component="h3" fontWeight="bold">Web Development</Typography>
