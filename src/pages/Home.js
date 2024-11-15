@@ -68,7 +68,7 @@ function WhatIDo() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle></AnimatedTypography>
+        <SectionTitle variant="h4" component="h2">What Iiiiiii Do</SectionTitle></AnimatedTypography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" component="h3" fontWeight="bold">Web Development</Typography>
@@ -137,7 +137,7 @@ function Home() {
               </Typography>
             </Box>
             <Typography variant="body1" component="p" fontFamily={'Marker Felt'} mb={2}>
-            I am an aspiring software engineer currently interning at MicroGenesis TechSoft. My dedication to web development and keen interest in enhancing user experiences drive me to create effective and efficient solutions. I have demonstrated commitment and professionalism in my previous roles, including an internship at Talview.
+            I am a dedicated software engineer currently working at the Kristu Jayanti Software Development Center, where I focus on building dynamic web applications using Angular, Tailwind CSS, and Java. With hands-on experience in both frontend and backend technologies, I strive to create seamless user experiences and efficient, scalable solutions. My previous internships at MicroGenesis TechSoft and Talview have honed my skills in web development, where I consistently demonstrated professionalism and a commitment to delivering quality work.
             </Typography>
             <Box mt={2}>
               <PortfolioButton
