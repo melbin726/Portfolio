@@ -68,12 +68,12 @@ function WhatIDo() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
         >
-        <SectionTitle variant="h4" component="h2">What I Do</SectionTitle></AnimatedTypography>
+        <SectionTitle variant="h4" component="h2">What I Do </SectionTitle></AnimatedTypography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" component="h3" fontWeight="bold">Web Development</Typography>
             <SectionContent variant="body1">
-            Utilizing React.js, HTML, CSS,JavaScript, C# ,sql, postgresql....etc I specialize in developing dynamic and responsive web applications. My passion lies in writing clean, modular, and maintainable code to build robust web solutions.
+            Utilizing React.js, HTML, CSS,JavaScript, C# ,sql, postgresql.....etc I specialize in developing dynamic and responsive web applications. My passion lies in writing clean, modular, and maintainable code to build robust web solutions.
             </SectionContent>
           </Grid>
           <Grid item xs={12} md={6}>
