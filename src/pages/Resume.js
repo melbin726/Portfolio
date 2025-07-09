@@ -132,8 +132,7 @@ const MainContainer = styled(Box)({
 });
 
 function Resume() {
-  const [activeSection, setActiveSection] = useState(null);
-
+ 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

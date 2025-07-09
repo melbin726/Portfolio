@@ -166,8 +166,14 @@ const Home = () => {
       description: 'Beyond my technical skills, I am a strong advocate for diversity and inclusion in the tech industry. I actively support initiatives that promote diversity, aiming to create a more equitable and welcoming tech community.',
     },
   ];
-
   useEffect(() => {
+    const texts = [
+      'I love coding',
+      'I develop innovative web applications',
+      'I can create your website from scratch.',
+      'I enjoy testing and improving software.',
+    ];
+  
     let timeout;
     let index = 0;
     const type = () => {
@@ -185,7 +191,8 @@ const Home = () => {
     };
     type();
     return () => clearTimeout(timeout);
-  }, [textIndex]);
+  }, [textIndex]); // ✅ no warning now
+  
 
   const scrollToWhatIDo = () => {
     whatIDoRef.current?.scrollIntoView({ behavior: 'smooth' });
