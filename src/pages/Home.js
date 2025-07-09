@@ -5,6 +5,14 @@ import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import { GitHub, LinkedIn, Mail, Phone, ArrowDownward, Code, Palette, Psychology, Diversity3 } from '@mui/icons-material';
 
+// Define texts array outside the component
+const texts = [
+  'I love coding',
+  'I develop innovative web applications',
+  'I can create your website from scratch.',
+  'I enjoy testing and improving software.',
+];
+
 // Styled components
 const GradientButton = styled(Button)({
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
@@ -40,7 +48,7 @@ const HeroContainer = styled(Box)({
   minHeight: '100vh',
   background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
   color: 'white',
-  paddingTop: '80px', // Add top padding to account for navbar
+  paddingTop: '80px',
   paddingBottom: '60px',
   paddingLeft: '20px',
   paddingRight: '20px',
@@ -137,13 +145,6 @@ const Home = () => {
   const [textIndex, setTextIndex] = useState(0);
   const whatIDoRef = useRef(null);
 
-  const texts = [
-    'I love coding',
-    'I develop innovative web applications',
-    'I can create your website from scratch.',
-    'I enjoy testing and improving software.',
-  ];
-
   const services = [
     {
       icon: <Code sx={{ fontSize: 28 }} />,
@@ -166,14 +167,8 @@ const Home = () => {
       description: 'Beyond my technical skills, I am a strong advocate for diversity and inclusion in the tech industry. I actively support initiatives that promote diversity, aiming to create a more equitable and welcoming tech community.',
     },
   ];
+
   useEffect(() => {
-    const texts = [
-      'I love coding',
-      'I develop innovative web applications',
-      'I can create your website from scratch.',
-      'I enjoy testing and improving software.',
-    ];
-  
     let timeout;
     let index = 0;
     const type = () => {
@@ -191,8 +186,7 @@ const Home = () => {
     };
     type();
     return () => clearTimeout(timeout);
-  }, [textIndex]); // ✅ no warning now
-  
+  }, [textIndex]);
 
   const scrollToWhatIDo = () => {
     whatIDoRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -321,7 +315,6 @@ const Home = () => {
             </Grid>
           </Grid>
 
-          {/* Scroll Indicator */}
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
@@ -334,7 +327,6 @@ const Home = () => {
         </Container>
       </HeroContainer>
 
-      {/* What I Do Section */}
       <WhatIDoSection ref={whatIDoRef} px={3} py={8}>
         <Container maxWidth="lg">
           <motion.div
