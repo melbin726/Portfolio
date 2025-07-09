@@ -5,9 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Launch, 
   GitHub, 
-  Code, 
-  Storage, 
-  Web, 
+  
   Dashboard,
   ShoppingCart,
   School,

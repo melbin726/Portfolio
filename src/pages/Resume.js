@@ -8,11 +8,9 @@ import {
   Work, 
   School, 
   Code, 
-  Psychology, 
-  Timeline,
+ 
   Star,
-  Language,
-  EmojiEvents,
+ 
   Visibility
 } from '@mui/icons-material';
 

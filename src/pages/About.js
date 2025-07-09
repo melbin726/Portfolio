@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Typography, Box, Grid, LinearProgress, Avatar, Card, CardContent, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
-import { Code, Work, School, Timeline, Star, TrendingUp } from '@mui/icons-material';
+import { Code, Work,  Timeline, Star, TrendingUp } from '@mui/icons-material';
 
 const PageContainer = styled(Box)({
   minHeight: '100vh',
