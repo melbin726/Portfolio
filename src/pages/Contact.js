@@ -8,11 +8,7 @@ import {
   Phone, 
   LocationOn, 
   Send, 
-  GitHub, 
-  LinkedIn, 
-  Twitter, 
-  Instagram,
-  CheckCircle,
+ CheckCircle,
   Error
 } from '@mui/icons-material';
 
@@ -125,23 +121,7 @@ const IconContainer = styled(Box)({
   transition: 'all 0.3s ease',
 });
 
-const SocialIcon = styled(motion.div)({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '50px',
-  height: '50px',
-  borderRadius: '50%',
-  background: 'rgba(255, 255, 255, 0.1)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  margin: '0 8px',
-  cursor: 'pointer',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    background: 'rgba(255, 255, 255, 0.2)',
-    transform: 'translateY(-2px)',
-  },
-});
+
 
 const FloatingElement = styled(motion.div)({
   position: 'absolute',
@@ -202,14 +182,14 @@ function Contact() {
     {
       icon: <Email sx={{ fontSize: 32 }} />,
       title: 'Email',
-      info: 'melbin.joseph@example.com',
-      action: 'mailto:melbin.joseph@example.com'
+      info: 'melmelbin2007@gmail.com',
+      action: 'mailto:melmelbin2007@gmail.com'
     },
     {
       icon: <Phone sx={{ fontSize: 32 }} />,
       title: 'Phone',
-      info: '+91 9876543210',
-      action: 'tel:+919876543210'
+      info: '+91 6282696352',
+      action: 'tel:+6282696352'
     },
     {
       icon: <LocationOn sx={{ fontSize: 32 }} />,
@@ -219,13 +199,7 @@ function Contact() {
     }
   ];
 
-  const socialLinks = [
-    { icon: <GitHub />, url: 'https://github.com/melbin726/' },
-    { icon: <LinkedIn />, url: 'https://www.linkedin.com/in/melbin-joseph-96640a252/' },
-    { icon: <Twitter />, url: 'https://x.com/Melbin?s=08' },
-    { icon: <Instagram />, url: 'https://www.instagram.com/___melbin_/?igsh=MZFmcHN4NzYwajM0eA%3D%3D' }
-  ];
-
+ 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -462,36 +436,7 @@ function Contact() {
           </Grid>
         </Grid>
 
-        {/* Social Links */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <Box textAlign="center" mt={6}>
-            <Typography variant="h5" fontWeight="bold" color="white" gutterBottom>
-              Follow Me
-            </Typography>
-            <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" sx={{ mb: 3 }}>
-              Connect with me on social media
-            </Typography>
-            <Box display="flex" justifyContent="center" flexWrap="wrap">
-              {socialLinks.map((social, index) => (
-                <SocialIcon
-                  key={index}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.7 + index * 0.1 }}
-                  onClick={() => window.open(social.url, '_blank')}
-                >
-                  {social.icon}
-                </SocialIcon>
-              ))}
-            </Box>
-          </Box>
-        </motion.div>
+       
       </Container>
 
       {/* Snackbar for notifications */}

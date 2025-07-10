@@ -103,7 +103,7 @@ function Footer() {
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon 
-                href="https://x.com/Melbin?s=08" 
+                href="acac" 
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
@@ -131,7 +131,7 @@ function Footer() {
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon 
-                href="mailto:your.email@example.com" 
+                href="melmelbin2007@gmail.com" 
                 aria-label="Email"
               >
                 <EmailIcon />
@@ -143,7 +143,7 @@ function Footer() {
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon 
-                href="tel:+1234567890" 
+                href="tel:+916282696352" 
                 aria-label="Phone"
               >
                 <PhoneIcon />

@@ -240,83 +240,145 @@ const About = () => {
                 <Box display="flex" justifyContent="center" mb={3}>
                   <StyledAvatar
                     alt="Melbin Joseph"
-                    src="/DSC_0382.jpg"
+                    src="/IMG_6049.JPG"
+                    
                   />
                 </Box>
               </motion.div>
             </Grid>
             <Grid item xs={12} md={8}>
-              <motion.div variants={itemVariants}>
-                <GlassCard>
-                  <CardContent sx={{ p: 4 }}>
-                    <Typography variant="h5" fontWeight="bold" gutterBottom color="white">
-                      Web Developer & Software Engineer
-                    </Typography>
-                    <Typography variant="body1" color="rgba(255, 255, 255, 0.9)" paragraph sx={{ lineHeight: 1.7 }}>
-                      I am a web developer with expertise in React.js, C#, and PostgreSQL. Currently pursuing a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru, where I've been developing my skills in modern web development and database management.
-                    </Typography>
-                    <Typography variant="body1" color="rgba(255, 255, 255, 0.9)" paragraph sx={{ lineHeight: 1.7 }}>
-                      Experienced web developer with a demonstrated history of working on real-world projects. Skilled in React.js, C#, and PostgreSQL, I bring a comprehensive understanding of both front-end and back-end development. My strong technical background, combined with hands-on experience, makes me a proficient and adaptable technology professional.
-                    </Typography>
-                  </CardContent>
-                </GlassCard>
-              </motion.div>
-            </Grid>
+  <motion.div variants={itemVariants}>
+    <GlassCard>
+      <CardContent sx={{ p: 4 }}>
+        <Typography variant="h5" fontWeight="bold" gutterBottom color="white">
+          Web Developer & Software Engineer
+        </Typography>
+        <Typography
+          variant="body1"
+          color="rgba(255, 255, 255, 0.9)"
+          paragraph
+          sx={{ lineHeight: 1.7 }}
+        >
+          I am currently working as part of the development team at Kristu Jayanti Software Development Center (KJSDC), contributing to the college’s internal ERP solution. My role focuses on building responsive and modular front-end interfaces using Angular and Tailwind CSS, ensuring smooth integration and user-friendly design across different modules.
+        </Typography>
+        <Typography
+          variant="body1"
+          color="rgba(255, 255, 255, 0.9)"
+          paragraph
+          sx={{ lineHeight: 1.7 }}
+        >
+          I began at KJSDC as a software development intern from September to December 2024, and transitioned into a full-time role in January 2025. During this time, I’ve collaborated closely with backend and UI teams to deliver cohesive, production-ready components that meet real-world needs.
+        </Typography>
+        <Typography
+          variant="body1"
+          color="rgba(255, 255, 255, 0.9)"
+          paragraph
+          sx={{ lineHeight: 1.7 }}
+        >
+          I hold a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru. With hands-on experience in technologies such as Angular, React.js, C#, PostgreSQL, and Java, I bring a well-rounded understanding of full-stack development and a commitment to clean, scalable code.
+        </Typography>
+      </CardContent>
+    </GlassCard>
+  </motion.div>
+</Grid>
+
           </Grid>
         </motion.div>
 
         {/* Work Timeline */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          <Typography 
-            variant="h4" 
-            fontWeight="bold" 
-            gutterBottom 
-            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}
-          >
-            <Timeline /> Work Experience
-          </Typography>
-          <GlassCard sx={{ mb: 6 }}>
-            <CardContent sx={{ p: 4 }}>
-              <TimelineItem
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                viewport={{ once: true }}
-              >
-                <Typography variant="h6" fontWeight="bold" color="white">
-                  Software Developer Internship
-                </Typography>
-                <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-                  MicroGenesis TechSoft • Present
-                </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-                  Working on GrocerEase application with C# backend services and PostgreSQL database management
-                </Typography>
-              </TimelineItem>
-              <TimelineItem
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                <Typography variant="h6" fontWeight="bold" color="white">
-                  Software Developer Internship
-                </Typography>
-                <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-                  Talview • January 2023
-                </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-                  Enhanced Cambridge Dashboard with React.js, focusing on UI/UX improvements
-                </Typography>
-              </TimelineItem>
-            </CardContent>
-          </GlassCard>
-        </motion.div>
+  initial={{ opacity: 0, y: 50 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  viewport={{ once: true }}
+>
+  <Typography 
+    variant="h4" 
+    fontWeight="bold" 
+    gutterBottom 
+    sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}
+  >
+    <Timeline /> Work Experience
+  </Typography>
+  <GlassCard sx={{ mb: 6 }}>
+    <CardContent sx={{ p: 4 }}>
+      
+      {/* KJSDC Full-Time */}
+      <TimelineItem
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <Typography variant="h6" fontWeight="bold" color="white">
+          Software Development Engineer
+        </Typography>
+        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+          Kristu Jayanti Software Development Center • Dec 2024 – Present
+        </Typography>
+        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
+          Working as a full-time developer focusing on end-to-end web application development using Angular, Java, and other technologies.
+        </Typography>
+      </TimelineItem>
+
+      {/* KJSDC Internship */}
+      <TimelineItem
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+      >
+        <Typography variant="h6" fontWeight="bold" color="white">
+          Software Developer Internship
+        </Typography>
+        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+          Kristu Jayanti Software Development Center • Sep 2024 – Nov 2024
+        </Typography>
+        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
+          Interned as part of the software team building internal applications with Java Spring Boot and Angular.
+        </Typography>
+      </TimelineItem>
+
+      {/* MicroGenesis */}
+      <TimelineItem
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        viewport={{ once: true }}
+      >
+        <Typography variant="h6" fontWeight="bold" color="white">
+          Software Developer Internship
+        </Typography>
+        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+          MicroGenesis TechSoft • April 2023 – Aug 2023
+        </Typography>
+        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
+          Worked on GrocerEase application with C# backend services and PostgreSQL database management.
+        </Typography>
+      </TimelineItem>
+
+      {/* Talview */}
+      <TimelineItem
+        initial={{ opacity: 0, x: -50 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.6 }}
+        viewport={{ once: true }}
+      >
+        <Typography variant="h6" fontWeight="bold" color="white">
+          Software Developer Internship
+        </Typography>
+        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+          Talview • January 2023
+        </Typography>
+        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
+          Enhanced Cambridge Dashboard with React.js, focusing on UI/UX improvements.
+        </Typography>
+      </TimelineItem>
+
+    </CardContent>
+  </GlassCard>
+</motion.div>
+
 
         {/* Skills Section */}
         <motion.div
