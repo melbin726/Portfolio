@@ -9,124 +9,159 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 import CloseIcon from '@mui/icons-material/Close';
 import { useThemeContext } from '../ThemeContext'; // Assuming ThemeContext is correctly set up
 
-const StyledAppBar = styled(AppBar)({
-  // Subtle white to light gray linear gradient for the AppBar background
-  background: 'linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%)',
-  backdropFilter: 'blur(8px)', // Slightly less blur for a crisp look
-  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.08)', // Softer, lighter shadow
+const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  background: theme.palette.mode === 'dark' 
+    ? 'rgba(0, 0, 0, 0.8)' 
+    : 'rgba(255, 255, 255, 0.8)',
+  backdropFilter: 'blur(20px)',
+  boxShadow: theme.palette.mode === 'dark'
+    ? '0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3)'
+    : '0 1px 0 rgba(0, 0, 0, 0.05), 0 8px 32px rgba(0, 0, 0, 0.1)',
   position: 'fixed',
   top: 0,
   left: 0,
   right: 0,
   zIndex: 1100,
-  borderBottom: '1px solid rgba(0, 0, 0, 0.05)', // Very subtle bottom border for definition
-});
+  borderBottom: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.05)',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+}));
 
-const Logo = styled(Typography)({
-  fontFamily: 'Monaco, Courier, monospace',
-  fontWeight: 'bold',
+const Logo = styled(Typography)(({ theme }) => ({
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", Monaco, Courier, monospace',
+  fontWeight: 700,
   fontSize: '1.5rem',
-  // Black to dark gray gradient for the logo text
-  background: 'linear-gradient(45deg, #000000, #333333)',
-  backgroundClip: 'text',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
+  color: theme.palette.text.primary,
   textDecoration: 'none',
-  transition: 'all 0.3s ease',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  letterSpacing: '-0.02em',
   '&:hover': {
-    transform: 'scale(1.05)',
-    filter: 'brightness(1.1)', // Subtle brightness on hover
+    transform: 'scale(1.02)',
+    opacity: 0.8,
   },
-});
+}));
 
-const NavButton = styled(Button)({
-  color: '#333333', // Dark gray for default text
+const NavButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.primary,
   fontWeight: 500,
   textTransform: 'none',
   fontSize: '1rem',
   padding: '8px 16px',
-  borderRadius: '20px',
-  background: 'transparent', // Start transparent for a clean look
-  transition: 'all 0.3s ease',
+  borderRadius: '12px',
+  background: 'transparent',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  position: 'relative',
+  overflow: 'hidden',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Very light transparent black on hover
-    transform: 'translateY(-2px)',
-    color: '#000000', // Black on hover
+    backgroundColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(0, 0, 0, 0.05)',
+    transform: 'translateY(-1px)',
+    '&::before': {
+      opacity: 1,
+    },
   },
-  '&:active': { // For touch devices
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(0)',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)'
+      : 'linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%)',
+    opacity: 0,
+    transition: 'opacity 0.3s ease',
+    pointerEvents: 'none',
   },
-});
+}));
 
-const MobileNavButton = styled(Button)({
-  color: '#333333', // Dark gray for default text
+const MobileNavButton = styled(Button)(({ theme }) => ({
+  color: theme.palette.text.primary,
   fontWeight: 600,
   textTransform: 'none',
-  fontSize: '2rem',
+  fontSize: '1.5rem',
   padding: '16px 24px',
-  borderRadius: '12px',
+  borderRadius: '16px',
   width: '100%',
-  // Always subtle light gray gradient for mobile buttons
-  background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
-  transition: 'all 0.3s ease',
-  boxShadow: '0 2px 5px rgba(0,0,0,0.05)', // Subtle shadow
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)'
+    : 'linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.1)',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  backdropFilter: 'blur(10px)',
   '&:hover': {
-    background: 'linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
-    transform: 'scale(1.03)', // Slightly less pronounced scale
-    boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)'
+      : 'linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%)',
+    transform: 'scale(1.02)',
+    boxShadow: theme.palette.mode === 'dark'
+      ? '0 8px 32px rgba(255, 255, 255, 0.1)'
+      : '0 8px 32px rgba(0, 0, 0, 0.1)',
   },
-  '&:active': { // For touch devices
-    background: 'linear-gradient(135deg, #d0d0d0 0%, #e0e0e0 100%)',
-    transform: 'scale(1)',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-  },
-});
+}));
 
-const ThemeToggle = styled(IconButton)({
-  color: '#666666', // Medium gray for icons
-  backgroundColor: 'rgba(0, 0, 0, 0.03)', // Very subtle background
-  border: '1px solid rgba(0, 0, 0, 0.08)', // Subtle border
-  transition: 'all 0.3s ease',
+const ThemeToggle = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.05)'
+    : 'rgba(0, 0, 0, 0.03)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.08)',
+  borderRadius: '12px',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  backdropFilter: 'blur(10px)',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Slightly more visible on hover
-    transform: 'translateY(-2px)',
-    color: '#000000', // Black on hover
+    backgroundColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(0, 0, 0, 0.05)',
+    transform: 'translateY(-1px)',
+    color: theme.palette.text.primary,
+    boxShadow: theme.palette.mode === 'dark'
+      ? '0 4px 16px rgba(255, 255, 255, 0.1)'
+      : '0 4px 16px rgba(0, 0, 0, 0.1)',
   },
-  '&:active': { // For touch devices
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(0)',
-  },
-});
+}));
 
-const MobileMenuIcon = styled(IconButton)({
-  color: '#666666', // Medium gray for icons
-  backgroundColor: 'rgba(0, 0, 0, 0.03)', // Very subtle background
-  border: '1px solid rgba(0, 0, 0, 0.08)', // Subtle border
-  transition: 'all 0.3s ease',
+const MobileMenuIcon = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.05)'
+    : 'rgba(0, 0, 0, 0.03)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.08)',
+  borderRadius: '12px',
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  backdropFilter: 'blur(10px)',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Slightly more visible on hover
-    color: '#000000', // Black on hover
-    transform: 'translateY(-2px)',
+    backgroundColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(0, 0, 0, 0.05)',
+    color: theme.palette.text.primary,
+    transform: 'translateY(-1px)',
   },
-  '&:active': { // For touch devices
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(0)',
-  },
-});
+}));
 
-const StyledDrawer = styled(Drawer)({
+const StyledDrawer = styled(Drawer)(({ theme }) => ({
   '& .MuiDrawer-paper': {
     width: '100%',
     height: '100%',
-    // Subtle white to light gray gradient for the drawer background
-    background: 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)',
-    color: '#333333', // Text color inside drawer
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%)'
+      : 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 248, 248, 0.95) 100%)',
+    backdropFilter: 'blur(20px)',
+    color: theme.palette.text.primary,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+}));
 
 const DesktopNavItems = styled(Box)({
   display: 'flex',
@@ -167,7 +202,7 @@ function Navbar() {
       transition: {
         delay: i * 0.1,
         duration: 0.5,
-        ease: 'easeOut',
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     }),
   };
@@ -230,27 +265,32 @@ function Navbar() {
         anchor="top"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
-        transitionDuration={300}
+        transitionDuration={400}
       >
         <Box sx={{ width: '100%', position: 'relative' }}>
           {/* Close Button */}
           <IconButton
             onClick={toggleDrawer(false)}
-            sx={{
+            sx={(theme) => ({
               position: 'absolute',
               top: 16,
               right: 16,
-              color: '#666666', // Medium gray icon
-              backgroundColor: 'rgba(0, 0, 0, 0.03)', // Subtle background
-              border: '1px solid rgba(0, 0, 0, 0.08)', // Subtle border
+              color: theme.palette.text.secondary,
+              backgroundColor: theme.palette.mode === 'dark'
+                ? 'rgba(255, 255, 255, 0.05)'
+                : 'rgba(0, 0, 0, 0.03)',
+              border: theme.palette.mode === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.1)'
+                : '1px solid rgba(0, 0, 0, 0.08)',
+              borderRadius: '12px',
+              backdropFilter: 'blur(10px)',
               '&:hover': {
-                backgroundColor: 'rgba(0, 0, 0, 0.05)',
-                color: '#000000',
+                backgroundColor: theme.palette.mode === 'dark'
+                  ? 'rgba(255, 255, 255, 0.1)'
+                  : 'rgba(0, 0, 0, 0.05)',
+                color: theme.palette.text.primary,
               },
-              '&:active': { // For touch devices
-                backgroundColor: 'rgba(0, 0, 0, 0.08)',
-              },
-            }}
+            })}
           >
             <CloseIcon />
           </IconButton>
@@ -263,7 +303,7 @@ function Navbar() {
               alignItems: 'center',
               justifyContent: 'center',
               height: '100vh',
-              gap: 2,
+              gap: 3,
               px: 4
             }}
           >
