@@ -3,98 +3,105 @@ import { Container, Typography, Box, TextField, Button,  Grid, Card, CardContent
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import emailjs from 'emailjs-com';
-import { 
-  Email, 
-  Phone, 
-  LocationOn, 
-  Send, 
- CheckCircle,
+import {
+  Email,
+  Phone,
+  LocationOn,
+  Send,
+  CheckCircle,
   Error
 } from '@mui/icons-material';
 
 // Styled Components
 const HeroContainer = styled(Box)({
   minHeight: '100vh',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  // Subtle radial gradient from center to edges, light gray to white for the page background
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
+  color: '#333333', // Default text color is dark gray
   paddingTop: '80px',
   paddingBottom: '60px',
   position: 'relative',
   overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><defs><pattern id=\'circles\' patternUnits=\'userSpaceOnUse\' width=\'50\' height=\'50\'><circle cx=\'25\' cy=\'25\' r=\'1\' fill=\'%23ffffff\' fill-opacity=\'0.1\'/></pattern></defs><rect width=\'100\' height=\'100\' fill=\'url(%23circles)\'></rect></svg>")',
-  },
+  // Removed the ::before pattern for cleaner gradients
 });
 
 const GlassCard = styled(Card)({
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(20px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  borderRadius: '20px',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+  // Always apply a subtle radial gradient for depth
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
+  backdropFilter: 'blur(5px)', // Less blur as background is light
+  border: '1px solid rgba(0, 0, 0, 0.04)', // Even lighter border
+  borderRadius: '15px', // Consistent border radius
+  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)', // Very light initial shadow
   transition: 'all 0.3s ease',
   '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.4)',
-    background: 'rgba(255, 255, 255, 0.15)',
+    transform: 'translateY(-5px)', // Consistent lift
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)', // More prominent but still light shadow on hover
+    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)', // Subtle gradient change on hover
+    border: '1px solid rgba(0, 0, 0, 0.08)', // Slightly more defined border on hover
+  },
+  '&:active': { // For touch devices
+    transform: 'translateY(-1px)', // Simulating a soft press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    background: 'radial-gradient(circle at top left, #f0f0f0 0%, #ffffff 100%)',
   },
 });
 
 const StyledTextField = styled(TextField)({
   '& .MuiOutlinedInput-root': {
-    background: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: '12px',
-    color: 'white',
+    background: 'rgba(0, 0, 0, 0.03)', // Very subtle light transparent black background
+    borderRadius: '10px', // Slightly less rounded for text fields
+    color: '#333333', // Dark gray text input
     '& fieldset': {
-      borderColor: 'rgba(255, 255, 255, 0.3)',
+      borderColor: 'rgba(0, 0, 0, 0.1)', // Subtle border
       borderWidth: '1px',
     },
     '&:hover fieldset': {
-      borderColor: 'rgba(255, 255, 255, 0.5)',
+      borderColor: 'rgba(0, 0, 0, 0.3)', // Darker border on hover
     },
     '&.Mui-focused fieldset': {
-      borderColor: 'rgba(255, 255, 255, 0.8)',
+      borderColor: '#000000', // Pure black border when focused
       borderWidth: '2px',
     },
   },
   '& .MuiInputLabel-root': {
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: '#666666', // Medium gray label
     '&.Mui-focused': {
-      color: 'white',
+      color: '#000000', // Black label when focused
     },
   },
   '& .MuiOutlinedInput-input': {
-    color: 'white',
+    color: '#333333', // Dark gray input text
     '&::placeholder': {
-      color: 'rgba(255, 255, 255, 0.5)',
+      color: '#999999', // Lighter gray placeholder
     },
   },
 });
 
 const GradientButton = styled(Button)({
-  background: 'linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%)',
-  color: '#667eea',
-  borderRadius: '50px',
+  // Sleek black to dark grey gradient
+  background: 'linear-gradient(135deg, #222222 0%, #000000 100%)',
+  color: 'white',
+  borderRadius: '30px',
   padding: '12px 32px',
   textTransform: 'none',
-  fontWeight: 700,
+  fontWeight: 600,
   fontSize: '1.1rem',
-  boxShadow: '0 8px 25px rgba(255, 255, 255, 0.3)',
+  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)', // Always has a shadow for depth
   transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 12px 30px rgba(255, 255, 255, 0.4)',
+    background: 'linear-gradient(135deg, #111111 0%, #000000 100%)', // Darker on hover
+    transform: 'translateY(-3px)',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
+  },
+  '&:active': { // Add active state for touch devices
+    background: 'linear-gradient(135deg, #000000 0%, #111111 100%)', // Slightly inverted/darker on press
+    transform: 'translateY(0)', // Resets on press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
   },
   '&:disabled': {
-    background: 'rgba(255, 255, 255, 0.3)',
-    color: 'rgba(255, 255, 255, 0.5)',
+    background: 'linear-gradient(135deg, #cccccc 0%, #aaaaaa 100%)', // Lighter gradient when disabled
+    color: '#666666', // Darker text for disabled state
+    boxShadow: 'none',
   },
 });
 
@@ -106,28 +113,41 @@ const ContactInfoCard = styled(GlassCard)({
   textAlign: 'center',
   padding: '24px',
   cursor: 'pointer',
+  // Inherits hover/active from GlassCard, specific icon hover below
 });
 
 const IconContainer = styled(Box)({
   width: '80px',
   height: '80px',
   borderRadius: '50%',
-  background: 'linear-gradient(135deg, #ffffff20, #ffffff10)',
+  // Subtle white to light gray radial gradient for depth
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #e8e8e8 100%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   marginBottom: '20px',
-  border: '2px solid rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(0, 0, 0, 0.08)', // Softer border
+  color: '#333333', // Dark gray icon color
   transition: 'all 0.3s ease',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.05)', // Very subtle shadow
+  '&:hover': { // Apply hover effect directly to IconContainer
+    background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
+    transform: 'scale(1.08)',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+  },
+  '&:active': { // For touch devices
+    background: 'radial-gradient(circle at center, #d0d0d0 0%, #e0e0e0 100%)',
+    transform: 'scale(1)',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  },
 });
-
-
 
 const FloatingElement = styled(motion.div)({
   position: 'absolute',
   borderRadius: '50%',
-  background: 'rgba(255, 255, 255, 0.1)',
+  background: 'rgba(0, 0, 0, 0.02)', // Very subtle transparent black
   pointerEvents: 'none',
+  border: '1px solid rgba(0, 0, 0, 0.05)', // Even more subtle border
 });
 
 function Contact() {
@@ -189,17 +209,17 @@ function Contact() {
       icon: <Phone sx={{ fontSize: 32 }} />,
       title: 'Phone',
       info: '+91 6282696352',
-      action: 'tel:+6282696352'
+      action: 'tel:+916282696352' // Corrected action for phone
     },
     {
       icon: <LocationOn sx={{ fontSize: 32 }} />,
       title: 'Location',
       info: 'Bengaluru, Karnataka',
-      action: '#'
+      action: '#' // No direct action for location, can link to map if desired
     }
   ];
 
- 
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -268,25 +288,29 @@ function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <Typography 
-            variant="h2" 
-            fontWeight="bold" 
-            textAlign="center" 
-            color="white"
-            sx={{ 
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            textAlign="center"
+            // Black to dark gray gradient for the main heading text
+            sx={{
               fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' },
-              mb: 2
+              mb: 2,
+              background: 'linear-gradient(45deg, #000000, #333333)',
+              backgroundClip: 'text',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
             }}
           >
             Get In Touch
           </Typography>
-          <Typography 
-            variant="h6" 
-            textAlign="center" 
-            color="rgba(255, 255, 255, 0.8)" 
-            sx={{ 
-              mb: 8, 
-              maxWidth: '600px', 
+          <Typography
+            variant="h6"
+            textAlign="center"
+            color="#666666" // Medium gray for sub-heading
+            sx={{
+              mb: 8,
+              maxWidth: '600px',
               mx: 'auto',
               fontSize: { xs: '1.1rem', sm: '1.3rem' }
             }}
@@ -316,10 +340,10 @@ function Contact() {
                         <IconContainer>
                           {item.icon}
                         </IconContainer>
-                        <Typography variant="h6" fontWeight="bold" color="white" gutterBottom>
+                        <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for title */}
                           {item.title}
                         </Typography>
-                        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)">
+                        <Typography variant="body1" color="#666666"> {/* Medium gray for info */}
                           {item.info}
                         </Typography>
                       </ContactInfoCard>
@@ -339,10 +363,10 @@ function Contact() {
             >
               <GlassCard>
                 <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
-                  <Typography variant="h4" fontWeight="bold" color="white" gutterBottom>
+                  <Typography variant="h4" fontWeight="bold" color="#000000" gutterBottom> {/* Pure black for heading */}
                     Send Message
                   </Typography>
-                  <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" sx={{ mb: 4 }}>
+                  <Typography variant="body1" color="#666666" sx={{ mb: 4 }}> {/* Medium gray for sub-text */}
                     Have a project in mind? Let's discuss how we can work together.
                   </Typography>
 
@@ -419,7 +443,7 @@ function Contact() {
                             >
                               ⏳
                             </motion.div> : <Send />}
-                            sx={{ 
+                            sx={{
                               mt: 2,
                               minWidth: '150px'
                             }}
@@ -435,8 +459,6 @@ function Contact() {
             </motion.div>
           </Grid>
         </Grid>
-
-       
       </Container>
 
       {/* Snackbar for notifications */}

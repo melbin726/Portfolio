@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import { Container, Typography, Box, Paper, Button, Grid, Card, CardContent, Chip, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
-import { 
-  Download, 
-  Work, 
-  School, 
-  Code, 
+import {
+  Download,
+  Work,
+  School,
+  Code,
   Star,
   Visibility,
   Email,
@@ -15,22 +15,23 @@ import {
   Person
 } from '@mui/icons-material';
 
+const MainContainer = styled(Box)({
+  minHeight: '100vh',
+  // Subtle radial gradient from center to edges, light gray to white for the page background
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
+  color: '#333333', // Default text color is dark gray
+  paddingBottom: '40px',
+});
+
 const HeroSection = styled(Box)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  // Subtle radial gradient from center to edges, light gray to white
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
+  color: '#333333', // Dark gray text for contrast
   paddingTop: '120px',
   paddingBottom: '60px',
   position: 'relative',
   overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><defs><pattern id=\'circles\' patternUnits=\'userSpaceOnUse\' width=\'50\' height=\'50\'><circle cx=\'25\' cy=\'25\' r=\'1\' fill=\'%23ffffff\' fill-opacity=\'0.1\'/></pattern></defs><rect width=\'100\' height=\'100\' fill=\'url(%23circles)\'></rect></svg>")',
-  },
+  // Removed the ::before pattern
 });
 
 const AnimatedTypography = styled(motion(Typography))({
@@ -39,106 +40,171 @@ const AnimatedTypography = styled(motion(Typography))({
 });
 
 const GradientButton = styled(Button)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  // Sleek black to dark grey gradient
+  background: 'linear-gradient(135deg, #222222 0%, #000000 100%)',
   color: 'white',
   borderRadius: '30px',
   padding: '12px 32px',
   textTransform: 'none',
   fontWeight: 600,
   fontSize: '1.1rem',
-  boxShadow: '0 8px 16px rgba(102, 126, 234, 0.3)',
+  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)', // Always has a shadow for depth
   transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
+    background: 'linear-gradient(135deg, #111111 0%, #000000 100%)', // Darker on hover
     transform: 'translateY(-3px)',
-    boxShadow: '0 12px 24px rgba(102, 126, 234, 0.4)',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
+  },
+  '&:active': { // Add active state for touch devices
+    background: 'linear-gradient(135deg, #000000 0%, #111111 100%)', // Slightly inverted/darker on press
+    transform: 'translateY(0)', // Resets on press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
   },
 });
 
 const OutlineButton = styled(Button)({
-  border: '2px solid rgba(255, 255, 255, 0.8)',
-  color: 'white',
+  // Always apply a subtle light gray gradient
+  background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
+  color: '#333333', // Dark gray text
   borderRadius: '30px',
   padding: '10px 32px',
   textTransform: 'none',
   fontWeight: 600,
   fontSize: '1.1rem',
-  backdropFilter: 'blur(10px)',
+  backdropFilter: 'blur(5px)', // Slightly less blur
+  boxShadow: '0 2px 5px rgba(0,0,0,0.05)', // Always has a subtle shadow
   transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    border: '2px solid white',
-    transform: 'translateY(-3px)',
+    background: 'linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
+    borderColor: 'rgba(0, 0, 0, 0.2)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+  },
+  '&:active': { // For touch devices
+    background: 'linear-gradient(135deg, #d0d0d0 0%, #e0e0e0 100%)', // Slightly inverted/darker on press
+    transform: 'translateY(0)',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
   },
 });
 
 const SectionContainer = styled(Paper)({
-  background: 'rgba(255, 255, 255, 0.05)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  color: '#FFFFFF',
+  // Always apply a subtle radial gradient for depth
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
+  backdropFilter: 'blur(5px)', // Less blur as background is light
+  border: '1px solid rgba(0, 0, 0, 0.04)', // Even lighter border
+  color: '#333333', // Default text color is dark gray
   padding: '30px',
   marginTop: '30px',
-  borderRadius: '20px',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+  borderRadius: '15px', // Consistent border radius
+  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)', // Very light initial shadow
   transition: 'all 0.3s ease',
   '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
+    transform: 'translateY(-5px)', // Consistent lift
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)', // More prominent but still light shadow on hover
+    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)', // Subtle gradient change on hover
+    border: '1px solid rgba(0, 0, 0, 0.08)', // Slightly more defined border on hover
+  },
+  '&:active': { // For touch devices
+    transform: 'translateY(-1px)', // Simulating a soft press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    background: 'radial-gradient(circle at top left, #f0f0f0 0%, #ffffff 100%)',
   },
 });
 
 const SkillCard = styled(Card)({
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  // Always apply a subtle radial gradient for depth (same as SectionContainer but for smaller cards)
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
+  backdropFilter: 'blur(5px)',
+  border: '1px solid rgba(0, 0, 0, 0.04)',
   borderRadius: '15px',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
   height: '100%',
+  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)',
   '&:hover': {
     transform: 'translateY(-8px)',
-    boxShadow: '0 15px 30px rgba(0, 0, 0, 0.3)',
-    background: 'rgba(255, 255, 255, 0.15)',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)',
+    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)',
+    border: '1px solid rgba(0, 0, 0, 0.08)',
+  },
+  '&:active': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    background: 'radial-gradient(circle at top left, #f0f0f0 0%, #ffffff 100%)',
   },
 });
 
 const SkillChip = styled(Chip)({
-  background: 'rgba(255, 255, 255, 0.2)',
-  color: 'white',
+  // Subtle light gray background with soft border
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  color: '#333333', // Dark gray text
+  border: '1px solid rgba(0, 0, 0, 0.1)',
   margin: '4px',
   transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.08)', // Slightly darker on hover
     transform: 'scale(1.05)',
+  },
+  '&:active': { // For touch devices
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    transform: 'scale(1)',
   },
 });
 
-const IconWrapper = styled(Box)({
-  width: '60px',
-  height: '60px',
-  borderRadius: '50%',
-  background: 'linear-gradient(135deg, #ffffff20, #ffffff10)',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginBottom: '16px',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-});
 
-const MainContainer = styled(Box)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  minHeight: '100vh',
-  paddingBottom: '40px',
-});
 
 const StyledAvatar = styled(Avatar)({
   width: '150px',
   height: '150px',
-  border: '4px solid rgba(255, 255, 255, 0.3)',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+  border: '4px solid rgba(0, 0, 0, 0.1)', // Lighter border
+  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.15)', // Lighter shadow
   marginBottom: '20px',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.03)', // Subtle scale on hover
+    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.25)', // More prominent but still light shadow
+  },
+  '&:active': { // For touch devices
+    transform: 'scale(0.98)',
+    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
+  },
 });
+
+const SectionTitleIcon = styled(Box)({
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)', // Light gradient for section icons
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#000000', // Black icon color
+  boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+});
+
+// Styles for individual experience/project/education items inside SectionContainer
+const InnerItemBox = styled(Box)({
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)', // Subtle card-like background
+  borderRadius: '10px', // Slightly less rounded than main cards for nesting
+  border: '1px solid rgba(0, 0, 0, 0.06)', // Very light border
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.03)', // Very subtle shadow
+  padding: '20px', // Reduced padding slightly
+  marginBottom: '20px',
+  transition: 'all 0.3s ease',
+  '&:last-child': {
+    marginBottom: 0,
+  },
+  '&:hover': {
+    transform: 'translateY(-3px)',
+    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.08)',
+  },
+  '&:active': {
+    transform: 'translateY(0)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)',
+  },
+});
+
 
 const PrintableResume = styled('div')({
   position: 'absolute',
@@ -157,11 +223,75 @@ const PrintableResume = styled('div')({
     left: 'auto',
     boxShadow: 'none',
   },
+  // Basic styles for printable resume to match the black and white theme
+  'h1, h2, h3, h4, h5, h6': {
+    color: '#000000',
+    margin: '0 0 5px 0',
+  },
+  'p, ul, li': {
+    color: '#333333',
+    margin: '0 0 5px 0',
+  },
+  '.header': {
+    textAlign: 'center',
+    borderBottom: '2px solid #333',
+    paddingBottom: '20px',
+    marginBottom: '30px',
+  },
+  '.section': {
+    marginBottom: '30px',
+  },
+  '.section-title': {
+    color: '#333',
+    borderBottom: '1px solid #ccc',
+    paddingBottom: '5px',
+    marginBottom: '15px',
+  },
+  '.contact-info': {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px',
+    justifyContent: 'center',
+  },
+  '.skill-category': {
+    marginBottom: '15px',
+  },
+  '.skills-list': {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '5px',
+  },
+  '.skill-tag': {
+    background: '#e0e0e0', // Light gray background for print chips
+    padding: '3px 8px',
+    borderRadius: '3px',
+    fontSize: '11px',
+    color: '#333333', // Dark gray text for print chips
+  },
+  '.experience-item, .project-item': {
+    marginBottom: '20px',
+    padding: '15px',
+    border: '1px solid #ddd',
+    borderRadius: '5px',
+  },
+  '.experience-title': {
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  '.experience-company': {
+    fontStyle: 'italic',
+    color: '#666',
+  },
+  '.experience-duration': {
+    color: '#888',
+    fontSize: '11px',
+  },
+ 
 });
 
 function Resume() {
   const printRef = useRef();
-  
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -185,9 +315,9 @@ function Resume() {
   };
 
   const skills = {
-    frontend: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'Material UI'],
-    backend: ['C#', 'SQL', 'PostgreSQL', 'REST APIs'],
-    tools: ['Git', 'Visual Studio Code', 'IntelliJ IDEA', 'Postman', 'PowerBI', 'Excel'],
+    frontend: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'Material UI', 'Angular', 'Tailwind CSS'], // Added Angular, Tailwind
+    backend: ['C#', 'SQL', 'PostgreSQL', 'REST APIs', 'Java', 'Spring Boot'], // Added Java, Spring Boot
+    tools: ['Git', 'Visual Studio Code', 'IntelliJ IDEA', 'Postman', 'PowerBI', 'Excel', 'Jira'], // Added Jira
     soft: ['Problem Solving', 'Team Leadership', 'Communication', 'Quick Learner', 'Creative & Innovative']
   };
 
@@ -199,9 +329,10 @@ function Resume() {
       description:
         'Part of the development team building an internal ERP solution for the college using Angular, Tailwind CSS, and Java. Focused on frontend integration, responsive UI, and component development.',
       achievements: [
-        'Built responsive and dynamic interfaces using Angular & Tailwind CSS',
-        'Integrated REST APIs built with Java Spring Boot',
-        'Collaborated with cross-functional teams to deliver ERP modules',
+        'Built responsive and dynamic interfaces using Angular & Tailwind CSS for critical ERP modules.',
+        'Integrated complex frontend components with Java Spring Boot REST APIs.',
+        'Collaborated effectively with cross-functional teams, adhering to agile methodologies to deliver timely solutions.',
+        'Contributed to the improvement of user experience by optimizing UI performance and responsiveness.',
       ],
     },
     {
@@ -211,9 +342,10 @@ function Resume() {
       description:
         'Worked on GrocerEase application focusing on backend development using C# and PostgreSQL, along with frontend components in React.js.',
       achievements: [
-        'Developed scalable features for a grocery management application',
-        'Integrated and tested backend APIs using C#',
-        'Optimized PostgreSQL queries for improved performance',
+        'Developed scalable features for a grocery management application, enhancing inventory tracking and user management.',
+        'Designed and integrated robust backend APIs using C# and Entity Framework.',
+        'Optimized PostgreSQL queries, leading to significant improvements in data retrieval performance.',
+        'Participated in code reviews and contributed to maintainable code practices.',
       ],
     },
     {
@@ -223,38 +355,52 @@ function Resume() {
       description:
         'Contributed to the Cambridge Dashboard Enhancement project using React.js and Material UI, with a focus on improving UI and usability.',
       achievements: [
-        'Enhanced UI components using React.js and Material UI',
-        'Worked on dashboard data visualizations',
+        'Enhanced UI components and implemented new features using React.js and Material UI.',
+        'Worked on improving dashboard data visualizations for better user insights.',
+        'Gained practical experience in a professional development environment.',
       ],
     },
   ];
-  
+
 
   const projects = [
     {
       title: 'College Placement Portal',
-      description: 'Worked on frontend and database parts for a team project during MCA.',
-      technologies: ['React.js', 'SQL', 'Material UI']
+      description: 'Developed key frontend and database components for a comprehensive college placement management system, improving student-recruiter interaction.',
+      technologies: ['React.js', 'SQL', 'Material UI', 'Node.js', 'Express.js']
     },
     {
       title: 'OLX Clone',
-      description: 'Developed a functional OLX clone to practice and improve skills in web development.',
-      technologies: ['React.js', 'JavaScript', 'CSS3']
+      description: 'Built a full-stack OLX clone, implementing user authentication, product listings, and search functionality to simulate a real-world marketplace.',
+      technologies: ['React.js', 'JavaScript', 'CSS3', 'Node.js', 'MongoDB']
     },
     {
       title: 'Netflix Clone',
-      description: 'Created a Netflix clone to enhance understanding of front-end technologies and streaming functionalities.',
-      technologies: ['React.js', 'JavaScript', 'HTML5', 'CSS3']
+      description: 'Created a Netflix clone to deepen understanding of front-end technologies, API integration for movie data, and responsive design for various devices.',
+      technologies: ['React.js', 'JavaScript', 'HTML5', 'CSS3', 'API Integration']
     }
   ];
 
   const handleDownload = () => {
+    // A more robust way to handle printing without DOM manipulation, if supported
+    // For wider browser compatibility, the original DOM manipulation approach might still be preferred by some.
     const printContent = printRef.current;
-    const originalContent = document.body.innerHTML;
-    document.body.innerHTML = printContent.innerHTML;
-    window.print();
-    document.body.innerHTML = originalContent;
-    window.location.reload();
+    if (window.PrintJS) { // If you have PrintJS or a similar library
+      window.PrintJS({
+        printable: printContent,
+        type: 'html',
+        css: '/print-resume.css', // You could put print styles in a separate CSS file
+        scanStyles: false
+      });
+    } else {
+      // Fallback to simpler window.print()
+      const originalContents = document.body.innerHTML;
+      const printContents = printContent.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+      window.location.reload(); // Reloads to restore original state
+    }
   };
 
   const handlePreview = () => {
@@ -264,20 +410,25 @@ function Resume() {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Melbin Joseph Resume</title>
+          <title>Melbin Joseph Resume Preview</title>
           <style>
-            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+            /* Inline styles for preview to ensure consistent rendering */
+            body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; color: black; }
+            h1, h2, h3, h4, h5, h6 { color: #000000; margin: 0 0 5px 0; }
+            p, ul, li { color: #333333; margin: 0 0 5px 0; }
             .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 20px; margin-bottom: 30px; }
             .section { margin-bottom: 30px; }
             .section-title { color: #333; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 15px; }
             .contact-info { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
             .skill-category { margin-bottom: 15px; }
             .skills-list { display: flex; flex-wrap: wrap; gap: 5px; }
-            .skill-tag { background: #f0f0f0; padding: 3px 8px; border-radius: 3px; font-size: 11px; }
+            .skill-tag { background: #e0e0e0; padding: 3px 8px; border-radius: 3px; font-size: 11px; color: #333333; }
             .experience-item, .project-item { margin-bottom: 20px; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
             .experience-title { font-weight: bold; color: #333; }
             .experience-company { font-style: italic; color: #666; }
             .experience-duration { color: #888; font-size: 11px; }
+            ul { list-style: disc; padding-left: 20px; }
+            li { margin-bottom: 5px; }
             @media print { body { margin: 0; } }
           </style>
         </head>
@@ -308,10 +459,11 @@ function Resume() {
                 component="h1"
                 fontWeight="bold"
                 textAlign="center"
-                sx={{ 
+                sx={{
                   fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' },
                   mb: 1,
-                  background: 'linear-gradient(45deg, #ffffff, #e0e0e0)',
+                  // Black to dark gray gradient for the name
+                  background: 'linear-gradient(45deg, #000000, #333333)',
                   backgroundClip: 'text',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
@@ -322,9 +474,9 @@ function Resume() {
               <AnimatedTypography
                 variant="h5"
                 textAlign="center"
-                sx={{ 
+                sx={{
                   mb: 2,
-                  color: 'rgba(255, 255, 255, 0.9)',
+                  color: '#666666', // Medium gray for title
                   fontWeight: 500
                 }}
               >
@@ -332,25 +484,25 @@ function Resume() {
               </AnimatedTypography>
               <Box display="flex" flexWrap="wrap" justifyContent="center" gap={3} mb={4}>
                 <Box display="flex" alignItems="center">
-                  <Email sx={{ mr: 1 }} />
-                  <Typography variant="body2">22mcaa40@kristujayanti.com</Typography>
+                  <Email sx={{ mr: 1, color: '#666666' }} /> {/* Medium gray icons */}
+                  <Typography variant="body2" color="#666666">22mcaa40@kristujayanti.com</Typography> {/* Medium gray text */}
                 </Box>
                 <Box display="flex" alignItems="center">
-                  <Phone sx={{ mr: 1 }} />
-                  <Typography variant="body2">+91 6282696352</Typography>
+                  <Phone sx={{ mr: 1, color: '#666666' }} /> {/* Medium gray icons */}
+                  <Typography variant="body2" color="#666666">+91 6282696352</Typography> {/* Medium gray text */}
                 </Box>
                 <Box display="flex" alignItems="center">
-                  <LocationOn sx={{ mr: 1 }} />
-                  <Typography variant="body2">Bengaluru, Karnataka</Typography>
+                  <LocationOn sx={{ mr: 1, color: '#666666' }} /> {/* Medium gray icons */}
+                  <Typography variant="body2" color="#666666">Bengaluru, Karnataka</Typography> {/* Medium gray text */}
                 </Box>
               </Box>
             </Box>
             <AnimatedTypography
               variant="h6"
               textAlign="center"
-              sx={{ 
+              sx={{
                 mb: 4,
-                color: 'rgba(255, 255, 255, 0.9)',
+                color: '#666666', // Medium gray for description
                 fontSize: { xs: '1.1rem', sm: '1.25rem' },
                 maxWidth: '600px',
                 mx: 'auto',
@@ -390,7 +542,7 @@ function Resume() {
       </HeroSection>
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        
+
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -400,14 +552,14 @@ function Resume() {
           <motion.div variants={itemVariants}>
             <SectionContainer>
               <Box display="flex" alignItems="center" mb={3}>
-                <IconWrapper>
-                  <Person sx={{ fontSize: 28, color: 'white' }} />
-                </IconWrapper>
-                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: 'white' }}>
+                <SectionTitleIcon> {/* Use the new SectionTitleIcon */}
+                  <Person sx={{ fontSize: 28 }} />
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}> {/* Pure black for heading */}
                   Objective
                 </Typography>
               </Box>
-              <Typography variant="body1" color="rgba(255, 255, 255, 0.9)" sx={{ fontSize: '1.1rem', lineHeight: 1.7 }}>
+              <Typography variant="body1" color="#666666" sx={{ fontSize: '1.1rem', lineHeight: 1.7 }}> {/* Medium gray text */}
                 Enthusiastic about launching my career in an organization that fosters continuous learning and provides abundant opportunities for professional development. Eager to contribute positivity to a team that values innovation and growth.
               </Typography>
             </SectionContainer>
@@ -423,14 +575,14 @@ function Resume() {
           <motion.div variants={itemVariants}>
             <SectionContainer>
               <Box display="flex" alignItems="center" mb={3}>
-                <IconWrapper>
-                  <Work sx={{ fontSize: 28, color: 'white' }} />
-                </IconWrapper>
-                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: 'white' }}>
+                <SectionTitleIcon> {/* Use the new SectionTitleIcon */}
+                  <Work sx={{ fontSize: 28 }} />
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}> {/* Pure black for heading */}
                   Professional Experience
                 </Typography>
               </Box>
-              
+
               {experiences.map((exp, index) => (
                 <motion.div
                   key={index}
@@ -439,36 +591,30 @@ function Resume() {
                   transition={{ delay: index * 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <Box mb={3} p={3} 
-                    sx={{ 
-                      background: 'rgba(255, 255, 255, 0.05)',
-                      borderRadius: '15px',
-                      border: '1px solid rgba(255, 255, 255, 0.1)'
-                    }}
-                  >
-                    <Typography variant="h5" fontWeight="bold" color="white" gutterBottom>
+                  <InnerItemBox> {/* Use the new InnerItemBox */}
+                    <Typography variant="h5" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for title */}
                       {exp.title}
                     </Typography>
-                    <Typography variant="h6" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+                    <Typography variant="h6" color="#666666" gutterBottom> {/* Medium gray for company */}
                       {exp.company}
                     </Typography>
-                    <Typography variant="body2" color="rgba(255, 255, 255, 0.6)" gutterBottom>
+                    <Typography variant="body2" color="#999999" gutterBottom> {/* Lighter gray for duration */}
                       {exp.duration}
                     </Typography>
-                    <Typography variant="body1" color="rgba(255, 255, 255, 0.9)" paragraph>
+                    <Typography variant="body1" color="#666666" paragraph> {/* Medium gray for description */}
                       {exp.description}
                     </Typography>
                     <Box>
                       {exp.achievements.map((achievement, idx) => (
                         <Box key={idx} display="flex" alignItems="center" mb={1}>
-                          <Star sx={{ fontSize: 16, color: '#FFD700', mr: 1 }} />
-                          <Typography variant="body2" color="rgba(255, 255, 255, 0.8)">
+                          <Star sx={{ fontSize: 16, color: '#FFD700', mr: 1 }} /> {/* Keeping gold star */}
+                          <Typography variant="body2" color="#666666"> {/* Medium gray for achievement text */}
                             {achievement}
                           </Typography>
                         </Box>
                       ))}
                     </Box>
-                  </Box>
+                  </InnerItemBox>
                 </motion.div>
               ))}
             </SectionContainer>
@@ -484,14 +630,14 @@ function Resume() {
           <motion.div variants={itemVariants}>
             <SectionContainer>
               <Box display="flex" alignItems="center" mb={4}>
-                <IconWrapper>
-                  <Code sx={{ fontSize: 28, color: 'white' }} />
-                </IconWrapper>
-                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: 'white' }}>
+                <SectionTitleIcon> {/* Use the new SectionTitleIcon */}
+                  <Code sx={{ fontSize: 28 }} />
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}> {/* Pure black for heading */}
                   Technical Skills
                 </Typography>
               </Box>
-              
+
               <Grid container spacing={3}>
                 {Object.entries(skills).map(([category, skillList], index) => (
                   <Grid item xs={12} sm={6} md={6} key={category}>
@@ -501,16 +647,16 @@ function Resume() {
                     >
                       <SkillCard>
                         <CardContent>
-                          <Typography 
-                            variant="h6" 
-                            fontWeight="bold" 
-                            color="white" 
+                          <Typography
+                            variant="h6"
+                            fontWeight="bold"
+                            color="#333333" // Dark gray for category title
                             gutterBottom
                             sx={{ textTransform: 'capitalize' }}
                           >
-                            {category === 'frontend' ? 'Frontend' : 
-                             category === 'backend' ? 'Backend' : 
-                             category === 'tools' ? 'Tools & Technologies' : 'Soft Skills'}
+                            {category === 'frontend' ? 'Frontend' :
+                              category === 'backend' ? 'Backend' :
+                                category === 'tools' ? 'Tools & Technologies' : 'Soft Skills'}
                           </Typography>
                           <Box>
                             {skillList.map((skill, idx) => (
@@ -518,7 +664,7 @@ function Resume() {
                                 key={idx}
                                 initial={{ opacity: 0, scale: 0.8 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
-                                transition={{ delay: idx * 0.1 }}
+                                transition={{ delay: idx * 0.05 }}
                                 viewport={{ once: true }}
                                 style={{ display: 'inline-block' }}
                               >
@@ -549,14 +695,14 @@ function Resume() {
           <motion.div variants={itemVariants}>
             <SectionContainer>
               <Box display="flex" alignItems="center" mb={3}>
-                <IconWrapper>
-                  <Code sx={{ fontSize: 28, color: 'white' }} />
-                </IconWrapper>
-                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: 'white' }}>
+                <SectionTitleIcon> {/* Use the new SectionTitleIcon */}
+                  <Code sx={{ fontSize: 28 }} />
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}> {/* Pure black for heading */}
                   Projects
                 </Typography>
               </Box>
-              
+
               <Grid container spacing={3}>
                 {projects.map((project, index) => (
                   <Grid item xs={12} md={6} key={index}>
@@ -566,18 +712,11 @@ function Resume() {
                       transition={{ delay: index * 0.1 }}
                       viewport={{ once: true }}
                     >
-                      <Box p={3} 
-                        sx={{ 
-                          background: 'rgba(255, 255, 255, 0.05)',
-                          borderRadius: '15px',
-                          border: '1px solid rgba(255, 255, 255, 0.1)',
-                          height: '100%'
-                        }}
-                      >
-                        <Typography variant="h6" fontWeight="bold" color="white" gutterBottom>
+                      <InnerItemBox sx={{ height: '100%' }}> {/* Use InnerItemBox */}
+                        <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for title */}
                           {project.title}
                         </Typography>
-                        <Typography variant="body2" color="rgba(255, 255, 255, 0.8)" paragraph>
+                        <Typography variant="body2" color="#666666" paragraph> {/* Medium gray for description */}
                           {project.description}
                         </Typography>
                         <Box>
@@ -591,7 +730,7 @@ function Resume() {
                             />
                           ))}
                         </Box>
-                      </Box>
+                      </InnerItemBox>
                     </motion.div>
                   </Grid>
                 ))}
@@ -609,90 +748,166 @@ function Resume() {
           <motion.div variants={itemVariants}>
             <SectionContainer>
               <Box display="flex" alignItems="center" mb={3}>
-                <IconWrapper>
-                  <School sx={{ fontSize: 28, color: 'white' }} />
-                </IconWrapper>
-                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: 'white' }}>
+                <SectionTitleIcon> {/* Use the new SectionTitleIcon */}
+                  <School sx={{ fontSize: 28 }} />
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}> {/* Pure black for heading */}
                   Education
                 </Typography>
               </Box>
-              
-              <Box mb={3} p={3} 
-                sx={{ 
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderRadius: '15px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold" color="white" gutterBottom>
+
+              <InnerItemBox> {/* Use InnerItemBox */}
+                <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
                   Master of Computer Applications (MCA)
                 </Typography>
-                <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+                <Typography variant="body1" color="#666666" gutterBottom>
                   Kristu Jayanti College, Bengaluru
                 </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.6)" gutterBottom>
+                <Typography variant="body2" color="#999999" gutterBottom>
                   2024 - 67%
                 </Typography>
-              </Box>
+              </InnerItemBox>
 
-              <Box p={3} 
-                sx={{ 
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  borderRadius: '15px',
-                  border: '1px solid rgba(255, 255, 255, 0.1)'
-                }}
-              >
-                <Typography variant="h6" fontWeight="bold" color="white" gutterBottom>
+              <InnerItemBox> {/* Use InnerItemBox */}
+                <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
                   Bachelor of Science - Computer Science, Mathematics and Statistics
                 </Typography>
-                <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+                <Typography variant="body1" color="#666666" gutterBottom>
                   Kristu Jayanti College, Bengaluru
                 </Typography>
-                <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                <Typography variant="body2" color="#999999">
                   2022 - CGPA 7.2
                 </Typography>
+              </InnerItemBox>
+
+              <InnerItemBox> {/* Added for consistency with previous changes */}
+                <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
+                  Plus Two - Computer Science
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom>
+                  St.Joseph HSS Vayattuparamba Kannur
+                </Typography>
+                <Typography variant="body2" color="#999999">
+                  2019 - 75%
+                </Typography>
+              </InnerItemBox>
+
+              <InnerItemBox> {/* Added for consistency with previous changes */}
+                <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom>
+                  Class 10
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom>
+                  Government High School Rayarome, Kannur
+                </Typography>
+                <Typography variant="body2" color="#999999">
+                  2017 - 80%
+                </Typography>
+              </InnerItemBox>
+
+            </SectionContainer>
+          </motion.div>
+        </motion.div>
+
+        {/* Additional Qualifications and Personal Strengths - Added for completeness based on PrintableResume*/}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={itemVariants}>
+            <SectionContainer>
+              <Box display="flex" alignItems="center" mb={3}>
+                <SectionTitleIcon>
+                  <Star sx={{ fontSize: 28 }} /> {/* Using Star for additional qual for now */}
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}>
+                  Additional Qualifications
+                </Typography>
               </Box>
+              <InnerItemBox>
+                <Typography variant="body1" color="#666666">
+                  <ul>
+                    <li>Python Fundamentals for Beginners from Great Learning (2021)</li>
+                    <li>Instagram Marketing Fundamentals from Great Learning (2021)</li>
+                    <li>Introduction to Internet of Things from Great Learning (2021)</li>
+                  </ul>
+                </Typography>
+              </InnerItemBox>
             </SectionContainer>
           </motion.div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
         >
-          <SectionContainer sx={{ textAlign: 'center', mt: 4 }}>
-            <Typography variant="h5" fontWeight="bold" color="white" gutterBottom>
-              Ready to Collaborate?
-            </Typography>
-            <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" paragraph>
-              I'm always open to discussing new opportunities and exciting projects.
-            </Typography>
-            <Box display="flex" justifyContent="center" gap={2} mt={3}>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <GradientButton
-                  startIcon={<Download />}
-                  onClick={handleDownload}
-                  size="large"
-                >
-                  Download Full Resume
-                </GradientButton>
-              </motion.div>
-            </Box>
-          </SectionContainer>
+          <motion.div variants={itemVariants}>
+            <SectionContainer>
+              <Box display="flex" alignItems="center" mb={3}>
+                <SectionTitleIcon>
+                  <Person sx={{ fontSize: 28 }} /> {/* Using Person for Personal Strengths */}
+                </SectionTitleIcon>
+                <Typography variant="h4" fontWeight="bold" sx={{ ml: 2, color: '#000000' }}>
+                  Personal Strengths
+                </Typography>
+              </Box>
+              <InnerItemBox>
+                <Box display="flex" flexWrap="wrap" gap={1}>
+                  <SkillChip label="Teamwork" size="small" variant="outlined" />
+                  <SkillChip label="Creative & Innovative" size="small" variant="outlined" />
+                  <SkillChip label="Honest & Hard working" size="small" variant="outlined" />
+                  <SkillChip label="Quick learner" size="small" variant="outlined" />
+                  <SkillChip label="Problem Solving" size="small" variant="outlined" />
+                  <SkillChip label="Communication" size="small" variant="outlined" />
+                </Box>
+              </InnerItemBox>
+            </SectionContainer>
+          </motion.div>
+        </motion.div>
+
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <motion.div variants={itemVariants}>
+            <SectionContainer sx={{ textAlign: 'center', mt: 4 }}>
+              <Typography variant="h5" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for heading */}
+                Ready to Collaborate?
+              </Typography>
+              <Typography variant="body1" color="#666666" paragraph> {/* Medium gray for text */}
+                I'm always open to discussing new opportunities and exciting projects.
+              </Typography>
+              <Box display="flex" justifyContent="center" gap={2} mt={3}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <GradientButton
+                    startIcon={<Download />}
+                    onClick={handleDownload}
+                    size="large"
+                  >
+                    Download Full Resume
+                  </GradientButton>
+                </motion.div>
+              </Box>
+            </SectionContainer>
+          </motion.div>
         </motion.div>
       </Container>
 
+      {/* Printable Resume Content (hidden by default) */}
       <PrintableResume ref={printRef}>
         <div className="header">
-          <h1 style={{ margin: 0, fontSize: '24px', color: '#333' }}>MELBIN JOSEPH</h1>
-          <h2 style={{ margin: '5px 0', fontSize: '16px', color: '#666' }}>MCA - Software Engineer</h2>
-          <div className="contact-info">
-            <span>📧 22mcaa40@kristujayanti.com</span>
-            <span>📞 +91 6282696352</span>
-            <span>📍 Bengaluru, Karnataka</span>
-            <span>🔗 LinkedIn: linkedin.com/in/melbin-joseph-9</span>
+          <h1 style={{ margin: 0, fontSize: '28px', color: '#000' }}>MELBIN JOSEPH</h1>
+          <h2 style={{ margin: '5px 0', fontSize: '18px', color: '#333' }}>MCA - Software Engineer</h2>
+          <div className="contact-info" style={{ flexDirection: 'column', alignItems: 'center', gap: '5px' }}>
+            <span style={{ color: '#666' }}>📧 22mcaa40@kristujayanti.com</span>
+            <span style={{ color: '#666' }}>📞 +91 6282696352</span>
+            <span style={{ color: '#666' }}>📍 Bengaluru, Karnataka</span>
+            <span style={{ color: '#666' }}>🔗 LinkedIn: linkedin.com/in/melbin-joseph-9</span> {/* Ensure this is a valid link */}
           </div>
         </div>
 
@@ -702,43 +917,46 @@ function Resume() {
         </div>
 
         <div className="section">
-  <h3 className="section-title">PROFESSIONAL EXPERIENCE</h3>
+          <h3 className="section-title">PROFESSIONAL EXPERIENCE</h3>
 
-  <div className="experience-item">
-    <div className="experience-title">Software Development Engineer</div>
-    <div className="experience-company">Kristu Jayanti Software Development Center (KJSDC)</div>
-    <div className="experience-duration">Jan 2025 – Present (Internship: Sep 2024 – Dec 2024)</div>
-    <p>Contributing to the college's ERP system as part of the development team. Working with Angular, Tailwind CSS, and Java to build modular and responsive web interfaces.</p>
-    <ul>
-      <li>Built responsive and dynamic web applications using Angular</li>
-      <li>Integrated frontend with backend REST APIs built on Java</li>
-      <li>Collaborated with cross-functional teams to develop scalable ERP modules</li>
-    </ul>
-  </div>
+          <div className="experience-item">
+            <div className="experience-title">Software Development Engineer</div>
+            <div className="experience-company">Kristu Jayanti Software Development Center (KJSDC)</div>
+            <div className="experience-duration">Jan 2025 – Present (Internship: Sep 2024 – Dec 2024)</div>
+            <p>Part of the development team building an internal ERP solution for the college using Angular, Tailwind CSS, and Java. Focused on frontend integration, responsive UI, and component development.</p>
+            <ul>
+              <li>Built responsive and dynamic web applications using Angular & Tailwind CSS for critical ERP modules.</li>
+              <li>Integrated complex frontend components with Java Spring Boot REST APIs.</li>
+              <li>Collaborated effectively with cross-functional teams, adhering to agile methodologies to deliver timely solutions.</li>
+              <li>Contributed to the improvement of user experience by optimizing UI performance and responsiveness.</li>
+            </ul>
+          </div>
 
-  <div className="experience-item">
-    <div className="experience-title">Software Developer Intern</div>
-    <div className="experience-company">MicroGenesis TechSoft Pvt Ltd</div>
-    <div className="experience-duration">Apr 2023 – Aug 2023</div>
-    <p>Worked on GrocerEase application using C#, PostgreSQL, and React.js. Gained strong understanding of backend services and API communication.</p>
-    <ul>
-      <li>Developed scalable features and modules for a grocery management application</li>
-      <li>Integrated and tested API endpoints using C#</li>
-      <li>Improved PostgreSQL queries for optimized performance</li>
-    </ul>
-  </div>
+          <div className="experience-item">
+            <div className="experience-title">Software Developer Intern</div>
+            <div className="experience-company">MicroGenesis TechSoft Pvt Ltd</div>
+            <div className="experience-duration">Apr 2023 – Aug 2023</div>
+            <p>Worked on GrocerEase application using C#, PostgreSQL, and React.js. Gained strong understanding of backend services and API communication.</p>
+            <ul>
+              <li>Developed scalable features for a grocery management application, enhancing inventory tracking and user management.</li>
+              <li>Designed and integrated robust backend APIs using C# and Entity Framework.</li>
+              <li>Optimized PostgreSQL queries, leading to significant improvements in data retrieval performance.</li>
+              <li>Participated in code reviews and contributed to maintainable code practices.</li>
+            </ul>
+          </div>
 
-  <div className="experience-item">
-    <div className="experience-title">React Developer Intern</div>
-    <div className="experience-company">Talview</div>
-    <div className="experience-duration">Jan 2023</div>
-    <p>Enhanced the Cambridge Dashboard using React.js, SQL, and Material UI with a focus on UI/UX improvements.</p>
-    <ul>
-      <li>Implemented UI enhancements using React.js and Material UI</li>
-      <li>Collaborated on improving data visualization features</li>
-    </ul>
-  </div>
-</div>
+          <div className="experience-item">
+            <div className="experience-title">React Developer Intern</div>
+            <div className="experience-company">Talview</div>
+            <div className="experience-duration">Jan 2023</div>
+            <p>Enhanced the Cambridge Dashboard using React.js, SQL, and Material UI with a focus on UI/UX improvements.</p>
+            <ul>
+              <li>Implemented UI enhancements and new features using React.js and Material UI.</li>
+              <li>Worked on improving dashboard data visualizations for better user insights.</li>
+              <li>Gained practical experience in a professional development environment.</li>
+            </ul>
+          </div>
+        </div>
 
         <div className="section">
           <h3 className="section-title">TECHNICAL SKILLS</h3>
@@ -750,6 +968,8 @@ function Resume() {
               <span className="skill-tag">HTML5</span>
               <span className="skill-tag">CSS3</span>
               <span className="skill-tag">Material UI</span>
+              <span className="skill-tag">Angular</span>
+              <span className="skill-tag">Tailwind CSS</span>
             </div>
           </div>
           <div className="skill-category">
@@ -759,6 +979,8 @@ function Resume() {
               <span className="skill-tag">SQL</span>
               <span className="skill-tag">PostgreSQL</span>
               <span className="skill-tag">REST APIs</span>
+              <span className="skill-tag">Java</span>
+              <span className="skill-tag">Spring Boot</span>
             </div>
           </div>
           <div className="skill-category">
@@ -770,6 +992,7 @@ function Resume() {
               <span className="skill-tag">Postman</span>
               <span className="skill-tag">PowerBI</span>
               <span className="skill-tag">Excel</span>
+              <span className="skill-tag">Jira</span>
             </div>
           </div>
         </div>
@@ -778,32 +1001,37 @@ function Resume() {
           <h3 className="section-title">PROJECTS</h3>
           <div className="project-item">
             <div className="experience-title">College Placement Portal</div>
-            <p>Worked on frontend and database parts for a team project during MCA.</p>
+            <p>Developed key frontend and database components for a comprehensive college placement management system, improving student-recruiter interaction.</p>
             <div className="skills-list">
               <span className="skill-tag">React.js</span>
               <span className="skill-tag">SQL</span>
               <span className="skill-tag">Material UI</span>
+              <span className="skill-tag">Node.js</span>
+              <span className="skill-tag">Express.js</span>
             </div>
           </div>
 
           <div className="project-item">
             <div className="experience-title">OLX Clone</div>
-            <p>Developed a functional OLX clone to practice and improve skills in web development.</p>
+            <p>Built a full-stack OLX clone, implementing user authentication, product listings, and search functionality to simulate a real-world marketplace.</p>
             <div className="skills-list">
               <span className="skill-tag">React.js</span>
               <span className="skill-tag">JavaScript</span>
               <span className="skill-tag">CSS3</span>
+              <span className="skill-tag">Node.js</span>
+              <span className="skill-tag">MongoDB</span>
             </div>
           </div>
 
           <div className="project-item">
             <div className="experience-title">Netflix Clone</div>
-            <p>Created a Netflix clone to enhance understanding of front-end technologies and streaming functionalities.</p>
+            <p>Created a Netflix clone to deepen understanding of front-end technologies, API integration for movie data, and responsive design for various devices.</p>
             <div className="skills-list">
               <span className="skill-tag">React.js</span>
               <span className="skill-tag">JavaScript</span>
               <span className="skill-tag">HTML5</span>
               <span className="skill-tag">CSS3</span>
+              <span className="skill-tag">API Integration</span>
             </div>
           </div>
         </div>
@@ -837,7 +1065,7 @@ function Resume() {
 
         <div className="section">
           <h3 className="section-title">ADDITIONAL QUALIFICATIONS</h3>
-          <ul>
+          <ul style={{ listStyle: 'disc', paddingLeft: '20px' }}>
             <li>Python Fundamentals for Beginners from Great Learning (2021)</li>
             <li>Instagram Marketing Fundamentals from Great Learning (2021)</li>
             <li>Introduction to Internet of Things from Great Learning (2021)</li>

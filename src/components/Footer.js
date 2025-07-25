@@ -11,8 +11,9 @@ import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
 const StyledFooter = styled(Box)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  // Subtle light gray to white linear gradient for the footer background
+  background: 'linear-gradient(180deg, #f0f0f0 0%, #ffffff 100%)',
+  color: '#333333', // Default text color is dark gray
   position: 'relative',
   '&::before': {
     content: '""',
@@ -21,21 +22,29 @@ const StyledFooter = styled(Box)({
     left: '50%',
     transform: 'translateX(-50%)',
     width: '80%',
-    height: '2px',
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+    height: '1px', // Thinner, more subtle line
+    background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', // Light black line
   },
 });
 
 const SocialIcon = styled(IconButton)({
-  color: 'white',
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  // Always apply a subtle light background and border
+  color: '#666666', // Medium gray for icons
+  backgroundColor: 'rgba(0, 0, 0, 0.03)', // Subtle background even without hover
+  border: '1px solid rgba(0,0,0,0.08)', // Subtle border
   margin: '0 8px',
   transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Slightly more visible on hover
+    color: '#000000', // Black on hover
+    borderColor: 'rgba(0,0,0,0.15)', // Darker border on hover
+    transform: 'translateY(-3px)', // Consistent lift on hover
+    boxShadow: '0 2px 8px rgba(0,0,0,0.05)', // Subtle shadow on hover
+  },
+  '&:active': { // For touch devices
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    transform: 'translateY(0)',
+    boxShadow: 'none',
   },
 });
 
@@ -48,13 +57,14 @@ function Footer() {
     <StyledFooter component="footer" py={6}>
       <Container maxWidth="lg">
         <Box textAlign="center">
-          <Typography 
-            variant="h6" 
-            fontWeight="bold" 
-            sx={{ 
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+            sx={{
               mb: 2,
               fontSize: { xs: '1.2rem', sm: '1.5rem' },
-              background: 'linear-gradient(45deg, #ffffff, #e0e0e0)',
+              // White text with subtle gradient for the heading
+              background: 'linear-gradient(45deg, #000000, #333333)', // Black to dark gray gradient
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -62,10 +72,10 @@ function Footer() {
           >
             Let's Connect
           </Typography>
-          
-          <Box 
-            display="flex" 
-            justifyContent="center" 
+
+          <Box
+            display="flex"
+            justifyContent="center"
             flexWrap="wrap"
             gap={2}
             mb={4}
@@ -74,9 +84,9 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="https://github.com/melbin726/" 
-                target="_blank" 
+              <SocialIcon
+                href="https://github.com/melbin726/"
+                target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
@@ -88,8 +98,8 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="https://www.linkedin.com/in/melbin-joseph-96640a252/" 
+              <SocialIcon
+                href="https://www.linkedin.com/in/melbin-joseph-96640a252/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -102,8 +112,8 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="acac" 
+              <SocialIcon
+                href="acac" // Consider updating this dummy link
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
@@ -116,8 +126,8 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="https://www.instagram.com/___melbin_/?igsh=MZFmcHN4NzYwajM0eA%3D%3D" 
+              <SocialIcon
+                href="https://www.instagram.com/___melbin_/?igsh=MZFmcHN4NzYwajM0eA%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -130,8 +140,8 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="melmelbin2007@gmail.com" 
+              <SocialIcon
+                href="mailto:melmelbin2007@gmail.com" // Changed to mailto: for email link
                 aria-label="Email"
               >
                 <EmailIcon />
@@ -142,8 +152,8 @@ function Footer() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
-              <SocialIcon 
-                href="tel:+916282696352" 
+              <SocialIcon
+                href="tel:+916282696352"
                 aria-label="Phone"
               >
                 <PhoneIcon />
@@ -151,27 +161,29 @@ function Footer() {
             </AnimatedSocialIcon>
           </Box>
 
-          <Box 
-            sx={{ 
-              borderTop: '1px solid rgba(255, 255, 255, 0.2)',
+          <Box
+            sx={{
+              // Lighter, subtle border for separation
+              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
               pt: 3,
               mt: 3
             }}
           >
-            <Typography 
-              variant="body1" 
-              sx={{ 
+            <Typography
+              variant="body1"
+              sx={{
                 mb: 1,
                 fontSize: { xs: '0.9rem', sm: '1rem' },
-                fontWeight: 500
+                fontWeight: 500,
+                color: '#333333' // Dark gray for primary footer text
               }}
             >
               © 2024 Melbin Joseph. All rights reserved.
             </Typography>
-            <Typography 
-              variant="body2" 
-              color="rgba(255, 255, 255, 0.7)"
-              sx={{ 
+            <Typography
+              variant="body2"
+              color="#666666" // Medium gray for secondary footer text
+              sx={{
                 fontSize: { xs: '0.8rem', sm: '0.875rem' }
               }}
             >

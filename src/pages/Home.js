@@ -15,39 +15,56 @@ const texts = [
 
 // Styled components
 const GradientButton = styled(Button)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  // Always apply a subtle black to dark grey gradient
+  background: 'linear-gradient(135deg, #222222 0%, #000000 100%)',
   color: 'white',
   borderRadius: '30px',
   padding: '12px 24px',
   textTransform: 'none',
   fontWeight: 600,
-  boxShadow: '0 8px 16px rgba(102, 126, 234, 0.3)',
+  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)', // Always has a shadow for depth
+  transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 12px 24px rgba(102, 126, 234, 0.4)',
+    background: 'linear-gradient(135deg, #111111 0%, #000000 100%)', // Darker on hover
+    transform: 'translateY(-3px)',
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
+  },
+  // Add active state for touch devices (optional, but good practice)
+  '&:active': {
+    background: 'linear-gradient(135deg, #000000 0%, #111111 100%)', // Slightly inverted/darker on press
+    transform: 'translateY(0)', // Resets on press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
   },
 });
 
 const OutlineButton = styled(Button)({
-  border: '2px solid rgba(255, 255, 255, 0.8)',
-  color: 'white',
+  // Always apply a subtle light gray gradient
+  background: 'linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%)',
+  border: '1px solid rgba(0, 0, 0, 0.1)',
+  color: '#333333',
   borderRadius: '30px',
   padding: '10px 24px',
   textTransform: 'none',
   fontWeight: 600,
-  backdropFilter: 'blur(10px)',
+  boxShadow: '0 2px 5px rgba(0,0,0,0.05)', // Always has a subtle shadow
+  transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    border: '2px solid white',
+    background: 'linear-gradient(135deg, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
+    borderColor: 'rgba(0, 0, 0, 0.2)',
     transform: 'translateY(-2px)',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.08)',
+  },
+  '&:active': {
+    background: 'linear-gradient(135deg, #d0d0d0 0%, #e0e0e0 100%)', // Slightly inverted/darker on press
+    transform: 'translateY(0)',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
   },
 });
 
 const HeroContainer = styled(Box)({
   minHeight: '100vh',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
+  color: '#333333',
   paddingTop: '80px',
   paddingBottom: '60px',
   paddingLeft: '20px',
@@ -57,20 +74,11 @@ const HeroContainer = styled(Box)({
   flexDirection: 'column',
   position: 'relative',
   overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><defs><pattern id=\'circles\' patternUnits=\'userSpaceOnUse\' width=\'50\' height=\'50\'><circle cx=\'25\' cy=\'25\' r=\'1\' fill=\'%23ffffff\' fill-opacity=\'0.1\'/></pattern></defs><rect width=\'100\' height=\'100\' fill=\'url(%23circles)\'></rect></svg>")',
-  },
 });
 
 const WhatIDoSection = styled(Box)({
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  background: 'linear-gradient(180deg, #f0f0f0 0%, #ffffff 100%)',
+  color: '#333333',
   position: 'relative',
   '&::before': {
     content: '""',
@@ -79,63 +87,93 @@ const WhatIDoSection = styled(Box)({
     left: '50%',
     transform: 'translateX(-50%)',
     width: '80%',
-    height: '2px',
-    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+    height: '1px',
+    background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)',
   },
 });
 
 const ServiceCard = styled(Card)({
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  borderRadius: '20px',
+  // Always apply a subtle radial gradient
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
+  backdropFilter: 'blur(5px)',
+  border: '1px solid rgba(0, 0, 0, 0.04)',
+  borderRadius: '15px',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
   height: '100%',
+  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)',
   '&:hover': {
-    transform: 'translateY(-10px)',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-    background: 'rgba(255, 255, 255, 0.15)',
+    transform: 'translateY(-8px)',
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)',
+    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)', // Subtle gradient change on hover
   },
 });
 
 const ServiceIcon = styled(Box)({
-  width: '60px',
-  height: '60px',
+  // Always apply a subtle radial gradient
+  width: '55px',
+  height: '55px',
   borderRadius: '50%',
-  background: 'linear-gradient(135deg, #ffffff20, #ffffff10)',
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #e8e8e8 100%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   marginBottom: '16px',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(0, 0, 0, 0.08)',
+  color: '#333333',
+  transition: 'all 0.3s ease',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.05)',
+  '&:hover': {
+    background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)',
+    transform: 'scale(1.08)',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+  },
 });
 
 const AnimatedSocial = styled(motion.a)({
-  color: 'white',
+  // Always apply a subtle light background and border
+  color: '#666666',
   margin: '0 10px',
-  padding: '8px',
+  padding: '10px',
   borderRadius: '50%',
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  backgroundColor: 'rgba(0, 0, 0, 0.03)', // Subtle background even without hover
+  border: '1px solid rgba(0,0,0,0.08)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   transition: 'all 0.3s ease',
   cursor: 'pointer',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    transform: 'translateY(-2px)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    color: '#000000',
+    borderColor: 'rgba(0,0,0,0.15)',
+    transform: 'translateY(-3px) scale(1.1)',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+  },
+  '&:active': {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    transform: 'translateY(0)',
+    boxShadow: 'none',
   },
 });
 
 const ScrollArrow = styled(IconButton)({
-  color: 'white',
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  // Always apply a subtle light background and border
+  color: '#666666',
+  backgroundColor: 'rgba(0, 0, 0, 0.03)',
+  border: '1px solid rgba(0, 0, 0, 0.08)',
   cursor: 'pointer',
+  transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    transform: 'translateY(-2px)',
+    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+    color: '#000000',
+    borderColor: 'rgba(0, 0, 0, 0.1)',
+    transform: 'translateY(-3px)',
+  },
+  '&:active': {
+    backgroundColor: 'rgba(0, 0, 0, 0.08)',
+    transform: 'translateY(0)',
+    boxShadow: 'none',
   },
 });
 
@@ -224,22 +262,23 @@ const Home = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
               >
-                <Typography 
-                  variant="h3" 
-                  fontWeight="bold" 
+                <Typography
+                  variant="h3"
+                  fontWeight="bold"
                   gutterBottom
-                  sx={{ 
+                  sx={{
                     fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-                    mb: 2
+                    mb: 2,
+                    color: '#000000'
                   }}
                 >
                   I'm Melbin Joseph
                 </Typography>
-                <Typography 
-                  variant="h5" 
-                  color="rgba(255, 255, 255, 0.9)" 
-                  gutterBottom 
-                  sx={{ 
+                <Typography
+                  variant="h5"
+                  color="#333333"
+                  gutterBottom
+                  sx={{
                     minHeight: '40px',
                     fontSize: { xs: '1.25rem', sm: '1.5rem' },
                     mb: 3
@@ -254,11 +293,11 @@ const Home = () => {
                     |
                   </motion.span>
                 </Typography>
-                <Typography 
-                  variant="body1" 
-                  color="rgba(255, 255, 255, 0.8)" 
-                  paragraph 
-                  sx={{ 
+                <Typography
+                  variant="body1"
+                  color="#666666"
+                  paragraph
+                  sx={{
                     fontSize: { xs: '1rem', sm: '1.1rem' },
                     lineHeight: 1.6,
                     mb: 4
@@ -279,7 +318,7 @@ const Home = () => {
                   <AnimatedSocial whileHover={{ scale: 1.1 }} href="#" title="LinkedIn">
                     <LinkedIn />
                   </AnimatedSocial>
-                  <AnimatedSocial whileHover={{ scale: 1.1 }} href="#" title="Email">
+                  <AnimatedSocial whileHover={{ scale: 1.1 }} href="#" title="Mail">
                     <Mail />
                   </AnimatedSocial>
                   <AnimatedSocial whileHover={{ scale: 1.1 }} href="#" title="Phone">
@@ -294,7 +333,7 @@ const Home = () => {
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1 }}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 1.03 }}
               >
                 <Box
                   component="img"
@@ -304,9 +343,9 @@ const Home = () => {
                     width: '100%',
                     height: 'auto',
                     maxWidth: '500px',
-                    borderRadius: '20px',
-                    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-                    border: '2px solid rgba(255, 255, 255, 0.2)',
+                    borderRadius: '15px',
+                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.08)',
+                    border: '1px solid rgba(0, 0, 0, 0.06)',
                     display: 'block',
                     margin: '0 auto',
                   }}
@@ -334,26 +373,26 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <Typography 
-              variant="h3" 
-              fontWeight="bold" 
-              gutterBottom 
-              textAlign="center" 
-              color="white"
-              sx={{ 
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              gutterBottom
+              textAlign="center"
+              color="#000000"
+              sx={{
                 fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
                 mb: 2
               }}
             >
               What I Do
             </Typography>
-            <Typography 
-              variant="h6" 
-              textAlign="center" 
-              color="rgba(255, 255, 255, 0.8)" 
-              sx={{ 
-                mb: 6, 
-                maxWidth: '600px', 
+            <Typography
+              variant="h6"
+              textAlign="center"
+              color="#666666"
+              sx={{
+                mb: 6,
+                maxWidth: '600px',
                 mx: 'auto',
                 fontSize: { xs: '1rem', sm: '1.25rem' },
                 px: { xs: 2, sm: 0 }
@@ -378,22 +417,22 @@ const Home = () => {
                         <ServiceIcon>
                           {service.icon}
                         </ServiceIcon>
-                        <Typography 
-                          variant="h5" 
-                          fontWeight="bold" 
-                          gutterBottom 
-                          color="white"
-                          sx={{ 
+                        <Typography
+                          variant="h5"
+                          fontWeight="bold"
+                          gutterBottom
+                          color="#333333"
+                          sx={{
                             fontSize: { xs: '1.25rem', sm: '1.5rem' },
                             mb: 2
                           }}
                         >
                           {service.title}
                         </Typography>
-                        <Typography 
-                          variant="body1" 
-                          color="rgba(255, 255, 255, 0.8)" 
-                          sx={{ 
+                        <Typography
+                          variant="body1"
+                          color="#666666"
+                          sx={{
                             lineHeight: 1.6,
                             fontSize: { xs: '0.9rem', sm: '1rem' }
                           }}

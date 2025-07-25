@@ -2,49 +2,54 @@ import React from 'react';
 import { Container, Typography, Box, Grid, LinearProgress, Avatar, Card, CardContent, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
 import { styled } from '@mui/system';
-import { Code, Work,  Timeline, Star, TrendingUp } from '@mui/icons-material';
+import { Code, Work, Timeline, Star, TrendingUp } from '@mui/icons-material';
 
 const PageContainer = styled(Box)({
   minHeight: '100vh',
-  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  color: 'white',
+  // Subtle radial gradient from center to edges, light gray to white for the page background
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
+  color: '#333333', // Default text color is dark gray
   paddingTop: '100px',
   paddingBottom: '60px',
   position: 'relative',
   overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'url("data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><defs><pattern id=\'circles\' patternUnits=\'userSpaceOnUse\' width=\'50\' height=\'50\'><circle cx=\'25\' cy=\'25\' r=\'1\' fill=\'%23ffffff\' fill-opacity=\'0.1\'/></pattern></defs><rect width=\'100\' height=\'100\' fill=\'url(%23circles)\'></rect></svg>")',
-  },
+  // Removed the ::before pattern for cleaner gradients
 });
 
 const GlassCard = styled(Card)({
-  background: 'rgba(255, 255, 255, 0.1)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
-  borderRadius: '20px',
+  // Always apply a subtle radial gradient for depth
+  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
+  backdropFilter: 'blur(5px)', // Less blur as background is light
+  border: '1px solid rgba(0, 0, 0, 0.04)', // Even lighter border
+  borderRadius: '15px', // Consistent border radius
   transition: 'all 0.3s ease',
+  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)', // Very light initial shadow
   '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.3)',
-    background: 'rgba(255, 255, 255, 0.15)',
+    transform: 'translateY(-5px)', // Consistent lift
+    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)', // More prominent but still light shadow on hover
+    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)', // Subtle gradient change on hover
+    border: '1px solid rgba(0, 0, 0, 0.08)', // Slightly more defined border on hover
+  },
+  '&:active': { // For touch devices
+    transform: 'translateY(-1px)', // Simulating a soft press
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    background: 'radial-gradient(circle at top left, #f0f0f0 0%, #ffffff 100%)',
   },
 });
 
 const StyledAvatar = styled(Avatar)({
   width: 200,
   height: 200,
-  border: '4px solid rgba(255, 255, 255, 0.3)',
-  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.3)',
+  border: '4px solid rgba(0, 0, 0, 0.1)', // Lighter border
+  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)', // Lighter shadow
   transition: 'all 0.3s ease',
   '&:hover': {
     transform: 'scale(1.05)',
-    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.4)',
+    boxShadow: '0 15px 40px rgba(0, 0, 0, 0.25)', // More prominent but still light shadow
+  },
+  '&:active': { // For touch devices
+    transform: 'scale(1)',
+    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
   },
 });
 
@@ -56,23 +61,38 @@ const SkillCard = styled(GlassCard)({
 });
 
 const SkillIcon = styled(Box)({
+  // Subtle white to light gray radial gradient for depth
   width: '50px',
   height: '50px',
-  borderRadius: '50%',
-  background: 'linear-gradient(135deg, #ffffff20, #ffffff10)',
+  borderRadius: '50%', // Circular icons
+  background: 'radial-gradient(circle at center, #f5f5f5 0%, #e8e8e8 100%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   marginBottom: '16px',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(0, 0, 0, 0.08)', // Softer border
+  color: '#333333', // Dark gray icon color
+  transition: 'all 0.3s ease',
+  boxShadow: '0 1px 3px rgba(0,0,0,0.05)', // Very subtle shadow
+  '&:hover': {
+    background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
+    transform: 'scale(1.08)',
+    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+  },
+  '&:active': { // For touch devices
+    background: 'radial-gradient(circle at center, #d0d0d0 0%, #e0e0e0 100%)',
+    transform: 'scale(1)',
+    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+  },
 });
 
 const AnimatedLinearProgress = styled(LinearProgress)({
   height: 8,
   borderRadius: 4,
-  backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)', // Lighter background for the track
   '& .MuiLinearProgress-bar': {
-    background: 'linear-gradient(90deg, #667eea, #764ba2)',
+    // Black to dark gray gradient for the progress bar
+    background: 'linear-gradient(90deg, #333333, #000000)',
     borderRadius: 4,
   },
 });
@@ -89,9 +109,10 @@ const TimelineItem = styled(motion.div)({
     width: '10px',
     height: '10px',
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, #667eea, #764ba2)',
-    border: '2px solid white',
-    boxShadow: '0 0 0 4px rgba(255, 255, 255, 0.2)',
+    // Black to dark gray gradient for timeline dots
+    background: 'linear-gradient(135deg, #333333, #000000)',
+    border: '2px solid #ffffff', // White border for contrast
+    boxShadow: '0 0 0 4px rgba(0, 0, 0, 0.08)', // Subtle shadow
   },
   '&::after': {
     content: '""',
@@ -100,14 +121,14 @@ const TimelineItem = styled(motion.div)({
     top: '25px',
     width: '2px',
     height: 'calc(100% + 10px)',
-    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent)',
+    background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.1), transparent)', // Subtle black line
   },
   '&:last-child::after': {
     display: 'none',
   },
 });
 
-const ProjectCard = styled(GlassCard)({
+const ProjectCardStyled = styled(GlassCard)({ // Renamed to avoid conflict with Portfolio ProjectCard
   height: '100%',
   cursor: 'pointer',
   '&:hover': {
@@ -116,13 +137,32 @@ const ProjectCard = styled(GlassCard)({
 });
 
 const StyledChip = styled(Chip)({
-  backgroundColor: 'rgba(255, 255, 255, 0.2)',
-  color: 'white',
-  border: '1px solid rgba(255, 255, 255, 0.3)',
+  // Subtle light gray background with soft border
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  color: '#333333', // Dark gray text
+  border: '1px solid rgba(0, 0, 0, 0.1)',
   '&:hover': {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.08)', // Slightly darker on hover
+    transform: 'scale(1.05)',
+  },
+  '&:active': { // For touch devices
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    transform: 'scale(1)',
   },
 });
+
+const SectionTitleIcon = styled(Box)({
+  width: '40px',
+  height: '40px',
+  borderRadius: '50%',
+  background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)', // Light gradient for section icons
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  color: '#000000', // Black icon color
+  boxShadow: '0 2px 5px rgba(0,0,0,0.05)',
+});
+
 
 const skills = [
   { name: 'React JS', level: 80, icon: <Code /> },
@@ -197,15 +237,16 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <Typography 
-            variant="h2" 
-            fontWeight="bold" 
-            textAlign="center" 
+          <Typography
+            variant="h2"
+            fontWeight="bold"
+            textAlign="center"
             gutterBottom
-            sx={{ 
+            sx={{
               fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' },
               mb: 2,
-              background: 'linear-gradient(45deg, #ffffff, #e0e0e0)',
+              // Black to dark gray gradient for the main heading text
+              background: 'linear-gradient(45deg, #000000, #333333)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -213,13 +254,13 @@ const About = () => {
           >
             About Me
           </Typography>
-          <Typography 
-            variant="h6" 
-            textAlign="center" 
-            color="rgba(255, 255, 255, 0.8)" 
-            sx={{ 
-              mb: 6, 
-              maxWidth: '600px', 
+          <Typography
+            variant="h6"
+            textAlign="center"
+            color="#666666" // Medium gray for sub-heading
+            sx={{
+              mb: 6,
+              maxWidth: '600px',
               mx: 'auto',
               fontSize: { xs: '1rem', sm: '1.25rem' },
             }}
@@ -241,144 +282,142 @@ const About = () => {
                   <StyledAvatar
                     alt="Melbin Joseph"
                     src="/IMG_6049.JPG"
-                    
                   />
                 </Box>
               </motion.div>
             </Grid>
             <Grid item xs={12} md={8}>
-  <motion.div variants={itemVariants}>
-    <GlassCard>
-      <CardContent sx={{ p: 4 }}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom color="white">
-          Web Developer & Software Engineer
-        </Typography>
-        <Typography
-          variant="body1"
-          color="rgba(255, 255, 255, 0.9)"
-          paragraph
-          sx={{ lineHeight: 1.7 }}
-        >
-          I am currently working as part of the development team at Kristu Jayanti Software Development Center (KJSDC), contributing to the college’s internal ERP solution. My role focuses on building responsive and modular front-end interfaces using Angular and Tailwind CSS, ensuring smooth integration and user-friendly design across different modules.
-        </Typography>
-        <Typography
-          variant="body1"
-          color="rgba(255, 255, 255, 0.9)"
-          paragraph
-          sx={{ lineHeight: 1.7 }}
-        >
-          I began at KJSDC as a software development intern from September to December 2024, and transitioned into a full-time role in January 2025. During this time, I’ve collaborated closely with backend and UI teams to deliver cohesive, production-ready components that meet real-world needs.
-        </Typography>
-        <Typography
-          variant="body1"
-          color="rgba(255, 255, 255, 0.9)"
-          paragraph
-          sx={{ lineHeight: 1.7 }}
-        >
-          I hold a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru. With hands-on experience in technologies such as Angular, React.js, C#, PostgreSQL, and Java, I bring a well-rounded understanding of full-stack development and a commitment to clean, scalable code.
-        </Typography>
-      </CardContent>
-    </GlassCard>
-  </motion.div>
-</Grid>
+              <motion.div variants={itemVariants}>
+                <GlassCard>
+                  <CardContent sx={{ p: 4 }}>
+                    <Typography variant="h5" fontWeight="bold" gutterBottom color="#333333"> {/* Dark gray for heading */}
+                      Web Developer & Software Engineer
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="#666666" // Medium gray for body text
+                      paragraph
+                      sx={{ lineHeight: 1.7 }}
+                    >
+                      I am currently working as part of the development team at Kristu Jayanti Software Development Center (KJSDC), contributing to the college’s internal ERP solution. My role focuses on building responsive and modular front-end interfaces using Angular and Tailwind CSS, ensuring smooth integration and user-friendly design across different modules.
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="#666666" // Medium gray for body text
+                      paragraph
+                      sx={{ lineHeight: 1.7 }}
+                    >
+                      I began at KJSDC as a software development intern from September to December 2024, and transitioned into a full-time role in January 2025. During this time, I’ve collaborated closely with backend and UI teams to deliver cohesive, production-ready components that meet real-world needs.
+                    </Typography>
+                    <Typography
+                      variant="body1"
+                      color="#666666" // Medium gray for body text
+                      paragraph
+                      sx={{ lineHeight: 1.7 }}
+                    >
+                      I hold a Master's degree in Computer Applications from Kristu Jayanti College, Bengaluru. With hands-on experience in technologies such as Angular, React.js, C#, PostgreSQL, and Java, I bring a well-rounded understanding of full-stack development and a commitment to clean, scalable code.
+                    </Typography>
+                  </CardContent>
+                </GlassCard>
+              </motion.div>
+            </Grid>
 
           </Grid>
         </motion.div>
 
         {/* Work Timeline */}
         <motion.div
-  initial={{ opacity: 0, y: 50 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  viewport={{ once: true }}
->
-  <Typography 
-    variant="h4" 
-    fontWeight="bold" 
-    gutterBottom 
-    sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}
-  >
-    <Timeline /> Work Experience
-  </Typography>
-  <GlassCard sx={{ mb: 6 }}>
-    <CardContent sx={{ p: 4 }}>
-      
-      {/* KJSDC Full-Time */}
-      <TimelineItem
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <Typography variant="h6" fontWeight="bold" color="white">
-          Software Development Engineer
-        </Typography>
-        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-          Kristu Jayanti Software Development Center • Dec 2024 – Present
-        </Typography>
-        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-          Working as a full-time developer focusing on end-to-end web application development using Angular, Java, and other technologies.
-        </Typography>
-      </TimelineItem>
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            gutterBottom
+            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2, color: '#000000' }} 
+          >
+            <SectionTitleIcon><Timeline /></SectionTitleIcon> Work Experience
+          </Typography>
+          <GlassCard sx={{ mb: 6 }}>
+            <CardContent sx={{ p: 4 }}>
 
-      {/* KJSDC Internship */}
-      <TimelineItem
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        viewport={{ once: true }}
-      >
-        <Typography variant="h6" fontWeight="bold" color="white">
-          Software Developer Internship
-        </Typography>
-        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-          Kristu Jayanti Software Development Center • Sep 2024 – Nov 2024
-        </Typography>
-        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-          Interned as part of the software team building internal applications with Java Spring Boot and Angular.
-        </Typography>
-      </TimelineItem>
+              {/* KJSDC Full-Time */}
+              <TimelineItem
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Typography variant="h6" fontWeight="bold" color="#333333"> {/* Dark gray for title */}
+                  Software Development Engineer
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom> {/* Medium gray for date/company */}
+                  Kristu Jayanti Software Development Center • Dec 2024 – Present
+                </Typography>
+                <Typography variant="body2" color="#666666"> {/* Medium gray for description */}
+                  Working as a full-time developer focusing on end-to-end web application development using Angular, Java, and other technologies.
+                </Typography>
+              </TimelineItem>
 
-      {/* MicroGenesis */}
-      <TimelineItem
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        viewport={{ once: true }}
-      >
-        <Typography variant="h6" fontWeight="bold" color="white">
-          Software Developer Internship
-        </Typography>
-        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-          MicroGenesis TechSoft • April 2023 – Aug 2023
-        </Typography>
-        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-          Worked on GrocerEase application with C# backend services and PostgreSQL database management.
-        </Typography>
-      </TimelineItem>
+              {/* KJSDC Internship */}
+              <TimelineItem
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <Typography variant="h6" fontWeight="bold" color="#333333">
+                  Software Developer Internship
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom>
+                  Kristu Jayanti Software Development Center • Sep 2024 – Nov 2024
+                </Typography>
+                <Typography variant="body2" color="#666666">
+                  Interned as part of the software team building internal applications with Java Spring Boot and Angular.
+                </Typography>
+              </TimelineItem>
 
-      {/* Talview */}
-      <TimelineItem
-        initial={{ opacity: 0, x: -50 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <Typography variant="h6" fontWeight="bold" color="white">
-          Software Developer Internship
-        </Typography>
-        <Typography variant="body1" color="rgba(255, 255, 255, 0.8)" gutterBottom>
-          Talview • January 2023
-        </Typography>
-        <Typography variant="body2" color="rgba(255, 255, 255, 0.7)">
-          Enhanced Cambridge Dashboard with React.js, focusing on UI/UX improvements.
-        </Typography>
-      </TimelineItem>
+              {/* MicroGenesis */}
+              <TimelineItem
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+              >
+                <Typography variant="h6" fontWeight="bold" color="#333333">
+                  Software Developer Internship
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom>
+                  MicroGenesis TechSoft • April 2023 – Aug 2023
+                </Typography>
+                <Typography variant="body2" color="#666666">
+                  Worked on GrocerEase application with C# backend services and PostgreSQL database management.
+                </Typography>
+              </TimelineItem>
 
-    </CardContent>
-  </GlassCard>
-</motion.div>
+              {/* Talview */}
+              <TimelineItem
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                viewport={{ once: true }}
+              >
+                <Typography variant="h6" fontWeight="bold" color="#333333">
+                  Software Developer Internship
+                </Typography>
+                <Typography variant="body1" color="#666666" gutterBottom>
+                  Talview • January 2023
+                </Typography>
+                <Typography variant="body2" color="#666666">
+                  Enhanced Cambridge Dashboard with React.js, focusing on UI/UX improvements.
+                </Typography>
+              </TimelineItem>
 
+            </CardContent>
+          </GlassCard>
+        </motion.div>
 
         {/* Skills Section */}
         <motion.div
@@ -387,13 +426,13 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Typography 
-            variant="h4" 
-            fontWeight="bold" 
-            gutterBottom 
-            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            gutterBottom
+            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2, color: '#000000' }} 
           >
-            <TrendingUp /> Skills & Expertise
+            <SectionTitleIcon><TrendingUp /></SectionTitleIcon> Skills & Expertise
           </Typography>
           <Grid container spacing={3} sx={{ mb: 6 }}>
             {skills.map((skill, index) => (
@@ -409,15 +448,15 @@ const About = () => {
                       <SkillIcon>
                         {skill.icon}
                       </SkillIcon>
-                      <Typography variant="h6" fontWeight="bold" color="white" gutterBottom>
+                      <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for skill name */}
                         {skill.name}
                       </Typography>
                       <Box sx={{ mt: 2 }}>
                         <Box display="flex" justifyContent="space-between" mb={1}>
-                          <Typography variant="body2" color="rgba(255, 255, 255, 0.8)">
+                          <Typography variant="body2" color="#666666"> {/* Medium gray for text */}
                             Proficiency
                           </Typography>
-                          <Typography variant="body2" color="rgba(255, 255, 255, 0.8)">
+                          <Typography variant="body2" color="#666666"> {/* Medium gray for percentage */}
                             {skill.level}%
                           </Typography>
                         </Box>
@@ -441,13 +480,13 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <Typography 
-            variant="h4" 
-            fontWeight="bold" 
-            gutterBottom 
-            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2 }}
+          <Typography
+            variant="h4"
+            fontWeight="bold"
+            gutterBottom
+            sx={{ mb: 4, display: 'flex', alignItems: 'center', gap: 2, color: '#000000' }} 
           >
-            <Work /> Featured Projects
+            <SectionTitleIcon><Work /></SectionTitleIcon> Featured Projects
           </Typography>
           <Grid container spacing={3}>
             {projects.map((project, index) => (
@@ -458,18 +497,18 @@ const About = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <ProjectCard>
+                  <ProjectCardStyled> {/* Using renamed styled component */}
                     <CardContent sx={{ p: 3 }}>
                       <Box display="flex" alignItems="center" gap={1} mb={2}>
-                        <Star sx={{ color: '#FFD700' }} />
-                        <Typography variant="h6" fontWeight="bold" color="white">
+                        <Star sx={{ color: '#FFD700' }} /> {/* Keeping gold star as a highlight */}
+                        <Typography variant="h6" fontWeight="bold" color="#333333"> {/* Dark gray for title */}
                           {project.title}
                         </Typography>
                       </Box>
-                      <Typography variant="body2" color="rgba(255, 255, 255, 0.8)" gutterBottom>
+                      <Typography variant="body2" color="#666666" gutterBottom> {/* Medium gray for company */}
                         {project.company}
                       </Typography>
-                      <Typography variant="body1" color="rgba(255, 255, 255, 0.9)" paragraph sx={{ lineHeight: 1.6 }}>
+                      <Typography variant="body1" color="#666666" paragraph sx={{ lineHeight: 1.6 }}> {/* Medium gray for description */}
                         {project.description}
                       </Typography>
                       <Box display="flex" flexWrap="wrap" gap={1} mt={2}>
@@ -478,7 +517,7 @@ const About = () => {
                         ))}
                       </Box>
                     </CardContent>
-                  </ProjectCard>
+                  </ProjectCardStyled>
                 </motion.div>
               </Grid>
             ))}
