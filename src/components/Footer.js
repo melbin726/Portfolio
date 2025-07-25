@@ -10,11 +10,14 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 
-const StyledFooter = styled(Box)({
-  // Subtle light gray to white linear gradient for the footer background
-  background: 'linear-gradient(180deg, #f0f0f0 0%, #ffffff 100%)',
-  color: '#333333', // Default text color is dark gray
+const StyledFooter = styled(Box)(({ theme }) => ({
+  background: theme.palette.mode === 'dark'
+    ? 'linear-gradient(180deg, #111111 0%, #000000 100%)'
+    : 'linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%)',
+  color: theme.palette.text.primary,
   position: 'relative',
+  paddingTop: '60px',
+  paddingBottom: '40px',
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -22,31 +25,46 @@ const StyledFooter = styled(Box)({
     left: '50%',
     transform: 'translateX(-50%)',
     width: '80%',
-    height: '1px', // Thinner, more subtle line
-    background: 'linear-gradient(90deg, transparent, rgba(0,0,0,0.08), transparent)', // Light black line
+    height: '1px',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
+      : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent)',
   },
-});
+}));
 
-const SocialIcon = styled(IconButton)({
-  // Always apply a subtle light background and border
-  color: '#666666', // Medium gray for icons
-  backgroundColor: 'rgba(0, 0, 0, 0.03)', // Subtle background even without hover
-  border: '1px solid rgba(0,0,0,0.08)', // Subtle border
+const SocialIcon = styled(IconButton)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  backgroundColor: theme.palette.mode === 'dark'
+    ? 'rgba(255, 255, 255, 0.05)'
+    : 'rgba(0, 0, 0, 0.03)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.08)',
+  borderRadius: '50%',
+  padding: '12px',
   margin: '0 8px',
-  transition: 'all 0.3s ease',
+  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  backdropFilter: 'blur(10px)',
   '&:hover': {
-    backgroundColor: 'rgba(0, 0, 0, 0.05)', // Slightly more visible on hover
-    color: '#000000', // Black on hover
-    borderColor: 'rgba(0,0,0,0.15)', // Darker border on hover
-    transform: 'translateY(-3px)', // Consistent lift on hover
-    boxShadow: '0 2px 8px rgba(0,0,0,0.05)', // Subtle shadow on hover
+    backgroundColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(0, 0, 0, 0.05)',
+    color: theme.palette.text.primary,
+    borderColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.3)'
+      : 'rgba(0, 0, 0, 0.15)',
+    transform: 'translateY(-4px) scale(1.1)',
+    boxShadow: theme.palette.mode === 'dark'
+      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
+      : '0 8px 20px rgba(0, 0, 0, 0.1)',
   },
-  '&:active': { // For touch devices
-    backgroundColor: 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(0)',
-    boxShadow: 'none',
+  '&:active': {
+    backgroundColor: theme.palette.mode === 'dark'
+      ? 'rgba(255, 255, 255, 0.08)'
+      : 'rgba(0, 0, 0, 0.08)',
+    transform: 'translateY(0) scale(1)',
   },
-});
+}));
 
 const AnimatedSocialIcon = styled(motion.div)({
   display: 'inline-block',
@@ -54,21 +72,18 @@ const AnimatedSocialIcon = styled(motion.div)({
 
 function Footer() {
   return (
-    <StyledFooter component="footer" py={6}>
+    <StyledFooter component="footer">
       <Container maxWidth="lg">
         <Box textAlign="center">
           <Typography
-            variant="h6"
-            fontWeight="bold"
-            sx={{
-              mb: 2,
-              fontSize: { xs: '1.2rem', sm: '1.5rem' },
-              // White text with subtle gradient for the heading
-              background: 'linear-gradient(45deg, #000000, #333333)', // Black to dark gray gradient
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+            variant="h4"
+            fontWeight={600}
+            sx={(theme) => ({
+              mb: 4,
+              fontSize: { xs: '1.5rem', sm: '2rem' },
+              color: theme.palette.text.primary,
+              letterSpacing: '-0.01em',
+            })}
           >
             Let's Connect
           </Typography>
@@ -78,10 +93,10 @@ function Footer() {
             justifyContent="center"
             flexWrap="wrap"
             gap={2}
-            mb={4}
+            mb={6}
           >
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
@@ -90,12 +105,12 @@ function Footer() {
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
-                <GitHubIcon />
+                <GitHubIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
 
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: -5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
@@ -104,26 +119,26 @@ function Footer() {
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
-                <LinkedInIcon />
+                <LinkedInIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
 
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
-                href="acac" // Consider updating this dummy link
+                href="acac"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
               >
-                <TwitterIcon />
+                <TwitterIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
 
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: -5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
@@ -132,60 +147,62 @@ function Footer() {
                 rel="noopener noreferrer"
                 aria-label="Instagram"
               >
-                <InstagramIcon />
+                <InstagramIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
 
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: 5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
-                href="mailto:melmelbin2007@gmail.com" // Changed to mailto: for email link
+                href="mailto:melmelbin2007@gmail.com"
                 aria-label="Email"
               >
-                <EmailIcon />
+                <EmailIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
 
             <AnimatedSocialIcon
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.15, rotate: -5 }}
               whileTap={{ scale: 0.95 }}
             >
               <SocialIcon
                 href="tel:+916282696352"
                 aria-label="Phone"
               >
-                <PhoneIcon />
+                <PhoneIcon sx={{ fontSize: 28 }} />
               </SocialIcon>
             </AnimatedSocialIcon>
           </Box>
 
           <Box
-            sx={{
-              // Lighter, subtle border for separation
-              borderTop: '1px solid rgba(0, 0, 0, 0.1)',
-              pt: 3,
-              mt: 3
-            }}
+            sx={(theme) => ({
+              borderTop: theme.palette.mode === 'dark'
+                ? '1px solid rgba(255, 255, 255, 0.1)'
+                : '1px solid rgba(0, 0, 0, 0.1)',
+              pt: 4,
+              mt: 4
+            })}
           >
             <Typography
               variant="body1"
-              sx={{
-                mb: 1,
-                fontSize: { xs: '0.9rem', sm: '1rem' },
+              sx={(theme) => ({
+                mb: 2,
+                fontSize: { xs: '1rem', sm: '1.1rem' },
                 fontWeight: 500,
-                color: '#333333' // Dark gray for primary footer text
-              }}
+                color: theme.palette.text.primary,
+              })}
             >
               © 2024 Melbin Joseph. All rights reserved.
             </Typography>
             <Typography
               variant="body2"
-              color="#666666" // Medium gray for secondary footer text
-              sx={{
-                fontSize: { xs: '0.8rem', sm: '0.875rem' }
-              }}
+              sx={(theme) => ({
+                fontSize: { xs: '0.9rem', sm: '1rem' },
+                color: theme.palette.text.secondary,
+                fontWeight: 400,
+              })}
             >
               Crafted with ❤️ by Melbin Joseph | Follow for more updates
             </Typography>

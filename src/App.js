@@ -17,22 +17,54 @@ function AppContent() {
   const cursorRef = useRef(null);
 
   useEffect(() => {
+    const cursor = cursorRef.current;
+    if (!cursor) return;
+
     const handleMouseMove = (event) => {
       const { clientX, clientY } = event;
-      const cursor = cursorRef.current;
       cursor.style.left = `${clientX}px`;
       cursor.style.top = `${clientY}px`;
     };
 
+    const handleMouseDown = () => {
+      cursor.classList.add('click');
+    };
+
+    const handleMouseUp = () => {
+      cursor.classList.remove('click');
+    };
+
+    const handleMouseEnter = (event) => {
+      if (event.target.matches('button, a, [role="button"], input, textarea, select')) {
+        cursor.classList.add('hover');
+      }
+    };
+
+    const handleMouseLeave = (event) => {
+      if (event.target.matches('button, a, [role="button"], input, textarea, select')) {
+        cursor.classList.remove('hover');
+      }
+    };
+
+    // Add event listeners
     document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mousedown', handleMouseDown);
+    document.addEventListener('mouseup', handleMouseUp);
+    document.addEventListener('mouseover', handleMouseEnter);
+    document.addEventListener('mouseout', handleMouseLeave);
+
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mousedown', handleMouseDown);
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mouseover', handleMouseEnter);
+      document.removeEventListener('mouseout', handleMouseLeave);
     };
   }, []);
 
   return (
     <MuiThemeProvider theme={theme}>
-      <CssBaseline /> {/* This will apply the background color */}
+      <CssBaseline />
       <div className="App">
         <div ref={cursorRef} className="custom-cursor"></div>
         <Router>
