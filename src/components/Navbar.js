@@ -11,20 +11,20 @@ import { useThemeContext } from '../ThemeContext'; // Assuming ThemeContext is c
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: theme.palette.mode === 'dark' 
-    ? 'rgba(0, 0, 0, 0.8)' 
-    : 'rgba(255, 255, 255, 0.8)',
+    ? 'rgba(15, 15, 35, 0.9)' 
+    : 'rgba(248, 250, 252, 0.9)',
   backdropFilter: 'blur(20px)',
   boxShadow: theme.palette.mode === 'dark'
-    ? '0 1px 0 rgba(255, 255, 255, 0.1), 0 8px 32px rgba(0, 0, 0, 0.3)'
-    : '0 1px 0 rgba(0, 0, 0, 0.05), 0 8px 32px rgba(0, 0, 0, 0.1)',
+    ? '0 1px 0 rgba(102, 126, 234, 0.2), 0 8px 32px rgba(0, 0, 0, 0.3)'
+    : '0 1px 0 rgba(102, 126, 234, 0.1), 0 8px 32px rgba(0, 0, 0, 0.1)',
   position: 'fixed',
   top: 0,
   left: 0,
   right: 0,
   zIndex: 1100,
   borderBottom: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.05)',
+    ? '1px solid rgba(102, 126, 234, 0.2)'
+    : '1px solid rgba(102, 126, 234, 0.1)',
   transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
 }));
 
@@ -32,12 +32,16 @@ const Logo = styled(Typography)(({ theme }) => ({
   fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", Monaco, Courier, monospace',
   fontWeight: 700,
   fontSize: '1.5rem',
-  color: theme.palette.text.primary,
+  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
   textDecoration: 'none',
   transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   letterSpacing: '-0.02em',
+  background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
   '&:hover': {
-    transform: 'scale(1.02)',
+    transform: 'scale(1.05)',
     opacity: 0.8,
   },
 }));
@@ -55,8 +59,9 @@ const NavButton = styled(Button)(({ theme }) => ({
   overflow: 'hidden',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.05)',
+      ? 'rgba(102, 126, 234, 0.1)'
+      : 'rgba(102, 126, 234, 0.08)',
+    color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
     transform: 'translateY(-1px)',
     '&::before': {
       opacity: 1,
@@ -106,25 +111,28 @@ const MobileNavButton = styled(Button)(({ theme }) => ({
 }));
 
 const ThemeToggle = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
-    : 'rgba(0, 0, 0, 0.03)',
+    ? 'rgba(102, 126, 234, 0.1)'
+    : 'rgba(102, 126, 234, 0.08)',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.08)',
+    ? '2px solid rgba(102, 126, 234, 0.3)'
+    : '2px solid rgba(102, 126, 234, 0.2)',
   borderRadius: '12px',
   transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   backdropFilter: 'blur(10px)',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.05)',
-    transform: 'translateY(-1px)',
-    color: theme.palette.text.primary,
+      ? 'rgba(102, 126, 234, 0.2)'
+      : 'rgba(102, 126, 234, 0.15)',
+    color: theme.palette.mode === 'dark' ? '#a78bfa' : '#4f46e5',
+    transform: 'translateY(-2px) scale(1.05)',
+    borderColor: theme.palette.mode === 'dark'
+      ? 'rgba(102, 126, 234, 0.5)'
+      : 'rgba(102, 126, 234, 0.4)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 4px 16px rgba(255, 255, 255, 0.1)'
-      : '0 4px 16px rgba(0, 0, 0, 0.1)',
+      ? '0 8px 25px rgba(102, 126, 234, 0.3)'
+      : '0 8px 25px rgba(102, 126, 234, 0.2)',
   },
 }));
 
