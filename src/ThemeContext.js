@@ -21,32 +21,28 @@ export const ThemeProvider = ({ children }) => {
         palette: {
           mode,
           primary: {
-            main: mode === 'light' ? '#1a1a1a' : '#ffffff',
-            light: mode === 'light' ? '#2d2d2d' : '#f5f5f5',
+            main: mode === 'light' ? '#000000' : '#ffffff',
+            light: mode === 'light' ? '#333333' : '#f5f5f5',
             dark: mode === 'light' ? '#000000' : '#e0e0e0',
           },
           secondary: {
-            main: mode === 'light' ? '#6366f1' : '#818cf8',
-            light: mode === 'light' ? '#8b5cf6' : '#a78bfa',
-            dark: mode === 'light' ? '#4f46e5' : '#6366f1',
+            main: mode === 'light' ? '#000000' : '#ffffff',
+            light: mode === 'light' ? '#333333' : '#cccccc',
+            dark: mode === 'light' ? '#000000' : '#ffffff',
           },
           background: {
-            default: mode === 'light' 
-              ? 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)' 
-              : 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
-            paper: mode === 'light' 
-              ? 'rgba(255, 255, 255, 0.8)' 
-              : 'rgba(30, 30, 60, 0.8)',
+            default: mode === 'light' ? '#ffffff' : '#000000',
+            paper: mode === 'light' ? '#ffffff' : '#000000',
           },
           text: {
-            primary: mode === 'light' ? '#1a202c' : '#f7fafc',
-            secondary: mode === 'light' ? '#4a5568' : '#cbd5e0',
+            primary: mode === 'light' ? '#000000' : '#ffffff',
+            secondary: mode === 'light' ? '#666666' : '#cccccc',
           },
           accent: {
-            main: mode === 'light' ? '#667eea' : '#764ba2',
+            main: mode === 'light' ? '#000000' : '#ffffff',
             gradient: mode === 'light' 
-              ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-              : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              ? 'linear-gradient(135deg, #000000 0%, #333333 100%)'
+              : 'linear-gradient(135deg, #ffffff 0%, #cccccc 100%)',
           },
         },
         typography: {
