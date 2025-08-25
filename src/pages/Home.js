@@ -4,6 +4,7 @@ import { Box, Container, Grid, Typography, Button, IconButton, Card, CardContent
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
 import { GitHub, LinkedIn, Mail, Phone, ArrowDownward, Code, Palette, Psychology, Diversity3 } from '@mui/icons-material';
+import { useThemeContext } from '../ThemeContext';
 
 // Define texts array outside the component
 const texts = [
@@ -13,33 +14,33 @@ const texts = [
   'I enjoy testing and improving software.',
 ];
 
-// Styled components - Apple-inspired black & white theme
+// Enhanced styled components with professional gradients
 const GradientButton = styled(Button)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%)'
-    : 'linear-gradient(135deg, #000000 0%, #333333 100%)',
-  color: theme.palette.mode === 'dark' ? '#000000' : '#ffffff',
-  borderRadius: '25px',
-  padding: '14px 32px',
+    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  color: '#ffffff',
+  borderRadius: '30px',
+  padding: '16px 40px',
   textTransform: 'none',
   fontWeight: 600,
-  fontSize: '1rem',
+  fontSize: '1.1rem',
   letterSpacing: '-0.01em',
   boxShadow: theme.palette.mode === 'dark'
-    ? '0 8px 20px rgba(255, 255, 255, 0.15)'
-    : '0 8px 20px rgba(0, 0, 0, 0.3)',
+    ? '0 10px 30px rgba(102, 126, 234, 0.3)'
+    : '0 10px 30px rgba(102, 126, 234, 0.25)',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   border: 'none',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, #f0f0f0 0%, #d0d0d0 100%)'
-      : 'linear-gradient(135deg, #111111 0%, #000000 100%)',
-    transform: 'translateY(-2px) scale(1.02)',
+      ? 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
+      : 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+    transform: 'translateY(-3px) scale(1.05)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 12px 30px rgba(255, 255, 255, 0.2)'
-      : '0 12px 30px rgba(0, 0, 0, 0.4)',
+      ? '0 15px 40px rgba(102, 126, 234, 0.4)'
+      : '0 15px 40px rgba(102, 126, 234, 0.35)',
   },
   '&::before': {
     content: '""',
@@ -48,10 +49,8 @@ const GradientButton = styled(Button)(({ theme }) => ({
     left: '-100%',
     width: '100%',
     height: '100%',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
-      : 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
-    transition: 'left 0.5s ease',
+    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+    transition: 'left 0.6s ease',
   },
   '&:hover::before': {
     left: '100%',
@@ -61,37 +60,38 @@ const GradientButton = styled(Button)(({ theme }) => ({
 const OutlineButton = styled(Button)(({ theme }) => ({
   background: 'transparent',
   border: theme.palette.mode === 'dark'
-    ? '2px solid rgba(255, 255, 255, 0.3)'
-    : '2px solid rgba(0, 0, 0, 0.3)',
-  color: theme.palette.text.primary,
-  borderRadius: '25px',
-  padding: '12px 32px',
+    ? '2px solid rgba(102, 126, 234, 0.5)'
+    : '2px solid rgba(102, 126, 234, 0.6)',
+  color: theme.palette.mode === 'dark' ? '#667eea' : '#667eea',
+  borderRadius: '30px',
+  padding: '14px 40px',
   textTransform: 'none',
   fontWeight: 600,
-  fontSize: '1rem',
+  fontSize: '1.1rem',
   letterSpacing: '-0.01em',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.1)',
+      ? 'rgba(102, 126, 234, 0.1)'
+      : 'rgba(102, 126, 234, 0.08)',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.6)'
-      : 'rgba(0, 0, 0, 0.6)',
-    transform: 'translateY(-2px) scale(1.02)',
+      ? 'rgba(102, 126, 234, 0.8)'
+      : 'rgba(102, 126, 234, 0.9)',
+    transform: 'translateY(-3px) scale(1.05)',
+    color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#4f46e5',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
-      : '0 8px 20px rgba(0, 0, 0, 0.1)',
+      ? '0 10px 25px rgba(102, 126, 234, 0.2)'
+      : '0 10px 25px rgba(102, 126, 234, 0.15)',
   },
 }));
 
 const HeroContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   background: theme.palette.mode === 'dark'
-    ? 'radial-gradient(ellipse at center, #111111 0%, #000000 70%)'
-    : 'radial-gradient(ellipse at center, #f8f8f8 0%, #ffffff 70%)',
+    ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
+    : 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)',
   color: theme.palette.text.primary,
   paddingTop: '100px',
   paddingBottom: '60px',
@@ -110,7 +110,19 @@ const HeroContainer = styled(Box)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.02) 50%, transparent 100%)'
+      ? 'radial-gradient(ellipse at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%)'
+      : 'radial-gradient(ellipse at 20% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 50%)',
+    pointerEvents: 'none',
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.01) 50%, transparent 100%)'
       : 'linear-gradient(45deg, transparent 0%, rgba(0, 0, 0, 0.02) 50%, transparent 100%)',
     pointerEvents: 'none',
   },
@@ -118,12 +130,12 @@ const HeroContainer = styled(Box)(({ theme }) => ({
 
 const WhatIDoSection = styled(Box)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(180deg, #000000 0%, #111111 50%, #000000 100%)'
-    : 'linear-gradient(180deg, #ffffff 0%, #f8f8f8 50%, #ffffff 100%)',
+    ? 'linear-gradient(180deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%)'
+    : 'linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 50%, #f8fafc 100%)',
   color: theme.palette.text.primary,
   position: 'relative',
-  paddingTop: '80px',
-  paddingBottom: '80px',
+  paddingTop: '100px',
+  paddingBottom: '100px',
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -131,38 +143,38 @@ const WhatIDoSection = styled(Box)(({ theme }) => ({
     left: '50%',
     transform: 'translateX(-50%)',
     width: '80%',
-    height: '1px',
+    height: '2px',
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
-      : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent)',
+      ? 'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent)'
+      : 'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent)',
   },
 }));
 
 const ServiceCard = styled(Card)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
     ? 'rgba(255, 255, 255, 0.03)'
-    : 'rgba(0, 0, 0, 0.02)',
-  backdropFilter: 'blur(10px)',
+    : 'rgba(255, 255, 255, 0.8)',
+  backdropFilter: 'blur(20px)',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.05)',
-  borderRadius: '20px',
+    ? '1px solid rgba(102, 126, 234, 0.2)'
+    : '1px solid rgba(102, 126, 234, 0.1)',
+  borderRadius: '24px',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   cursor: 'pointer',
   height: '100%',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
-    transform: 'translateY(-12px) scale(1.02)',
+    transform: 'translateY(-15px) scale(1.03)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 20px 40px rgba(255, 255, 255, 0.1)'
-      : '0 20px 40px rgba(0, 0, 0, 0.1)',
+      ? '0 25px 50px rgba(102, 126, 234, 0.2)'
+      : '0 25px 50px rgba(102, 126, 234, 0.15)',
     background: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.05)'
-      : 'rgba(0, 0, 0, 0.03)',
+      ? 'rgba(102, 126, 234, 0.05)'
+      : 'rgba(255, 255, 255, 0.9)',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.2)'
-      : 'rgba(0, 0, 0, 0.1)',
+      ? 'rgba(102, 126, 234, 0.4)'
+      : 'rgba(102, 126, 234, 0.2)',
   },
   '&::before': {
     content: '""',
@@ -170,10 +182,8 @@ const ServiceCard = styled(Card)(({ theme }) => ({
     top: 0,
     left: 0,
     right: 0,
-    height: '2px',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent)'
-      : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.2), transparent)',
+    height: '3px',
+    background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
     opacity: 0,
     transition: 'opacity 0.4s ease',
   },
@@ -183,91 +193,119 @@ const ServiceCard = styled(Card)(({ theme }) => ({
 }));
 
 const ServiceIcon = styled(Box)(({ theme }) => ({
-  width: '60px',
-  height: '60px',
+  width: '70px',
+  height: '70px',
   borderRadius: '50%',
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)'
-    : 'linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%)',
+    ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%)'
+    : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  marginBottom: '20px',
+  marginBottom: '24px',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.05)',
-  color: theme.palette.text.primary,
+    ? '2px solid rgba(102, 126, 234, 0.3)'
+    : '2px solid rgba(102, 126, 234, 0.2)',
+  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   position: 'relative',
-  overflow: 'hidden',
-  '&:hover': {
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)'
-      : 'linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%)',
-    transform: 'scale(1.1) rotate(5deg)',
-    boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
-      : '0 8px 20px rgba(0, 0, 0, 0.1)',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '-2px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    opacity: 0,
+    transition: 'opacity 0.4s ease',
+    zIndex: -1,
   },
 }));
 
 const AnimatedSocial = styled(motion.a)(({ theme }) => ({
-  color: theme.palette.text.secondary,
-  margin: '0 12px',
-  padding: '12px',
+  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
+  margin: '0 15px',
+  padding: '15px',
   borderRadius: '50%',
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
-    : 'rgba(0, 0, 0, 0.03)',
+    ? 'rgba(102, 126, 234, 0.1)'
+    : 'rgba(102, 126, 234, 0.08)',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.08)',
+    ? '2px solid rgba(102, 126, 234, 0.3)'
+    : '2px solid rgba(102, 126, 234, 0.2)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   cursor: 'pointer',
-  backdropFilter: 'blur(10px)',
+  backdropFilter: 'blur(20px)',
+  position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.05)',
-    color: theme.palette.text.primary,
+      ? 'rgba(102, 126, 234, 0.2)'
+      : 'rgba(102, 126, 234, 0.15)',
+    color: theme.palette.mode === 'dark' ? '#a78bfa' : '#4f46e5',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.3)'
-      : 'rgba(0, 0, 0, 0.15)',
-    transform: 'translateY(-4px) scale(1.15)',
+      ? 'rgba(102, 126, 234, 0.6)'
+      : 'rgba(102, 126, 234, 0.4)',
+    transform: 'translateY(-5px) scale(1.2)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
-      : '0 8px 20px rgba(0, 0, 0, 0.1)',
+      ? '0 12px 30px rgba(102, 126, 234, 0.3)'
+      : '0 12px 30px rgba(102, 126, 234, 0.2)',
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '-2px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    opacity: 0,
+    transition: 'opacity 0.4s ease',
+    zIndex: -1,
+  },
+  '&:hover::before': {
+    opacity: 0.2,
   },
 }));
 
 const ScrollArrow = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.text.secondary,
+  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
-    : 'rgba(0, 0, 0, 0.03)',
+    ? 'rgba(102, 126, 234, 0.1)'
+    : 'rgba(102, 126, 234, 0.08)',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.08)',
+    ? '2px solid rgba(102, 126, 234, 0.3)'
+    : '2px solid rgba(102, 126, 234, 0.2)',
   borderRadius: '50%',
-  padding: '16px',
+  padding: '20px',
   cursor: 'pointer',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  backdropFilter: 'blur(10px)',
+  backdropFilter: 'blur(20px)',
+  position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.05)',
-    color: theme.palette.text.primary,
+      ? 'rgba(102, 126, 234, 0.2)'
+      : 'rgba(102, 126, 234, 0.15)',
+    color: theme.palette.mode === 'dark' ? '#a78bfa' : '#4f46e5',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.3)'
-      : 'rgba(0, 0, 0, 0.1)',
-    transform: 'translateY(-4px)',
+      ? 'rgba(102, 126, 234, 0.6)'
+      : 'rgba(102, 126, 234, 0.4)',
+    transform: 'translateY(-6px) scale(1.1)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
-      : '0 8px 20px rgba(0, 0, 0, 0.1)',
+      ? '0 15px 35px rgba(102, 126, 234, 0.3)'
+      : '0 15px 35px rgba(102, 126, 234, 0.2)',
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    inset: '-2px',
+    borderRadius: '50%',
+    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    opacity: 0,
+    transition: 'opacity 0.4s ease',
+    zIndex: -1,
+  },
+  '&:hover::before': {
+    opacity: 0.1,
   },
 }));
 
@@ -324,6 +362,9 @@ const Home = () => {
     whatIDoRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const { theme } = useThemeContext();
+
+  // Animation variants with enhanced timings
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -336,10 +377,11 @@ const Home = () => {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
         duration: 0.8,
         ease: [0.25, 0.46, 0.45, 0.94],
@@ -348,10 +390,11 @@ const Home = () => {
   };
 
   const heroVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
+    hidden: { opacity: 0, scale: 0.95, rotateY: 10 },
     visible: {
       opacity: 1,
       scale: 1,
+      rotateY: 0,
       transition: {
         duration: 1.2,
         ease: [0.25, 0.46, 0.45, 0.94],
@@ -458,40 +501,70 @@ const Home = () => {
 
             <Grid item xs={12} md={6}>
               <motion.div
-                initial={{ opacity: 0, scale: 0.8, rotateY: 15 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                initial={{ opacity: 0, scale: 0.8, rotateY: 15, z: -100 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0, z: 0 }}
                 transition={{ 
-                  duration: 1.2,
+                  duration: 1.4,
                   ease: [0.25, 0.46, 0.45, 0.94],
-                  delay: 0.2
+                  delay: 0.3
                 }}
                 whileHover={{ 
-                  scale: 1.05,
-                  rotateY: -5,
-                  transition: { duration: 0.4 }
+                  scale: 1.08,
+                  rotateY: -8,
+                  rotateX: 5,
+                  transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }
+                }}
+                style={{
+                  perspective: '1000px',
+                  transformStyle: 'preserve-3d'
                 }}
               >
                 <Box
                   component="img"
                   src="/Minimalist_Platform_Delivery_Courier_Website_Desktop_Prototype_Desktop_Prototype__2_-removebg-preview.png"
-                  alt="Melbin"
+                  alt="Melbin Joseph"
                   sx={(theme) => ({
                     width: '100%',
                     height: 'auto',
                     maxWidth: '500px',
-                    borderRadius: '20px',
-                    boxShadow: theme.palette.mode === 'dark'
-                      ? '0 20px 40px rgba(255, 255, 255, 0.1)'
-                      : '0 20px 40px rgba(0, 0, 0, 0.15)',
-                    border: theme.palette.mode === 'dark'
-                      ? '1px solid rgba(255, 255, 255, 0.1)'
-                      : '1px solid rgba(0, 0, 0, 0.05)',
-                    display: 'block',
-                    margin: '0 auto',
+                    borderRadius: '30px',
                     filter: theme.palette.mode === 'dark'
-                      ? 'contrast(1.1) brightness(1.1)'
-                      : 'none',
+                      ? 'drop-shadow(0 20px 40px rgba(102, 126, 234, 0.3))'
+                      : 'drop-shadow(0 20px 40px rgba(102, 126, 234, 0.2))',
+                    transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                    position: 'relative',
+                    '&:hover': {
+                      filter: theme.palette.mode === 'dark'
+                        ? 'drop-shadow(0 30px 60px rgba(102, 126, 234, 0.4))'
+                        : 'drop-shadow(0 30px 60px rgba(102, 126, 234, 0.3))',
+                    }
                   })}
+                />
+                
+                {/* Animated background glow */}
+                <motion.div
+                  animate={{
+                    rotate: [0, 360],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear"
+                  }}
+                  style={{
+                    position: 'absolute',
+                    top: '-20px',
+                    left: '-20px',
+                    right: '-20px',
+                    bottom: '-20px',
+                    background: theme.palette.mode === 'dark'
+                      ? 'conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.2), transparent, rgba(118, 75, 162, 0.2), transparent)'
+                      : 'conic-gradient(from 0deg, transparent, rgba(102, 126, 234, 0.1), transparent, rgba(118, 75, 162, 0.1), transparent)',
+                    borderRadius: '50px',
+                    zIndex: -1,
+                    filter: 'blur(20px)',
+                  }}
                 />
               </motion.div>
             </Grid>
@@ -499,18 +572,30 @@ const Home = () => {
 
           <motion.div
             animate={{ 
-              y: [0, 15, 0],
-              scale: [1, 1.1, 1]
+              y: [0, 20, 0],
+              scale: [1, 1.15, 1],
+              rotate: [0, 5, 0, -5, 0]
             }}
             transition={{ 
-              duration: 2.5, 
+              duration: 3, 
               repeat: Infinity,
               ease: [0.25, 0.46, 0.45, 0.94]
             }}
-            style={{ textAlign: 'center', marginTop: '60px' }}
+            style={{ textAlign: 'center', marginTop: '80px' }}
           >
             <ScrollArrow onClick={scrollToWhatIDo} size="large">
-              <ArrowDownward sx={{ fontSize: 32 }} />
+              <motion.div
+                animate={{ 
+                  y: [0, 8, 0] 
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <ArrowDownward sx={{ fontSize: 36 }} />
+              </motion.div>
             </ScrollArrow>
           </motion.div>
         </Container>
@@ -571,40 +656,59 @@ const Home = () => {
                   <motion.div 
                     variants={itemVariants}
                     whileHover={{ 
-                      y: -8,
-                      scale: 1.02,
-                      transition: { duration: 0.3 }
+                      y: -12,
+                      scale: 1.03,
+                      rotateY: index % 2 === 0 ? 2 : -2,
+                      transition: { 
+                        duration: 0.4,
+                        ease: [0.25, 0.46, 0.45, 0.94]
+                      }
                     }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     <ServiceCard>
                       <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
-                        <ServiceIcon>
-                          {service.icon}
-                        </ServiceIcon>
-                        <Typography
-                          variant="h4"
-                          fontWeight={600}
-                          gutterBottom
-                          sx={(theme) => ({
-                            fontSize: { xs: '1.3rem', sm: '1.5rem' },
-                            mb: 3,
-                            color: theme.palette.text.primary,
-                            letterSpacing: '-0.01em',
-                          })}
+                        <motion.div
+                          whileHover={{ 
+                            scale: 1.1,
+                            rotate: 360,
+                            transition: { duration: 0.6, ease: "easeInOut" }
+                          }}
                         >
-                          {service.title}
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          sx={(theme) => ({
-                            lineHeight: 1.7,
-                            fontSize: { xs: '1rem', sm: '1.1rem' },
-                            color: theme.palette.text.secondary,
-                            fontWeight: 400,
-                          })}
+                          <ServiceIcon>
+                            {service.icon}
+                          </ServiceIcon>
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 + 0.3, duration: 0.6 }}
                         >
-                          {service.description}
-                        </Typography>
+                          <Typography
+                            variant="h4"
+                            fontWeight={600}
+                            gutterBottom
+                            sx={(theme) => ({
+                              fontSize: { xs: '1.3rem', sm: '1.5rem' },
+                              mb: 3,
+                              color: theme.palette.text.primary,
+                              letterSpacing: '-0.01em',
+                            })}
+                          >
+                            {service.title}
+                          </Typography>
+                          <Typography
+                            variant="body1"
+                            sx={(theme) => ({
+                              lineHeight: 1.7,
+                              fontSize: { xs: '1rem', sm: '1.1rem' },
+                              color: theme.palette.text.secondary,
+                              fontWeight: 400,
+                            })}
+                          >
+                            {service.description}
+                          </Typography>
+                        </motion.div>
                       </CardContent>
                     </ServiceCard>
                   </motion.div>

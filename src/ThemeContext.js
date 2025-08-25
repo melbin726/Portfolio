@@ -20,13 +20,33 @@ export const ThemeProvider = ({ children }) => {
       createTheme({
         palette: {
           mode,
+          primary: {
+            main: mode === 'light' ? '#1a1a1a' : '#ffffff',
+            light: mode === 'light' ? '#2d2d2d' : '#f5f5f5',
+            dark: mode === 'light' ? '#000000' : '#e0e0e0',
+          },
+          secondary: {
+            main: mode === 'light' ? '#6366f1' : '#818cf8',
+            light: mode === 'light' ? '#8b5cf6' : '#a78bfa',
+            dark: mode === 'light' ? '#4f46e5' : '#6366f1',
+          },
           background: {
-            default: mode === 'light' ? '#ffffff' : '#000000', // Pure white or black
-            paper: mode === 'light' ? '#f8f8f8' : '#111111', // Very light gray or very dark gray
+            default: mode === 'light' 
+              ? 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)' 
+              : 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)',
+            paper: mode === 'light' 
+              ? 'rgba(255, 255, 255, 0.8)' 
+              : 'rgba(30, 30, 60, 0.8)',
           },
           text: {
-            primary: mode === 'light' ? '#000000' : '#ffffff', // Black on white, white on black
-            secondary: mode === 'light' ? '#333333' : '#cccccc', // Dark gray on white, light gray on black
+            primary: mode === 'light' ? '#1a202c' : '#f7fafc',
+            secondary: mode === 'light' ? '#4a5568' : '#cbd5e0',
+          },
+          accent: {
+            main: mode === 'light' ? '#667eea' : '#764ba2',
+            gradient: mode === 'light' 
+              ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+              : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
           },
         },
         typography: {
