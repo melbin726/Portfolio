@@ -14,11 +14,11 @@ const texts = [
   'I enjoy testing and improving software.',
 ];
 
-// Enhanced styled components with professional gradients
+// Enhanced styled components with monochrome Apple design
 const GradientButton = styled(Button)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-    : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    ? 'linear-gradient(135deg, #000000 0%, #333333 100%)'
+    : 'linear-gradient(135deg, #000000 0%, #333333 100%)',
   color: '#ffffff',
   borderRadius: '30px',
   padding: '16px 40px',
@@ -27,20 +27,20 @@ const GradientButton = styled(Button)(({ theme }) => ({
   fontSize: '1.1rem',
   letterSpacing: '-0.01em',
   boxShadow: theme.palette.mode === 'dark'
-    ? '0 10px 30px rgba(102, 126, 234, 0.3)'
-    : '0 10px 30px rgba(102, 126, 234, 0.25)',
+    ? '0 10px 30px rgba(0, 0, 0, 0.3)'
+    : '0 10px 30px rgba(0, 0, 0, 0.25)',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   border: 'none',
   position: 'relative',
   overflow: 'hidden',
   '&:hover': {
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)'
-      : 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
+      ? 'linear-gradient(135deg, #333333 0%, #000000 100%)'
+      : 'linear-gradient(135deg, #333333 0%, #000000 100%)',
     transform: 'translateY(-3px) scale(1.05)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 15px 40px rgba(102, 126, 234, 0.4)'
-      : '0 15px 40px rgba(102, 126, 234, 0.35)',
+      ? '0 15px 40px rgba(0, 0, 0, 0.4)'
+      : '0 15px 40px rgba(0, 0, 0, 0.35)',
   },
   '&::before': {
     content: '""',
@@ -60,9 +60,9 @@ const GradientButton = styled(Button)(({ theme }) => ({
 const OutlineButton = styled(Button)(({ theme }) => ({
   background: 'transparent',
   border: theme.palette.mode === 'dark'
-    ? '2px solid rgba(102, 126, 234, 0.5)'
-    : '2px solid rgba(102, 126, 234, 0.6)',
-  color: theme.palette.mode === 'dark' ? '#667eea' : '#667eea',
+    ? '2px solid rgba(255, 255, 255, 0.5)'
+    : '2px solid rgba(0, 0, 0, 0.6)',
+  color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
   borderRadius: '30px',
   padding: '14px 40px',
   textTransform: 'none',
@@ -74,24 +74,24 @@ const OutlineButton = styled(Button)(({ theme }) => ({
   overflow: 'hidden',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.1)'
-      : 'rgba(102, 126, 234, 0.08)',
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(0, 0, 0, 0.08)',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.8)'
-      : 'rgba(102, 126, 234, 0.9)',
+      ? 'rgba(255, 255, 255, 0.8)'
+      : 'rgba(0, 0, 0, 0.9)',
     transform: 'translateY(-3px) scale(1.05)',
-    color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#4f46e5',
+    color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 10px 25px rgba(102, 126, 234, 0.2)'
-      : '0 10px 25px rgba(102, 126, 234, 0.15)',
+      ? '0 10px 25px rgba(0, 0, 0, 0.2)'
+      : '0 10px 25px rgba(0, 0, 0, 0.15)',
   },
 }));
 
 const HeroContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%)'
-    : 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%)',
+    ? '#000000'
+    : '#ffffff',
   color: theme.palette.text.primary,
   paddingTop: '100px',
   paddingBottom: '60px',
@@ -110,8 +110,8 @@ const HeroContainer = styled(Box)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: theme.palette.mode === 'dark'
-      ? 'radial-gradient(ellipse at 20% 80%, rgba(102, 126, 234, 0.15) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.15) 0%, transparent 50%)'
-      : 'radial-gradient(ellipse at 20% 80%, rgba(102, 126, 234, 0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(118, 75, 162, 0.08) 0%, transparent 50%)',
+      ? 'radial-gradient(ellipse at 20% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 50%)'
+      : 'radial-gradient(ellipse at 20% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 50%)',
     pointerEvents: 'none',
   },
   '&::after': {
@@ -130,8 +130,8 @@ const HeroContainer = styled(Box)(({ theme }) => ({
 
 const WhatIDoSection = styled(Box)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(180deg, #16213e 0%, #1a1a2e 50%, #0f0f23 100%)'
-    : 'linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 50%, #f8fafc 100%)',
+    ? '#000000'
+    : '#ffffff',
   color: theme.palette.text.primary,
   position: 'relative',
   paddingTop: '100px',
@@ -145,8 +145,8 @@ const WhatIDoSection = styled(Box)(({ theme }) => ({
     width: '80%',
     height: '2px',
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.5), transparent)'
-      : 'linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent)',
+      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)'
+      : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3), transparent)',
   },
 }));
 
@@ -156,8 +156,8 @@ const ServiceCard = styled(Card)(({ theme }) => ({
     : 'rgba(255, 255, 255, 0.8)',
   backdropFilter: 'blur(20px)',
   border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(102, 126, 234, 0.2)'
-    : '1px solid rgba(102, 126, 234, 0.1)',
+    ? '1px solid rgba(255, 255, 255, 0.1)'
+    : '1px solid rgba(0, 0, 0, 0.1)',
   borderRadius: '24px',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   cursor: 'pointer',
@@ -167,14 +167,14 @@ const ServiceCard = styled(Card)(({ theme }) => ({
   '&:hover': {
     transform: 'translateY(-15px) scale(1.03)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 25px 50px rgba(102, 126, 234, 0.2)'
-      : '0 25px 50px rgba(102, 126, 234, 0.15)',
+      ? '0 25px 50px rgba(0, 0, 0, 0.2)'
+      : '0 25px 50px rgba(0, 0, 0, 0.15)',
     background: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.05)'
+      ? 'rgba(255, 255, 255, 0.05)'
       : 'rgba(255, 255, 255, 0.9)',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.4)'
-      : 'rgba(102, 126, 234, 0.2)',
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(0, 0, 0, 0.2)',
   },
   '&::before': {
     content: '""',
@@ -183,7 +183,9 @@ const ServiceCard = styled(Card)(({ theme }) => ({
     left: 0,
     right: 0,
     height: '3px',
-    background: 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(90deg, #ffffff 0%, #cccccc 100%)'
+      : 'linear-gradient(90deg, #000000 0%, #333333 100%)',
     opacity: 0,
     transition: 'opacity 0.4s ease',
   },
@@ -197,16 +199,16 @@ const ServiceIcon = styled(Box)(({ theme }) => ({
   height: '70px',
   borderRadius: '50%',
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%)'
-    : 'linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)',
+    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)'
+    : 'linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   marginBottom: '24px',
   border: theme.palette.mode === 'dark'
-    ? '2px solid rgba(102, 126, 234, 0.3)'
-    : '2px solid rgba(102, 126, 234, 0.2)',
-  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
+    ? '2px solid rgba(255, 255, 255, 0.2)'
+    : '2px solid rgba(0, 0, 0, 0.2)',
+  color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
   transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   position: 'relative',
   '&::before': {
@@ -214,7 +216,9 @@ const ServiceIcon = styled(Box)(({ theme }) => ({
     position: 'absolute',
     inset: '-2px',
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, #ffffff 0%, #cccccc 100%)'
+      : 'linear-gradient(135deg, #000000 0%, #333333 100%)',
     opacity: 0,
     transition: 'opacity 0.4s ease',
     zIndex: -1,
@@ -222,16 +226,16 @@ const ServiceIcon = styled(Box)(({ theme }) => ({
 }));
 
 const AnimatedSocial = styled(motion.a)(({ theme }) => ({
-  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
+  color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
   margin: '0 15px',
   padding: '15px',
   borderRadius: '50%',
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(102, 126, 234, 0.1)'
-    : 'rgba(102, 126, 234, 0.08)',
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(0, 0, 0, 0.08)',
   border: theme.palette.mode === 'dark'
-    ? '2px solid rgba(102, 126, 234, 0.3)'
-    : '2px solid rgba(102, 126, 234, 0.2)',
+    ? '2px solid rgba(255, 255, 255, 0.2)'
+    : '2px solid rgba(0, 0, 0, 0.2)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -241,23 +245,25 @@ const AnimatedSocial = styled(motion.a)(({ theme }) => ({
   position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.2)'
-      : 'rgba(102, 126, 234, 0.15)',
-    color: theme.palette.mode === 'dark' ? '#a78bfa' : '#4f46e5',
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(0, 0, 0, 0.15)',
+    color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.6)'
-      : 'rgba(102, 126, 234, 0.4)',
+      ? 'rgba(255, 255, 255, 0.4)'
+      : 'rgba(0, 0, 0, 0.4)',
     transform: 'translateY(-5px) scale(1.2)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 12px 30px rgba(102, 126, 234, 0.3)'
-      : '0 12px 30px rgba(102, 126, 234, 0.2)',
+      ? '0 12px 30px rgba(0, 0, 0, 0.3)'
+      : '0 12px 30px rgba(0, 0, 0, 0.2)',
   },
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: '-2px',
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, #ffffff 0%, #cccccc 100%)'
+      : 'linear-gradient(135deg, #000000 0%, #333333 100%)',
     opacity: 0,
     transition: 'opacity 0.4s ease',
     zIndex: -1,
@@ -268,13 +274,13 @@ const AnimatedSocial = styled(motion.a)(({ theme }) => ({
 }));
 
 const ScrollArrow = styled(IconButton)(({ theme }) => ({
-  color: theme.palette.mode === 'dark' ? '#8b5cf6' : '#667eea',
+  color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(102, 126, 234, 0.1)'
-    : 'rgba(102, 126, 234, 0.08)',
+    ? 'rgba(255, 255, 255, 0.1)'
+    : 'rgba(0, 0, 0, 0.08)',
   border: theme.palette.mode === 'dark'
-    ? '2px solid rgba(102, 126, 234, 0.3)'
-    : '2px solid rgba(102, 126, 234, 0.2)',
+    ? '2px solid rgba(255, 255, 255, 0.2)'
+    : '2px solid rgba(0, 0, 0, 0.2)',
   borderRadius: '50%',
   padding: '20px',
   cursor: 'pointer',
@@ -283,23 +289,25 @@ const ScrollArrow = styled(IconButton)(({ theme }) => ({
   position: 'relative',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.2)'
-      : 'rgba(102, 126, 234, 0.15)',
-    color: theme.palette.mode === 'dark' ? '#a78bfa' : '#4f46e5',
+      ? 'rgba(255, 255, 255, 0.2)'
+      : 'rgba(0, 0, 0, 0.15)',
+    color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',
     borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(102, 126, 234, 0.6)'
-      : 'rgba(102, 126, 234, 0.4)',
+      ? 'rgba(255, 255, 255, 0.4)'
+      : 'rgba(0, 0, 0, 0.4)',
     transform: 'translateY(-6px) scale(1.1)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 15px 35px rgba(102, 126, 234, 0.3)'
-      : '0 15px 35px rgba(102, 126, 234, 0.2)',
+      ? '0 15px 35px rgba(0, 0, 0, 0.3)'
+      : '0 15px 35px rgba(0, 0, 0, 0.2)',
   },
   '&::before': {
     content: '""',
     position: 'absolute',
     inset: '-2px',
     borderRadius: '50%',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    background: theme.palette.mode === 'dark'
+      ? 'linear-gradient(135deg, #ffffff 0%, #cccccc 100%)'
+      : 'linear-gradient(135deg, #000000 0%, #333333 100%)',
     opacity: 0,
     transition: 'opacity 0.4s ease',
     zIndex: -1,
