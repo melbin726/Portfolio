@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Grid, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Code, Storage, Public, Cloud, Terminal, Smartphone, Refresh, CheckCircle } from '@mui/icons-material';
 
 // --- Styled Components ---
