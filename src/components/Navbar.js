@@ -81,32 +81,7 @@ const NavButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const MobileNavButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.text.primary,
-  fontWeight: 600,
-  textTransform: 'none',
-  fontSize: '1.5rem',
-  padding: '16px 24px',
-  borderRadius: '16px',
-  width: '100%',
-  background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)'
-    : 'linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.02) 100%)',
-  border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.1)',
-  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  backdropFilter: 'blur(10px)',
-  '&:hover': {
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%)'
-      : 'linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%)',
-    transform: 'scale(1.02)',
-    boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 32px rgba(255, 255, 255, 0.1)'
-      : '0 8px 32px rgba(0, 0, 0, 0.1)',
-  },
-}));
+
 
 const ThemeToggle = styled(IconButton)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#ffffff' : '#000000',

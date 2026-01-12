@@ -47,7 +47,7 @@ const PhysicsWorld = ({ children }) => {
     };
 
     useEffect(() => {
-        const { Engine, Render, Runner, World, Mouse, MouseConstraint, Composite, Bodies, Events } = Matter;
+        const { Engine, Render, Runner, Mouse, MouseConstraint, Composite, Bodies, Events } = Matter;
 
         // Create engine
         engineRef.current = Engine.create();

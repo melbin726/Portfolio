@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Container, Grid, Typography, Button, Card, CardContent, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Box, Container, Grid, Typography, Button, Card, CardContent, IconButton, Dialog, DialogTitle, DialogContent } from '@mui/material';
 import { styled } from '@mui/system';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Refresh, Close, EmojiEvents, Apps, Mouse, Tag, BugReport, Gesture, Keyboard, Timeline } from '@mui/icons-material';
+import { motion } from 'framer-motion';
+import { Refresh, Close, Apps, Mouse, Tag, Gesture, Keyboard, Timeline } from '@mui/icons-material';
 import { useThemeContext } from '../ThemeContext';
 import MemoryGame from '../components/MemoryGame';
 
@@ -42,17 +42,7 @@ const GameIconBox = styled(Box)(({ theme, color }) => ({
     color: '#fff',
 }));
 
-const PlayArea = styled(Box)(({ theme }) => ({
-    background: theme.palette.mode === 'dark' ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.02)',
-    borderRadius: '16px',
-    padding: '16px',
-    marginTop: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '300px',
-}));
+
 
 // --- SUDOKU LOGIC ---
 // Simple Pre-filled Sudoku for Demo (Full generation is complex)

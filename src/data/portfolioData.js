@@ -1,4 +1,4 @@
-import { Code, Palette, Psychology, Diversity3, Star, Work, School, Settings, Terminal, Storage } from '@mui/icons-material';
+import { Code, Palette, Work, Terminal, Storage } from '@mui/icons-material';
 
 export const portfolioData = {
     personal: {
