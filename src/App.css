@@ -1,8 +1,8 @@
-/* App.css - Apple-inspired black & white theme */
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
-  background: #ffffff;
 }
 
 .App {
@@ -10,8 +10,6 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #ffffff;
-  color: #000000;
   position: relative;
 }
 
@@ -92,6 +90,7 @@ html, body, #root {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -103,6 +102,7 @@ html, body, #root {
     opacity: 0;
     transform: translateY(-30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -114,6 +114,7 @@ html, body, #root {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -121,9 +122,12 @@ html, body, #root {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -144,4 +148,72 @@ html, body, #root {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+
+  body {
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.5rem !important;
+  }
+
+  h4 {
+    font-size: 1.25rem !important;
+  }
+
+  h5 {
+    font-size: 1.1rem !important;
+  }
+
+  h6 {
+    font-size: 1rem !important;
+  }
+
+  p,
+  span,
+  div {
+    font-size: 0.9rem;
+  }
+
+  .MuiTypography-body1 {
+    font-size: 0.9rem !important;
+  }
+
+  .MuiTypography-body2 {
+    font-size: 0.8rem !important;
+  }
+
+  .MuiTypography-caption {
+    font-size: 0.7rem !important;
+  }
+
+  .MuiContainer-root {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 12px;
+  }
+
+  .MuiTypography-h2 {
+    font-size: 1.8rem !important;
+  }
 }
