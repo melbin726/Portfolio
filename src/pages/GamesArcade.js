@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Box, Container, Grid, Typography, Button, Card, CardContent, IconButton, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { styled } from '@mui/system';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Refresh, Close, EmojiEvents, Apps, Mouse, Tag } from '@mui/icons-material';
+import { Refresh, Close, EmojiEvents, Apps, Mouse, Tag, BugReport, Gesture, Keyboard, Timeline } from '@mui/icons-material';
 import { useThemeContext } from '../ThemeContext';
+import MemoryGame from '../components/MemoryGame';
 
 // --- Styled Components ---
 
@@ -286,11 +287,266 @@ const TicTacToe = () => {
     );
 };
 
+// --- SNAKE GAME LOGIC ---
+const SnakeGame = () => {
+    const GRID_SIZE = 15;
+    const [snake, setSnake] = useState([{ x: 7, y: 7 }]);
+    const [food, setFood] = useState({ x: 5, y: 5 });
+    const [dir, setDir] = useState({ x: 0, y: -1 }); // Moving Up
+    const [gameOver, setGameOver] = useState(false);
+    const [score, setScore] = useState(0);
+    const [paused, setPaused] = useState(true);
+
+    // Keyboard controls
+    useEffect(() => {
+        const handleKeys = (e) => {
+            switch (e.key) {
+                case 'ArrowUp': if (dir.y !== 1) setDir({ x: 0, y: -1 }); break;
+                case 'ArrowDown': if (dir.y !== -1) setDir({ x: 0, y: 1 }); break;
+                case 'ArrowLeft': if (dir.x !== 1) setDir({ x: -1, y: 0 }); break;
+                case 'ArrowRight': if (dir.x !== -1) setDir({ x: 1, y: 0 }); break;
+                default: break;
+            }
+        };
+        window.addEventListener('keydown', handleKeys);
+        return () => window.removeEventListener('keydown', handleKeys);
+    }, [dir]);
+
+    // Game Loop
+    useEffect(() => {
+        if (paused || gameOver) return;
+        const moveSnake = setInterval(() => {
+            setSnake(curr => {
+                const head = { x: curr[0].x + dir.x, y: curr[0].y + dir.y };
+
+                // Check Collision
+                if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE ||
+                    curr.some(seg => seg.x === head.x && seg.y === head.y)) {
+                    setGameOver(true);
+                    return curr;
+                }
+
+                const newSnake = [head, ...curr];
+                if (head.x === food.x && head.y === food.y) {
+                    setScore(s => s + 1);
+                    setFood({
+                        x: Math.floor(Math.random() * GRID_SIZE),
+                        y: Math.floor(Math.random() * GRID_SIZE)
+                    });
+                } else {
+                    newSnake.pop();
+                }
+                return newSnake;
+            });
+        }, 150);
+        return () => clearInterval(moveSnake);
+    }, [dir, food, gameOver, paused]);
+
+    const restart = () => {
+        setSnake([{ x: 7, y: 7 }]);
+        setFood({ x: 5, y: 5 });
+        setDir({ x: 0, y: -1 });
+        setGameOver(false);
+        setScore(0);
+        setPaused(false);
+    };
+
+    return (
+        <Box textAlign="center">
+            <Typography variant="h6" gutterBottom>Score: {score}</Typography>
+            {gameOver && <Typography color="error" fontWeight="bold">Game Over!</Typography>}
+
+            <Box
+                sx={{
+                    display: 'grid',
+                    gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
+                    gap: '1px',
+                    bgcolor: 'divider',
+                    border: '2px solid',
+                    borderColor: 'text.primary',
+                    width: '300px',
+                    height: '300px',
+                    mx: 'auto',
+                    mb: 2
+                }}
+            >
+                {[...Array(GRID_SIZE * GRID_SIZE)].map((_, i) => {
+                    const x = i % GRID_SIZE;
+                    const y = Math.floor(i / GRID_SIZE);
+                    const isSnake = snake.some(s => s.x === x && s.y === y);
+                    const isFood = food.x === x && food.y === y;
+                    return (
+                        <Box
+                            key={i}
+                            sx={{
+                                bgcolor: isSnake ? 'success.main' : isFood ? 'error.main' : 'background.paper',
+                                borderRadius: isSnake ? '2px' : isFood ? '50%' : '0'
+                            }}
+                        />
+                    );
+                })}
+            </Box>
+
+            <Box display="flex" justifyContent="center" gap={2}>
+                <Button variant="contained" onClick={restart}>
+                    {gameOver ? 'Try Again' : paused ? 'Start' : 'Restart'}
+                </Button>
+                {!gameOver && !paused && (
+                    <Button variant="outlined" onClick={() => setPaused(true)}>Pause</Button>
+                )}
+
+                {/* Mobile Controls */}
+                <Box display={{ xs: 'grid', md: 'none' }} gridTemplateColumns="repeat(3, 1fr)" gap={1} ml={2}>
+                    <Box />
+                    {/* Up */}
+                    <Button variant="outlined" sx={{ minWidth: 0, p: 1 }} onClick={() => setDir({ x: 0, y: -1 })}><Keyboard sx={{ transform: 'rotate(0deg)' }} /></Button>
+                    <Box />
+
+                    {/* Left */}
+                    <Button variant="outlined" sx={{ minWidth: 0, p: 1 }} onClick={() => setDir({ x: -1, y: 0 })}><Keyboard sx={{ transform: 'rotate(-90deg)' }} /></Button>
+                    {/* Down */}
+                    <Button variant="outlined" sx={{ minWidth: 0, p: 1 }} onClick={() => setDir({ x: 0, y: 1 })}><Keyboard sx={{ transform: 'rotate(180deg)' }} /></Button>
+                    {/* Right */}
+                    <Button variant="outlined" sx={{ minWidth: 0, p: 1 }} onClick={() => setDir({ x: 1, y: 0 })}><Keyboard sx={{ transform: 'rotate(90deg)' }} /></Button>
+                </Box>
+            </Box>
+            <Typography variant="caption" display="block" mt={1}>Use Arrow Keys to Move</Typography>
+        </Box>
+    );
+};
+
+// --- ROCK PAPER SCISSORS ---
+const RockPaperScissors = () => {
+    const choices = ['Rock', 'Paper', 'Scissors'];
+    const [userChoice, setUserChoice] = useState(null);
+    const [compChoice, setCompChoice] = useState(null);
+    const [result, setResult] = useState(null);
+
+    const playGame = (choice) => {
+        setUserChoice(choice);
+        // Quick shuffle effect
+        let i = 0;
+        const interval = setInterval(() => {
+            setCompChoice(choices[i % 3]);
+            i++;
+        }, 100);
+
+        setTimeout(() => {
+            clearInterval(interval);
+            const random = Math.floor(Math.random() * 3);
+            const comp = choices[random];
+            setCompChoice(comp);
+
+            if (choice === comp) setResult("It's a Tie!");
+            else if (
+                (choice === 'Rock' && comp === 'Scissors') ||
+                (choice === 'Paper' && comp === 'Rock') ||
+                (choice === 'Scissors' && comp === 'Paper')
+            ) setResult("You Win! 🎉");
+            else setResult("Computer Wins! 🤖");
+        }, 1000);
+    };
+
+    return (
+        <Box textAlign="center">
+            <Typography variant="h6" gutterBottom minHeight="32px">{result || "Choose your weapon!"}</Typography>
+
+            <Box display="flex" justifyContent="center" gap={4} my={4}>
+                <Box>
+                    <Typography variant="caption">You</Typography>
+                    <Box sx={{ fontSize: '3rem' }}>
+                        {userChoice === 'Rock' ? '✊' : userChoice === 'Paper' ? '✋' : userChoice === 'Scissors' ? '✌️' : '❓'}
+                    </Box>
+                </Box>
+                <Typography variant="h4" sx={{ alignSelf: 'center' }}>VS</Typography>
+                <Box>
+                    <Typography variant="caption">Computer</Typography>
+                    <Box sx={{ fontSize: '3rem' }}>
+                        {compChoice === 'Rock' ? '✊' : compChoice === 'Paper' ? '✋' : compChoice === 'Scissors' ? '✌️' : '❓'}
+                    </Box>
+                </Box>
+            </Box>
+
+            <Box display="flex" justifyContent="center" gap={2}>
+                {choices.map(c => (
+                    <Button key={c} variant="outlined" onClick={() => playGame(c)} disabled={!!result && result === null}>
+                        {c}
+                    </Button>
+                ))}
+            </Box>
+            {result && <Button sx={{ mt: 2 }} onClick={() => { setResult(null); setUserChoice(null); setCompChoice(null); }}>Play Again</Button>}
+        </Box>
+    );
+};
+
+// --- TYPING TEST ---
+const TypingTest = () => {
+    const text = "The quick brown fox jumps over the lazy dog. Programming is the art of telling another human what one wants the computer to do.";
+    const [input, setInput] = useState("");
+    const [startTime, setStartTime] = useState(null);
+    const [wpm, setWpm] = useState(0);
+    const [finished, setFinished] = useState(false);
+
+    const handleChange = (e) => {
+        const val = e.target.value;
+        if (!startTime) setStartTime(Date.now());
+        setInput(val);
+
+        if (val === text) {
+            setFinished(true);
+            const durationArr = (Date.now() - startTime) / 60000;
+            const words = text.split(" ").length;
+            setWpm(Math.round(words / durationArr));
+        }
+    };
+
+    return (
+        <Box width="100%" maxWidth="500px">
+            <Typography variant="body1" paragraph sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 2, border: '1px solid', borderColor: 'divider' }}>
+                {text}
+            </Typography>
+
+            {!finished ? (
+                <textarea
+                    rows={4}
+                    style={{
+                        width: '100%',
+                        padding: '10px',
+                        borderRadius: '8px',
+                        fontSize: '1rem',
+                        border: '1px solid #ccc',
+                        fontFamily: 'inherit'
+                    }}
+                    placeholder="Start typing here..."
+                    value={input}
+                    onChange={handleChange}
+                />
+            ) : (
+                <Box textAlign="center">
+                    <Typography variant="h4" color="success.main" gutterBottom>
+                        {wpm} WPM
+                    </Typography>
+                    <Typography>Great job! You finished the test.</Typography>
+                    <Button sx={{ mt: 2 }} variant="contained" onClick={() => { setInput(""); setFinished(false); setStartTime(null); }}>Try Again</Button>
+                </Box>
+            )}
+        </Box>
+    );
+};
+
 const GamesArcade = () => {
     const { theme } = useThemeContext();
     const [activeGame, setActiveGame] = useState(null);
 
     const games = [
+        {
+            id: 'memory',
+            title: 'Skill Match',
+            description: 'Flip cards to match the tech stack icons. Test your memory!',
+            icon: <Apps fontSize="large" />,
+            color: '#673ab7',
+            component: <MemoryGame />
+        },
         {
             id: 'sudoku',
             title: 'Sudoku',
@@ -314,6 +570,30 @@ const GamesArcade = () => {
             icon: <Tag fontSize="large" />,
             color: '#f44336',
             component: <TicTacToe />
+        },
+        {
+            id: 'snake',
+            title: 'Snake',
+            description: 'Navigate the snake to eat food and grow. Avoid hitting the walls or yourself!',
+            icon: <Timeline fontSize="large" />,
+            color: '#4caf50',
+            component: <SnakeGame />
+        },
+        {
+            id: 'rps',
+            title: 'Rock Paper Scissors',
+            description: 'The classic game of chance. Play against the computer.',
+            icon: <Gesture fontSize="large" />,
+            color: '#9c27b0',
+            component: <RockPaperScissors />
+        },
+        {
+            id: 'typing',
+            title: 'Speed Typing',
+            description: 'Test your typing speed (WPM) with a random paragraph.',
+            icon: <Keyboard fontSize="large" />,
+            color: '#607d8b',
+            component: <TypingTest />
         }
     ];
 

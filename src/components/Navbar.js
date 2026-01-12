@@ -7,6 +7,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import CloseIcon from '@mui/icons-material/Close';
+import GitHub from '@mui/icons-material/GitHub';
+import LinkedIn from '@mui/icons-material/LinkedIn';
 import { useThemeContext } from '../ThemeContext'; // Assuming ThemeContext is correctly set up
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -181,10 +183,35 @@ const MobileNavItem = styled(motion.div)({
   justifyContent: 'center',
 });
 
+const MobileNavLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none',
+  fontSize: '2.5rem',
+  fontWeight: 800,
+  color: theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)',
+  position: 'relative',
+  transition: 'color 0.3s ease',
+  '&:hover': {
+    color: theme.palette.primary.main,
+  },
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    left: 0,
+    bottom: 5,
+    width: '0%',
+    height: '4px',
+    background: theme.palette.primary.main,
+    transition: 'width 0.3s ease'
+  },
+  '&:hover::after': {
+    width: '100%'
+  }
+}));
+
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'Portfolio', path: '/portfolio' },
-  { name: 'Game', path: '/#game' }, // New item
+  { name: 'Games', path: '/games' }, // New item
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
   { name: 'Resume', path: '/resume' },
@@ -265,53 +292,27 @@ function Navbar() {
         </Container>
       </StyledAppBar>
 
-      {/* Mobile Navigation Drawer */}
       <StyledDrawer
-        anchor="top"
+        anchor="right"
         open={drawerOpen}
         onClose={toggleDrawer(false)}
-        transitionDuration={400}
+        transitionDuration={500}
+        PaperProps={{
+          sx: { width: '100%', maxWidth: '100%' }
+        }}
       >
-        <Box sx={{ width: '100%', position: 'relative' }}>
-          {/* Close Button */}
-          <IconButton
-            onClick={toggleDrawer(false)}
-            sx={(theme) => ({
-              position: 'absolute',
-              top: 16,
-              right: 16,
-              color: theme.palette.text.secondary,
-              backgroundColor: theme.palette.mode === 'dark'
-                ? 'rgba(255, 255, 255, 0.05)'
-                : 'rgba(0, 0, 0, 0.03)',
-              border: theme.palette.mode === 'dark'
-                ? '1px solid rgba(255, 255, 255, 0.1)'
-                : '1px solid rgba(0, 0, 0, 0.08)',
-              borderRadius: '12px',
-              backdropFilter: 'blur(10px)',
-              '&:hover': {
-                backgroundColor: theme.palette.mode === 'dark'
-                  ? 'rgba(255, 255, 255, 0.1)'
-                  : 'rgba(0, 0, 0, 0.05)',
-                color: theme.palette.text.primary,
-              },
-            })}
-          >
-            <CloseIcon />
-          </IconButton>
+        <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', p: 4, position: 'relative' }}>
 
-          {/* Mobile Navigation Items */}
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              justifyContent: 'center',
-              height: '100vh',
-              gap: 3,
-              px: 4
-            }}
-          >
+          {/* Header with Logo and Close */}
+          <Box display="flex" justifyContent="space-between" alignItems="center" mb={6}>
+            <Logo variant="h5">MELBIN</Logo>
+            <IconButton onClick={toggleDrawer(false)} size="large">
+              <CloseIcon fontSize="large" />
+            </IconButton>
+          </Box>
+
+          {/* Nav Items */}
+          <Box display="flex" flexDirection="column" gap={4} flex={1} justifyContent="center" alignItems="flex-start">
             {navItems.map((item, index) => (
               <MobileNavItem
                 key={item.name}
@@ -319,16 +320,19 @@ function Navbar() {
                 initial="hidden"
                 animate="visible"
                 custom={index}
+                style={{ justifyContent: 'flex-start', margin: 0 }}
               >
-                <MobileNavButton
-                  component={Link}
-                  to={item.path}
-                  onClick={toggleDrawer(false)}
-                >
+                <MobileNavLink to={item.path} onClick={toggleDrawer(false)}>
                   {item.name}
-                </MobileNavButton>
+                </MobileNavLink>
               </MobileNavItem>
             ))}
+          </Box>
+
+          {/* Footer Socials */}
+          <Box mt="auto" pt={4} display="flex" gap={2} justifyContent="center">
+            <IconButton color="inherit" component="a" href="https://github.com" target="_blank"><GitHub fontSize="large" /></IconButton>
+            <IconButton color="inherit" component="a" href="https://linkedin.com" target="_blank"><LinkedIn fontSize="large" /></IconButton>
           </Box>
         </Box>
       </StyledDrawer>
