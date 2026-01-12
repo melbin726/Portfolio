@@ -158,6 +158,28 @@ const MemoryGame = () => {
                     ))}
                 </Grid>
             )}
+            {isGameOver && (
+                <Button
+                    variant="text"
+                    onClick={() => window.location.href = '/games'}
+                    sx={{ mt: 2, color: 'text.secondary' }}
+                >
+                    Play More Games 🎮
+                </Button>
+            )}
+
+            {!isGameOver && (
+                <Box mt={2} width="100%" display="flex" justifyContent="center">
+                    <Button
+                        size="small"
+                        color="inherit"
+                        onClick={() => window.location.href = '/games'}
+                        sx={{ opacity: 0.7 }}
+                    >
+                        More Games 🕹️
+                    </Button>
+                </Box>
+            )}
         </GameContainer>
     );
 };
