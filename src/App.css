@@ -1,8 +1,6 @@
-/* App.css - Apple-inspired black & white theme */
 html, body, #root {
   height: 100%;
   margin: 0;
-  background: #ffffff;
 }
 
 .App {
@@ -10,8 +8,6 @@ html, body, #root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #ffffff;
-  color: #000000;
   position: relative;
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Drawer,  Box, Button, Container } from '@mui/material';
+import { AppBar, Toolbar, Typography, IconButton, Drawer, Box, Button, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { styled } from '@mui/system';
 import { motion } from 'framer-motion';
@@ -10,8 +10,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useThemeContext } from '../ThemeContext'; // Assuming ThemeContext is correctly set up
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  background: theme.palette.mode === 'dark' 
-    ? 'rgba(0, 0, 0, 0.9)' 
+  background: theme.palette.mode === 'dark'
+    ? 'rgba(0, 0, 0, 0.9)'
     : 'rgba(255, 255, 255, 0.9)',
   backdropFilter: 'blur(20px)',
   boxShadow: theme.palette.mode === 'dark'
@@ -184,6 +184,7 @@ const MobileNavItem = styled(motion.div)({
 const navItems = [
   { name: 'Home', path: '/' },
   { name: 'Portfolio', path: '/portfolio' },
+  { name: 'Game', path: '/#game' }, // New item
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
   { name: 'Resume', path: '/resume' },
