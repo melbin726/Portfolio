@@ -1,86 +1,52 @@
 // src/App.js
-import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Portfolio from './pages/Portfolio';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Resume from './pages/Resume';
-import GamesArcade from './pages/GamesArcade';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import './App.css';
 import { ThemeProvider, useThemeContext } from './ThemeContext';
-import { ThemeProvider as MuiThemeProvider, CssBaseline } from '@mui/material';
+import { ThemeProvider as MuiThemeProvider, CssBaseline, Box } from '@mui/material';
+
+// Automatically scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 function AppContent() {
   const { theme } = useThemeContext();
-  const cursorRef = useRef(null);
-
-  useEffect(() => {
-    const cursor = cursorRef.current;
-    if (!cursor) return;
-
-    const handleMouseMove = (event) => {
-      const { clientX, clientY } = event;
-      cursor.style.left = `${clientX}px`;
-      cursor.style.top = `${clientY}px`;
-    };
-
-    const handleMouseDown = () => {
-      cursor.classList.add('click');
-    };
-
-    const handleMouseUp = () => {
-      cursor.classList.remove('click');
-    };
-
-    const handleMouseEnter = (event) => {
-      if (event.target.matches('button, a, [role="button"], input, textarea, select')) {
-        cursor.classList.add('hover');
-      }
-    };
-
-    const handleMouseLeave = (event) => {
-      if (event.target.matches('button, a, [role="button"], input, textarea, select')) {
-        cursor.classList.remove('hover');
-      }
-    };
-
-    // Add event listeners
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mousedown', handleMouseDown);
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mouseover', handleMouseEnter);
-    document.addEventListener('mouseout', handleMouseLeave);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mousedown', handleMouseDown);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('mouseover', handleMouseEnter);
-      document.removeEventListener('mouseout', handleMouseLeave);
-    };
-  }, []);
 
   return (
     <MuiThemeProvider theme={theme}>
       <CssBaseline />
-      <div className="App">
-        <div ref={cursorRef} className="custom-cursor"></div>
+      <Box className="App" sx={{ bgcolor: 'background.default', color: 'text.primary', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Router>
+          <ScrollToTop />
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/games" element={<GamesArcade />} />
-          </Routes>
+          <Box component="main" sx={{ flex: 1, width: '100%' }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/resume" element={<Resume />} />
+              <Route path="/contact" element={<Contact />} />
+              {/* Fallback redirect */}
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </Box>
           <Footer />
         </Router>
-      </div>
+      </Box>
     </MuiThemeProvider>
   );
 }

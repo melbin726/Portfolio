@@ -1,212 +1,225 @@
 import React from 'react';
-import { Box, Typography, Container, IconButton } from '@mui/material';
+import { Box, Typography, Container, IconButton, Grid, Avatar } from '@mui/material';
 import { styled } from '@mui/system';
-import { motion } from 'framer-motion';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-
-import TwitterIcon from '@mui/icons-material/Twitter';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import EmailIcon from '@mui/icons-material/Email';
-import PhoneIcon from '@mui/icons-material/Phone';
+import { Link } from 'react-router-dom';
+import {
+  Github,
+  Linkedin,
+  Instagram,
+  Mail,
+  Phone,
+  MapPin,
+  ExternalLink,
+} from 'lucide-react';
+import { useThemeContext } from '../ThemeContext';
+import { portfolioData } from '../data/portfolioData';
 
 const StyledFooter = styled(Box)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'linear-gradient(180deg, #111111 0%, #000000 100%)'
-    : 'linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%)',
+    ? 'linear-gradient(180deg, #0F172A 0%, #0B1120 100%)'
+    : 'linear-gradient(180deg, #F8FAFC 0%, #EEF2F6 100%)',
   color: theme.palette.text.primary,
   position: 'relative',
-  paddingTop: '60px',
-  paddingBottom: '40px',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '80%',
-    height: '1px',
-    background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)'
-      : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.1), transparent)',
-  },
+  paddingTop: '64px',
+  paddingBottom: '36px',
+  borderTop: `1px solid ${theme.palette.divider}`,
 }));
 
 const SocialIcon = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.secondary,
   backgroundColor: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
+    ? 'rgba(255, 255, 255, 0.04)'
     : 'rgba(0, 0, 0, 0.03)',
-  border: theme.palette.mode === 'dark'
-    ? '1px solid rgba(255, 255, 255, 0.1)'
-    : '1px solid rgba(0, 0, 0, 0.08)',
-  borderRadius: '50%',
-  padding: '12px',
-  margin: '0 8px',
-  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  backdropFilter: 'blur(10px)',
+  border: `1px solid ${theme.palette.divider}`,
+  borderRadius: '10px',
+  padding: '10px',
+  transition: 'all 0.25s ease',
   '&:hover': {
     backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
-      : 'rgba(0, 0, 0, 0.05)',
-    color: theme.palette.text.primary,
-    borderColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.3)'
-      : 'rgba(0, 0, 0, 0.15)',
-    transform: 'translateY(-4px) scale(1.1)',
-    boxShadow: theme.palette.mode === 'dark'
-      ? '0 8px 20px rgba(255, 255, 255, 0.1)'
-      : '0 8px 20px rgba(0, 0, 0, 0.1)',
-  },
-  '&:active': {
-    backgroundColor: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.08)'
-      : 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(0) scale(1)',
+      ? 'rgba(56, 189, 248, 0.15)'
+      : 'rgba(37, 99, 235, 0.1)',
+    color: theme.palette.primary.main,
+    borderColor: 'rgba(37, 99, 235, 0.4)',
+    transform: 'translateY(-2px)',
   },
 }));
 
-const AnimatedSocialIcon = styled(motion.div)({
-  display: 'inline-block',
-});
-
 function Footer() {
+  const { isDarkMode } = useThemeContext();
+  const { personal } = portfolioData;
+
   return (
     <StyledFooter component="footer">
       <Container maxWidth="lg">
-        <Box textAlign="center">
-          <Typography
-            variant="h4"
-            fontWeight={600}
-            sx={(theme) => ({
-              mb: 4,
-              fontSize: { xs: '1.5rem', sm: '2rem' },
-              color: theme.palette.text.primary,
-              letterSpacing: '-0.01em',
-            })}
-          >
-            Let's Connect
-          </Typography>
+        <Grid container spacing={4} sx={{ mb: 5 }}>
+          {/* Col 1: Bio & Role */}
+          <Grid item xs={12} md={5}>
+            <Box display="flex" alignItems="center" gap={1.5} mb={2}>
+              <Avatar
+                src="/face-avatar.jpg"
+                alt={personal.name}
+                sx={{
+                  width: 36,
+                  height: 36,
+                  border: '2px solid',
+                  borderColor: 'primary.main',
+                  boxShadow: '0 2px 8px rgba(37, 99, 235, 0.25)',
+                }}
+                imgProps={{
+                  style: {
+                    objectFit: 'cover',
+                    objectPosition: 'center 15%',
+                  }
+                }}
+              />
+              <Typography variant="h6" fontWeight={750}>
+                {personal.name}
+              </Typography>
+            </Box>
+            <Typography variant="body2" color="text.secondary" sx={{ maxWidth: 380, mb: 2, lineHeight: 1.7 }}>
+              {personal.headline}. Building scalable, user-friendly applications at Kristu Jayanti Software Development Centre (KJSDC).
+            </Typography>
+            <Box display="flex" alignItems="center" gap={1}>
+              <span className="status-dot"></span>
+              <Typography variant="caption" sx={{ color: isDarkMode ? '#34D399' : '#059669', fontWeight: 650 }}>
+                {personal.status}
+              </Typography>
+            </Box>
+          </Grid>
 
-          <Box
-            display="flex"
-            justifyContent="center"
-            flexWrap="wrap"
-            gap={2}
-            mb={6}
-          >
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
+          {/* Col 2: Navigation */}
+          <Grid item xs={6} sm={4} md={2}>
+            <Typography variant="subtitle2" fontWeight={750} sx={{ mb: 2, letterSpacing: '0.05em' }}>
+              NAVIGATION
+            </Typography>
+            <Box display="flex" flexDirection="column" gap={1}>
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'Projects & ERP', path: '/portfolio' },
+                { name: 'About & Journey', path: '/about' },
+                { name: 'Resume', path: '/resume' },
+                { name: 'Contact', path: '/contact' },
+              ].map((link) => (
+                <Typography
+                  key={link.name}
+                  component={Link}
+                  to={link.path}
+                  variant="body2"
+                  sx={{
+                    color: 'text.secondary',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                    '&:hover': { color: 'primary.main' }
+                  }}
+                >
+                  {link.name}
+                </Typography>
+              ))}
+            </Box>
+          </Grid>
+
+          {/* Col 3: Focus & Stack */}
+          <Grid item xs={6} sm={4} md={2}>
+            <Typography variant="subtitle2" fontWeight={750} sx={{ mb: 2, letterSpacing: '0.05em' }}>
+              EXPERTISE
+            </Typography>
+            <Box display="flex" flexDirection="column" gap={1}>
+              <Typography variant="body2" color="text.secondary">KJUSYS ERP System</Typography>
+              <Typography variant="body2" color="text.secondary">Angular & TypeScript</Typography>
+              <Typography variant="body2" color="text.secondary">Tailwind CSS UI/UX</Typography>
+              <Typography variant="body2" color="text.secondary">React.js & React Native</Typography>
+              <Typography variant="body2" color="text.secondary">C# & PostgreSQL</Typography>
+              <Typography variant="body2" color="text.secondary">Java & Spring Boot</Typography>
+            </Box>
+          </Grid>
+
+          {/* Col 4: Contact & Socials */}
+          <Grid item xs={12} sm={4} md={3}>
+            <Typography variant="subtitle2" fontWeight={750} sx={{ mb: 2, letterSpacing: '0.05em' }}>
+              GET IN TOUCH
+            </Typography>
+            <Box display="flex" alignItems="center" gap={1.2} mb={1}>
+              <Mail size={16} color="#64748B" />
+              <Typography
+                component="a"
+                href={`mailto:${personal.email}`}
+                variant="body2"
+                sx={{ color: 'text.secondary', textDecoration: 'none', '&:hover': { color: 'primary.main' } }}
+              >
+                {personal.email}
+              </Typography>
+            </Box>
+            <Box display="flex" alignItems="center" gap={1.2} mb={1}>
+              <MapPin size={16} color="#64748B" />
+              <Typography variant="body2" color="text.secondary">
+                {personal.location}
+              </Typography>
+            </Box>
+            <Box display="flex" gap={1} mt={2.5}>
               <SocialIcon
-                href="https://github.com/melbin726/"
+                component="a"
+                href={personal.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
               >
-                <GitHubIcon sx={{ fontSize: 28 }} />
+                <Github size={17} />
               </SocialIcon>
-            </AnimatedSocialIcon>
-
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
               <SocialIcon
-                href="https://www.linkedin.com/in/melbin-joseph-96640a252/"
+                component="a"
+                href={personal.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
               >
-                <LinkedInIcon sx={{ fontSize: 28 }} />
+                <Linkedin size={17} />
               </SocialIcon>
-            </AnimatedSocialIcon>
-
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
               <SocialIcon
-                href="acac"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter"
-              >
-                <TwitterIcon sx={{ fontSize: 28 }} />
-              </SocialIcon>
-            </AnimatedSocialIcon>
-
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <SocialIcon
-                href="https://www.instagram.com/___melbin_/?igsh=MZFmcHN4NzYwajM0eA%3D%3D"
+                component="a"
+                href={personal.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
               >
-                <InstagramIcon sx={{ fontSize: 28 }} />
+                <Instagram size={17} />
               </SocialIcon>
-            </AnimatedSocialIcon>
-
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
               <SocialIcon
-                href="mailto:melmelbin2007@gmail.com"
-                aria-label="Email"
-              >
-                <EmailIcon sx={{ fontSize: 28 }} />
-              </SocialIcon>
-            </AnimatedSocialIcon>
-
-            <AnimatedSocialIcon
-              whileHover={{ scale: 1.15, rotate: -5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <SocialIcon
-                href="tel:+916282696352"
+                component="a"
+                href={`tel:${personal.phone}`}
                 aria-label="Phone"
               >
-                <PhoneIcon sx={{ fontSize: 28 }} />
+                <Phone size={17} />
               </SocialIcon>
-            </AnimatedSocialIcon>
-          </Box>
+            </Box>
+          </Grid>
+        </Grid>
 
-          <Box
-            sx={(theme) => ({
-              borderTop: theme.palette.mode === 'dark'
-                ? '1px solid rgba(255, 255, 255, 0.1)'
-                : '1px solid rgba(0, 0, 0, 0.1)',
-              pt: 4,
-              mt: 4
-            })}
+        {/* Bottom copyright */}
+        <Box
+          sx={{
+            pt: 3,
+            borderTop: '1px solid',
+            borderColor: 'divider',
+            display: 'flex',
+            flexDirection: { xs: 'column', sm: 'row' },
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 1.5
+          }}
+        >
+          <Typography variant="body2" color="text.secondary">
+            © {new Date().getFullYear()} Melbin Joseph. Designed with modern engineering principles.
+          </Typography>
+          <Typography
+            component="a"
+            href={personal.portfolioUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            variant="caption"
+            sx={{ color: 'primary.main', textDecoration: 'none', fontWeight: 650, display: 'flex', alignItems: 'center', gap: 0.5 }}
           >
-            <Typography
-              variant="body1"
-              sx={(theme) => ({
-                mb: 2,
-                fontSize: { xs: '1rem', sm: '1.1rem' },
-                fontWeight: 500,
-                color: theme.palette.text.primary,
-              })}
-            >
-              © 2024 Melbin Joseph. All rights reserved.
-            </Typography>
-            <Typography
-              variant="body2"
-              sx={(theme) => ({
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                color: theme.palette.text.secondary,
-                fontWeight: 400,
-              })}
-            >
-              Crafted with ❤️ by Melbin Joseph | Follow for more updates
-            </Typography>
-          </Box>
+            melbinjoseph.netlify.app <ExternalLink size={12} />
+          </Typography>
         </Box>
       </Container>
     </StyledFooter>

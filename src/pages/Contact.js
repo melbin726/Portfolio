@@ -1,483 +1,456 @@
 import React, { useState } from 'react';
-import { Container, Typography, Box, TextField, Button,  Grid, Card, CardContent, Alert, Snackbar } from '@mui/material';
-import { styled } from '@mui/system';
-import { motion } from 'framer-motion';
-import emailjs from 'emailjs-com';
 import {
-  Email,
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Card,
+  TextField,
+  Button,
+  IconButton,
+  Alert,
+  Snackbar,
+  Stack,
+} from '@mui/material';
+import { styled } from '@mui/system';
+import {
+  Mail,
   Phone,
-  LocationOn,
+  MapPin,
   Send,
-  CheckCircle,
-  Error
-} from '@mui/icons-material';
+  Github,
+  Linkedin,
+  Copy,
+  Check,
+  Briefcase,
+} from 'lucide-react';
+import { useThemeContext } from '../ThemeContext';
+import { portfolioData } from '../data/portfolioData';
 
-// Styled Components
-const HeroContainer = styled(Box)({
-  minHeight: '100vh',
-  // Subtle radial gradient from center to edges, light gray to white for the page background
-  background: 'radial-gradient(circle at center, #f5f5f5 0%, #ffffff 75%)',
-  color: '#333333', // Default text color is dark gray
-  paddingTop: '80px',
-  paddingBottom: '60px',
-  position: 'relative',
-  overflow: 'hidden',
-  // Removed the ::before pattern for cleaner gradients
-});
+const GlassCard = styled(Card)(({ theme }) => ({
+  background: theme.palette.mode === 'dark'
+    ? 'rgba(30, 41, 59, 0.75)'
+    : 'rgba(255, 255, 255, 0.95)',
+  backdropFilter: 'blur(16px)',
+  WebkitBackdropFilter: 'blur(16px)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(255, 255, 255, 0.09)'
+    : '1px solid rgba(15, 23, 42, 0.08)',
+  borderRadius: '20px',
+  boxShadow: theme.palette.mode === 'dark'
+    ? '0 10px 30px -10px rgba(0, 0, 0, 0.3)'
+    : '0 10px 30px -10px rgba(15, 23, 42, 0.06)',
+}));
 
-const GlassCard = styled(Card)({
-  // Always apply a subtle radial gradient for depth
-  background: 'radial-gradient(circle at top left, #ffffff 0%, #f9f9f9 100%)',
-  backdropFilter: 'blur(5px)', // Less blur as background is light
-  border: '1px solid rgba(0, 0, 0, 0.04)', // Even lighter border
-  borderRadius: '15px', // Consistent border radius
-  boxShadow: '0 3px 8px rgba(0, 0, 0, 0.04)', // Very light initial shadow
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    transform: 'translateY(-5px)', // Consistent lift
-    boxShadow: '0 10px 20px rgba(0, 0, 0, 0.08)', // More prominent but still light shadow on hover
-    background: 'radial-gradient(circle at top left, #ffffff 0%, #f0f0f0 100%)', // Subtle gradient change on hover
-    border: '1px solid rgba(0, 0, 0, 0.08)', // Slightly more defined border on hover
-  },
-  '&:active': { // For touch devices
-    transform: 'translateY(-1px)', // Simulating a soft press
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    background: 'radial-gradient(circle at top left, #f0f0f0 0%, #ffffff 100%)',
-  },
-});
-
-const StyledTextField = styled(TextField)({
-  '& .MuiOutlinedInput-root': {
-    background: 'rgba(0, 0, 0, 0.03)', // Very subtle light transparent black background
-    borderRadius: '10px', // Slightly less rounded for text fields
-    color: '#333333', // Dark gray text input
-    '& fieldset': {
-      borderColor: 'rgba(0, 0, 0, 0.1)', // Subtle border
-      borderWidth: '1px',
-    },
-    '&:hover fieldset': {
-      borderColor: 'rgba(0, 0, 0, 0.3)', // Darker border on hover
-    },
-    '&.Mui-focused fieldset': {
-      borderColor: '#000000', // Pure black border when focused
-      borderWidth: '2px',
-    },
-  },
-  '& .MuiInputLabel-root': {
-    color: '#666666', // Medium gray label
-    '&.Mui-focused': {
-      color: '#000000', // Black label when focused
-    },
-  },
-  '& .MuiOutlinedInput-input': {
-    color: '#333333', // Dark gray input text
-    '&::placeholder': {
-      color: '#999999', // Lighter gray placeholder
-    },
-  },
-});
-
-const GradientButton = styled(Button)({
-  // Sleek black to dark grey gradient
-  background: 'linear-gradient(135deg, #222222 0%, #000000 100%)',
-  color: 'white',
-  borderRadius: '30px',
-  padding: '12px 32px',
-  textTransform: 'none',
-  fontWeight: 600,
-  fontSize: '1.1rem',
-  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.2)', // Always has a shadow for depth
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    background: 'linear-gradient(135deg, #111111 0%, #000000 100%)', // Darker on hover
-    transform: 'translateY(-3px)',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.3)',
-  },
-  '&:active': { // Add active state for touch devices
-    background: 'linear-gradient(135deg, #000000 0%, #111111 100%)', // Slightly inverted/darker on press
-    transform: 'translateY(0)', // Resets on press
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.4)',
-  },
-  '&:disabled': {
-    background: 'linear-gradient(135deg, #cccccc 0%, #aaaaaa 100%)', // Lighter gradient when disabled
-    color: '#666666', // Darker text for disabled state
-    boxShadow: 'none',
-  },
-});
-
-const ContactInfoCard = styled(GlassCard)({
-  height: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  textAlign: 'center',
-  padding: '24px',
-  cursor: 'pointer',
-  // Inherits hover/active from GlassCard, specific icon hover below
-});
-
-const IconContainer = styled(Box)({
-  width: '80px',
-  height: '80px',
-  borderRadius: '50%',
-  // Subtle white to light gray radial gradient for depth
-  background: 'radial-gradient(circle at center, #f5f5f5 0%, #e8e8e8 100%)',
+const ContactInfoCard = styled(Box)(({ theme }) => ({
+  padding: '20px',
+  borderRadius: '14px',
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'center',
-  marginBottom: '20px',
-  border: '1px solid rgba(0, 0, 0, 0.08)', // Softer border
-  color: '#333333', // Dark gray icon color
-  transition: 'all 0.3s ease',
-  boxShadow: '0 1px 3px rgba(0,0,0,0.05)', // Very subtle shadow
-  '&:hover': { // Apply hover effect directly to IconContainer
-    background: 'radial-gradient(circle at center, #e0e0e0 0%, #d0d0d0 100%)', // Darker gradient on hover
-    transform: 'scale(1.08)',
-    boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+  gap: '16px',
+  background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)',
+  border: theme.palette.mode === 'dark' ? '1px solid rgba(255, 255, 255, 0.06)' : '1px solid rgba(15, 23, 42, 0.06)',
+  transition: 'all 0.2s ease',
+  '&:hover': {
+    borderColor: theme.palette.primary.main,
+    transform: 'translateX(4px)',
+    backgroundColor: theme.palette.mode === 'dark' ? 'rgba(56, 189, 248, 0.06)' : 'rgba(37, 99, 235, 0.03)',
   },
-  '&:active': { // For touch devices
-    background: 'radial-gradient(circle at center, #d0d0d0 0%, #e0e0e0 100%)',
-    transform: 'scale(1)',
-    boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
-  },
-});
-
-const FloatingElement = styled(motion.div)({
-  position: 'absolute',
-  borderRadius: '50%',
-  background: 'rgba(0, 0, 0, 0.02)', // Very subtle transparent black
-  pointerEvents: 'none',
-  border: '1px solid rgba(0, 0, 0, 0.05)', // Even more subtle border
-});
+}));
 
 function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [loading, setLoading] = useState(false);
-  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+  const { isDarkMode } = useThemeContext();
+  const { personal } = portfolioData;
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [copied, setCopied] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(personal.email);
+    setCopied(true);
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm((prevForm) => ({
-      ...prevForm,
-      [name]: value,
-    }));
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setSubmitting(true);
 
-    try {
-      const templateParams = {
-        from_name: form.name,
-        reply_to: form.email,
-        message: form.message,
-      };
-
-      await emailjs.send(
-        'service_0vq6wlm',
-        'template_1zhew33',
-        templateParams,
-        'iMYRdqcRKdAbyNIl8'
-      );
-
-      setSnackbar({
-        open: true,
-        message: 'Message sent successfully! I\'ll get back to you soon.',
-        severity: 'success'
-      });
-      setForm({ name: '', email: '', message: '' });
-    } catch (error) {
-      setSnackbar({
-        open: true,
-        message: 'Failed to send message. Please try again.',
-        severity: 'error'
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const contactInfo = [
-    {
-      icon: <Email sx={{ fontSize: 32 }} />,
-      title: 'Email',
-      info: 'melmelbin2007@gmail.com',
-      action: 'mailto:melmelbin2007@gmail.com'
-    },
-    {
-      icon: <Phone sx={{ fontSize: 32 }} />,
-      title: 'Phone',
-      info: '+91 6282696352',
-      action: 'tel:+916282696352' // Corrected action for phone
-    },
-    {
-      icon: <LocationOn sx={{ fontSize: 32 }} />,
-      title: 'Location',
-      info: 'Bengaluru, Karnataka',
-      action: '#' // No direct action for location, can link to map if desired
-    }
-  ];
-
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: 'easeOut',
-      },
-    },
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+      const mailtoUrl = `mailto:${personal.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`From: ${formData.name} (${formData.email})\n\n${formData.message}`)}`;
+      window.location.href = mailtoUrl;
+    }, 600);
   };
 
   return (
-    <HeroContainer>
-      {/* Floating Background Elements */}
-      <FloatingElement
-        style={{ width: '100px', height: '100px', top: '10%', left: '10%' }}
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <FloatingElement
-        style={{ width: '150px', height: '150px', top: '20%', right: '15%' }}
-        animate={{
-          y: [0, 30, 0],
-          rotate: [0, -180, -360],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: 'easeInOut',
-        }}
-      />
-      <FloatingElement
-        style={{ width: '80px', height: '80px', bottom: '10%', left: '20%' }}
-        animate={{
-          y: [0, -15, 0],
-          x: [0, 10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: 'easeInOut',
+    <Box sx={{ minHeight: '100vh', pt: { xs: 12, md: 16 }, pb: 12, position: 'relative' }}>
+      
+      {/* Background Glow */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          width: '600px',
+          height: '400px',
+          background: isDarkMode
+            ? 'radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%)'
+            : 'radial-gradient(circle, rgba(37, 99, 235, 0.07) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          filter: 'blur(90px)',
         }}
       />
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            textAlign="center"
-            // Black to dark gray gradient for the main heading text
+        
+        {/* Header */}
+        <Box textAlign="center" mb={{ xs: 6, md: 8 }}>
+          <Box
             sx={{
-              fontSize: { xs: '2.5rem', sm: '3rem', md: '3.5rem' },
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 1,
+              px: 2,
+              py: 0.6,
+              borderRadius: '30px',
+              bgcolor: isDarkMode ? 'rgba(56, 189, 248, 0.12)' : 'rgba(37, 99, 235, 0.08)',
+              color: 'primary.main',
+              border: isDarkMode ? '1px solid rgba(56, 189, 248, 0.25)' : '1px solid rgba(37, 99, 235, 0.2)',
               mb: 2,
-              background: 'linear-gradient(45deg, #000000, #333333)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
+              fontSize: '0.825rem',
+              fontWeight: 650,
+              textTransform: 'uppercase',
+              letterSpacing: '0.04em',
+            }}
+          >
+            <Mail size={15} />
+            Let's Start a Conversation
+          </Box>
+
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: '2.4rem', sm: '3.2rem', md: '3.8rem' },
+              fontWeight: 850,
+              letterSpacing: '-0.03em',
+              mb: 2,
             }}
           >
             Get In Touch
           </Typography>
+
           <Typography
             variant="h6"
-            textAlign="center"
-            color="#666666" // Medium gray for sub-heading
+            color="text.secondary"
             sx={{
-              mb: 8,
-              maxWidth: '600px',
+              maxWidth: 620,
               mx: 'auto',
-              fontSize: { xs: '1.1rem', sm: '1.3rem' }
+              fontWeight: 400,
+              lineHeight: 1.6,
+              fontSize: { xs: '1rem', md: '1.2rem' }
             }}
           >
-            Let's discuss your next project and bring your ideas to life
+            {personal.status}. Open to discuss enterprise ERP projects, full-stack systems, or career opportunities.
           </Typography>
-        </motion.div>
+        </Box>
 
-        <Grid container spacing={4} sx={{ mb: 6 }}>
-          {/* Contact Info Cards */}
-          <Grid item xs={12} md={4}>
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <Grid container spacing={3}>
-                {contactInfo.map((item, index) => (
-                  <Grid item xs={12} key={index}>
-                    <motion.div variants={itemVariants}>
-                      <ContactInfoCard
-                        component="a"
-                        href={item.action}
-                        sx={{ textDecoration: 'none' }}
-                        whileHover={{ scale: 1.02 }}
-                      >
-                        <IconContainer>
-                          {item.icon}
-                        </IconContainer>
-                        <Typography variant="h6" fontWeight="bold" color="#333333" gutterBottom> {/* Dark gray for title */}
-                          {item.title}
-                        </Typography>
-                        <Typography variant="body1" color="#666666"> {/* Medium gray for info */}
-                          {item.info}
-                        </Typography>
-                      </ContactInfoCard>
-                    </motion.div>
+        <Grid container spacing={5}>
+          
+          {/* Left Column: Direct Info & Social Channels */}
+          <Grid item xs={12} md={5}>
+            <Stack spacing={2.5}>
+              
+              {/* Primary Email */}
+              <ContactInfoCard>
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: 'primary.main',
+                    color: '#ffffff',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Mail size={20} />
+                </Box>
+                <Box sx={{ flex: 1, minWidth: 0 }}>
+                  <Typography variant="caption" color="text.secondary" fontWeight={650} display="block">
+                    PRIMARY EMAIL
+                  </Typography>
+                  <Typography
+                    component="a"
+                    href={`mailto:${personal.email}`}
+                    variant="subtitle2"
+                    fontWeight={700}
+                    sx={{ color: 'text.primary', textDecoration: 'none', wordBreak: 'break-all' }}
+                  >
+                    {personal.email}
+                  </Typography>
+                </Box>
+                <IconButton size="small" onClick={handleCopyEmail} aria-label="Copy Email">
+                  {copied ? <Check size={18} color="#10B981" /> : <Copy size={18} />}
+                </IconButton>
+              </ContactInfoCard>
+
+              {/* College / Work Email */}
+              <ContactInfoCard>
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: isDarkMode ? 'rgba(56, 189, 248, 0.15)' : 'rgba(37, 99, 235, 0.1)',
+                    color: 'primary.main',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Briefcase size={20} />
+                </Box>
+                <Box sx={{ flex: 1, minWidth: 0 }}>
+                  <Typography variant="caption" color="text.secondary" fontWeight={650} display="block">
+                    INSTITUTIONAL EMAIL
+                  </Typography>
+                  <Typography
+                    component="a"
+                    href={`mailto:${personal.collegeEmail}`}
+                    variant="subtitle2"
+                    fontWeight={700}
+                    sx={{ color: 'text.primary', textDecoration: 'none', wordBreak: 'break-all' }}
+                  >
+                    {personal.collegeEmail}
+                  </Typography>
+                </Box>
+              </ContactInfoCard>
+
+              {/* Phone */}
+              <ContactInfoCard>
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: isDarkMode ? 'rgba(16, 185, 129, 0.15)' : 'rgba(16, 185, 129, 0.1)',
+                    color: '#10B981',
+                    flexShrink: 0,
+                  }}
+                >
+                  <Phone size={20} />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" color="text.secondary" fontWeight={650} display="block">
+                    TELEPHONE & WHATSAPP
+                  </Typography>
+                  <Typography
+                    component="a"
+                    href={`tel:${personal.phone}`}
+                    variant="subtitle2"
+                    fontWeight={700}
+                    sx={{ color: 'text.primary', textDecoration: 'none' }}
+                  >
+                    {personal.phone}
+                  </Typography>
+                </Box>
+              </ContactInfoCard>
+
+              {/* Location */}
+              <ContactInfoCard>
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    borderRadius: '12px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    bgcolor: isDarkMode ? 'rgba(236, 72, 153, 0.15)' : 'rgba(236, 72, 153, 0.1)',
+                    color: '#EC4899',
+                    flexShrink: 0,
+                  }}
+                >
+                  <MapPin size={20} />
+                </Box>
+                <Box sx={{ flex: 1 }}>
+                  <Typography variant="caption" color="text.secondary" fontWeight={650} display="block">
+                    LOCATION
+                  </Typography>
+                  <Typography variant="subtitle2" fontWeight={700}>
+                    {personal.location}
+                  </Typography>
+                </Box>
+              </ContactInfoCard>
+
+              {/* Social Link Badges */}
+              <Box
+                sx={{
+                  p: 3,
+                  borderRadius: '16px',
+                  bgcolor: isDarkMode ? 'rgba(255, 255, 255, 0.03)' : 'rgba(0, 0, 0, 0.02)',
+                  border: '1px solid',
+                  borderColor: 'divider',
+                }}
+              >
+                <Typography variant="subtitle2" fontWeight={750} gutterBottom>
+                  Software Profiles & Code:
+                </Typography>
+                <Box display="flex" gap={1.5} mt={1.5} flexWrap="wrap">
+                  <Button
+                    component="a"
+                    href={personal.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="outlined"
+                    size="small"
+                    startIcon={<Github size={16} />}
+                    sx={{ borderRadius: '8px', textTransform: 'none', fontWeight: 650 }}
+                  >
+                    GitHub (@melbin726)
+                  </Button>
+                  <Button
+                    component="a"
+                    href={personal.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    variant="outlined"
+                    size="small"
+                    startIcon={<Linkedin size={16} />}
+                    sx={{ borderRadius: '8px', textTransform: 'none', fontWeight: 650 }}
+                  >
+                    LinkedIn ({personal.connections})
+                  </Button>
+                </Box>
+              </Box>
+
+            </Stack>
+          </Grid>
+
+          {/* Right Column: Direct Message Form */}
+          <Grid item xs={12} md={7}>
+            <GlassCard sx={{ p: { xs: 3.5, sm: 5 } }}>
+              <Typography variant="h4" fontWeight={800} gutterBottom sx={{ fontSize: { xs: '1.6rem', md: '2rem' } }}>
+                Send a Message
+              </Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 4 }}>
+                Fill out the form below to initiate communication or open your email client directly.
+              </Typography>
+
+              {submitted && (
+                <Alert severity="success" sx={{ mb: 3, borderRadius: '12px' }}>
+                  Thank you! Your email client is opening with your message details.
+                </Alert>
+              )}
+
+              <Box component="form" onSubmit={handleSubmit}>
+                <Grid container spacing={2.5}>
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Your Full Name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      variant="outlined"
+                    />
                   </Grid>
-                ))}
-              </Grid>
-            </motion.div>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                      fullWidth
+                      label="Your Email Address"
+                      name="email"
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Subject / Project Focus"
+                      name="subject"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Your Message or Project Details"
+                      name="message"
+                      required
+                      multiline
+                      rows={5}
+                      value={formData.message}
+                      onChange={handleChange}
+                      variant="outlined"
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      size="large"
+                      fullWidth
+                      disabled={submitting}
+                      endIcon={<Send size={18} />}
+                      sx={{
+                        py: 1.5,
+                        borderRadius: '12px',
+                        fontWeight: 700,
+                        fontSize: '1rem',
+                        background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)',
+                      }}
+                    >
+                      {submitting ? 'Preparing Email...' : 'Send Message'}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </Box>
+            </GlassCard>
           </Grid>
 
-          {/* Contact Form */}
-          <Grid item xs={12} md={8}>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <GlassCard>
-                <CardContent sx={{ p: { xs: 3, sm: 4 } }}>
-                  <Typography variant="h4" fontWeight="bold" color="#000000" gutterBottom> {/* Pure black for heading */}
-                    Send Message
-                  </Typography>
-                  <Typography variant="body1" color="#666666" sx={{ mb: 4 }}> {/* Medium gray for sub-text */}
-                    Have a project in mind? Let's discuss how we can work together.
-                  </Typography>
-
-                  <Box component="form" onSubmit={handleSubmit} noValidate>
-                    <Grid container spacing={3}>
-                      <Grid item xs={12} sm={6}>
-                        <motion.div
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.6, delay: 0.3 }}
-                        >
-                          <StyledTextField
-                            name="name"
-                            label="Full Name"
-                            fullWidth
-                            required
-                            value={form.name}
-                            onChange={handleChange}
-                            placeholder="John Doe"
-                          />
-                        </motion.div>
-                      </Grid>
-                      <Grid item xs={12} sm={6}>
-                        <motion.div
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.6, delay: 0.4 }}
-                        >
-                          <StyledTextField
-                            name="email"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                            required
-                            value={form.email}
-                            onChange={handleChange}
-                            placeholder="john@example.com"
-                          />
-                        </motion.div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.5 }}
-                        >
-                          <StyledTextField
-                            name="message"
-                            label="Message"
-                            fullWidth
-                            required
-                            multiline
-                            rows={6}
-                            value={form.message}
-                            onChange={handleChange}
-                            placeholder="Tell me about your project..."
-                          />
-                        </motion.div>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.6, delay: 0.6 }}
-                        >
-                          <GradientButton
-                            type="submit"
-                            variant="contained"
-                            size="large"
-                            disabled={loading}
-                            startIcon={loading ? <motion.div
-                              animate={{ rotate: 360 }}
-                              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                            >
-                              ⏳
-                            </motion.div> : <Send />}
-                            sx={{
-                              mt: 2,
-                              minWidth: '150px'
-                            }}
-                          >
-                            {loading ? 'Sending...' : 'Send Message'}
-                          </GradientButton>
-                        </motion.div>
-                      </Grid>
-                    </Grid>
-                  </Box>
-                </CardContent>
-              </GlassCard>
-            </motion.div>
-          </Grid>
         </Grid>
+
       </Container>
 
-      {/* Snackbar for notifications */}
+      {/* Snackbar for copied email */}
       <Snackbar
-        open={snackbar.open}
-        autoHideDuration={6000}
-        onClose={() => setSnackbar({ ...snackbar, open: false })}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      >
-        <Alert
-          onClose={() => setSnackbar({ ...snackbar, open: false })}
-          severity={snackbar.severity}
-          sx={{ width: '100%' }}
-          icon={snackbar.severity === 'success' ? <CheckCircle /> : <Error />}
-        >
-          {snackbar.message}
-        </Alert>
-      </Snackbar>
-    </HeroContainer>
+        open={copied}
+        autoHideDuration={3000}
+        onClose={() => setCopied(false)}
+        message="Email copied to clipboard!"
+      />
+    </Box>
   );
 }
 
